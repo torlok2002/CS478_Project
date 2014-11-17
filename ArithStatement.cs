@@ -25,7 +25,7 @@ namespace Group_Project
 		
 		
 		
-	public String getJCode(){
+	public override String getJCode(){
 		String Code;
 		Code = "(" + operA + " " + operator1 + " " + operB+")";
 		return Code;

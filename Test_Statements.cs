@@ -18,7 +18,7 @@ namespace Group_Project
 		    objectB.setValue(3);
 		
 		    //Instantiate statement objects.
-            Statement statement0 = new Statement("name");
+            //Statement statement0 = new Statement("name");
 		    AssignStatement statement1 = new AssignStatement(objectA, objectB, "testAssignStatement");
 		    ArithStatement statement2 = new ArithStatement(objectA, objectB, "+", "testarithStatement");
 		    OutputStatement statement5 = new OutputStatement(objectB, "testOutputAssignment");
@@ -27,7 +27,7 @@ namespace Group_Project
 		    //Instantiate linked list and add statement objects to it. 
 		    LinkedList<Statement> list1 = new LinkedList<Statement>();
         
-            list1.AddFirst(statement0);
+            //list1.AddFirst(statement0);
             list1.AddLast(statement1);
 		    list1.AddLast(statement5);
 		    list1.AddFirst(objectA.getStatement());

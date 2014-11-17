@@ -34,7 +34,7 @@ namespace Group_Project
             return Name;
         }
 
-        public String getJCode()
+        public virtual String getJCode()
         {
             String Code;
             Code = "There should be real code here...this needs replaced";

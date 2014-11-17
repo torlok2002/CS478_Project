@@ -53,7 +53,7 @@ namespace Group_Project
 	    }
 		
 		
-	    public String getJCode(){
+	    public override String getJCode(){
 		    String Code;
 		    Code = aTo + " = " + aFrom+";";
 		    return Code;
