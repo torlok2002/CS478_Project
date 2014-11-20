@@ -14,3 +14,13 @@ C:\Users\Slowbro\Documents\Visual Studio 2010\Projects\TEST\TEST\obj\x86\Debug\T
 C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\bin\Debug\TEST.exe.config
 C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.exe
 C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.pdb
+C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\bin\Debug\TEST.exe.manifest
+C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\bin\Debug\TEST.application
+C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\bin\Debug\TEST.exe
+C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\bin\Debug\TEST.pdb
+C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.csprojResolveAssemblyReference.cache
+C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.frmMain.resources
+C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.Properties.Resources.resources
+C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.csproj.GenerateResource.Cache
+C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.exe.manifest
+C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.application
