@@ -33,23 +33,29 @@ namespace TEST
             
             string varName = Microsoft.VisualBasic.Interaction.InputBox("Enter varible name:", "Variable Name");
             string varVal = Microsoft.VisualBasic.Interaction.InputBox("Enter varible value:", "Variable Value");
-            //string varVal = System.Windows.Forms.DialogResult.OK;
             progObject objectA = new progObject(varName, 1); //new integer type variable
             objectA.setValue(varVal);
-            list1.AddFirst(objectA.getStatement());
+            list1.AddLast(objectA.getStatement());
 
-            //put visual code in Code Box
-            txtCodeBox.Text += objectA.getName() + "=" + objectA.getValue() + "\r\n";
-
+            update_codeOutputBox();
             update_txtOutputBox();
         }
 
         private void CalculateButton_Click(object sender, EventArgs e)
         {
+            string operA = Microsoft.VisualBasic.Interaction.InputBox("Enter first operand to calculate: ", "Enter operand 1");
+            string calculation = Microsoft.VisualBasic.Interaction.InputBox("Enter arithmetic operator: \r\n (+, -, *,or  /", "Enter operator");
+            string operB = Microsoft.VisualBasic.Interaction.InputBox("Enter Second operand to calculate: ", "Enter operand 2");
+            string toVar = Microsoft.VisualBasic.Interaction.InputBox("Enter variable to assign it to:\r\n (+, -, *,or  /", "Enter assignment");
+            progObject objectA = new progObject("A", 1);
+            progObject objectB = new progObject("B", 1);
+            objectA.setValue(operA);
+            objectB.setValue(operB);
+            ArithStatement stat1 = new ArithStatement(objectA, objectB, calculation, "statement1");
+            list1.AddLast(stat1);
 
-            string operatorA = Microsoft.VisualBasic.Interaction.InputBox("Enter Arithmetic operation\r\n (+, -, *,or  /", "Which math operation?");
-
-            txtCodeBox.Text += "\u2610 = \u2610 " + operatorA + " \u2610\r\n";
+            update_codeOutputBox();
+            update_txtOutputBox();
         }
 
         /*private void toolStripButton3_Click(object sender, EventArgs e)
@@ -73,6 +79,7 @@ namespace TEST
             txtCodeBox.Text += "Output: " + stmtA.getOutput() + "\r\n";
 
             update_txtOutputBox();
+            update_codeOutputBox();
             //txtCodeBox.Text += "Output = \u2610\r\n";
         }
 
@@ -171,9 +178,20 @@ namespace TEST
 
         }
 
-        private void update_txtOutputBox()
+        private void update_codeOutputBox() //iterate through linked list and get user statement code.
         {
-            //iterate through linked list and get statement code.
+            codeString = "";
+            foreach (var stat in list1)
+            {
+                codeString += stat.getUserCode() + "\r\n";
+            }
+            txtCodeBox.Text = "";
+            txtCodeBox.Text = codeString;
+        }
+
+        private void update_txtOutputBox() //iterate through linked list and get java statement code.
+
+        {
             codeString = "";
             foreach (var stat in list1)
             {

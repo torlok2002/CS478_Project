@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fIleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -187,24 +186,22 @@
             this.textBox1.Size = new System.Drawing.Size(415, 0);
             this.textBox1.TabIndex = 4;
             // 
-            // toolStripButton1 - Variable
+            // toolStripButton1
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("VariableButton.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "VariableButton";
-            this.toolStripButton1.Size = new System.Drawing.Size(39, 22);
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(53, 22);
             this.toolStripButton1.Text = "Variable";
             this.toolStripButton1.ToolTipText = "Initialize a Variable";
             this.toolStripButton1.Click += new System.EventHandler(this.VariableButton_Click);
             // 
-            // toolStripButton2 - Arithmetic Statement
+            // toolStripButton2
             // 
             this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("CalculateButton.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "CaluculateButton";
-            this.toolStripButton2.Size = new System.Drawing.Size(48, 22);
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(60, 22);
             this.toolStripButton2.Text = "Calculate";
             this.toolStripButton2.ToolTipText = "Calculate (arithmetic)";
             this.toolStripButton2.Click += new System.EventHandler(this.CalculateButton_Click);
@@ -225,33 +222,19 @@
             // 
             // toolStripButton3
             // 
-            /*this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(38, 22);
-            this.toolStripButton3.Text = "Loop";
-            this.toolStripButton3.ToolTipText = "Loop Statement";
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
+            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
             // 
             // toolStripButton4
             // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(39, 22);
-            this.toolStripButton4.Text = "Input";
-            this.toolStripButton4.ToolTipText = "Input Statement";
-            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
-            */
+            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
             // 
-            // toolStripButton5 - Output
+            // toolStripButton5
             // 
             this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("OutputButton.Image")));
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "OutputButton";
+            this.toolStripButton5.Name = "toolStripButton5";
             this.toolStripButton5.Size = new System.Drawing.Size(49, 22);
             this.toolStripButton5.Text = "Output";
             this.toolStripButton5.ToolTipText = "Output to user";
@@ -289,7 +272,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.treeDirectory);
             this.splitContainer2.Size = new System.Drawing.Size(556, 269);
-            this.splitContainer2.SplitterDistance = 278;
+            this.splitContainer2.SplitterDistance = 427;
             this.splitContainer2.TabIndex = 0;
             // 
             // txtCodeBox
@@ -301,7 +284,7 @@
             this.txtCodeBox.Name = "txtCodeBox";
             this.txtCodeBox.ReadOnly = true;
             this.txtCodeBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtCodeBox.Size = new System.Drawing.Size(278, 269);
+            this.txtCodeBox.Size = new System.Drawing.Size(427, 269);
             this.txtCodeBox.TabIndex = 0;
             this.txtCodeBox.TextChanged += new System.EventHandler(this.txtCodeBox_TextChanged);
             // 
@@ -311,7 +294,7 @@
             this.treeDirectory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.treeDirectory.Location = new System.Drawing.Point(0, 0);
             this.treeDirectory.Name = "treeDirectory";
-            this.treeDirectory.Size = new System.Drawing.Size(274, 269);
+            this.treeDirectory.Size = new System.Drawing.Size(125, 269);
             this.treeDirectory.TabIndex = 0;
             this.treeDirectory.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeDirectory_NodeMouseDoubleClick);
             // 

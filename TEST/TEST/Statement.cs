@@ -37,7 +37,14 @@ namespace TEST
         public virtual String getJCode()
         {
             String Code;
-            Code = "There should be real code here...This is a generic Statement object and something needs fixed.";
+            Code = "There should be real code here...This is a generic Java Statement object and something needs fixed.";
+            return Code;
+        }
+
+        public virtual String getUserCode()
+        {
+            String Code;
+            Code = "There should be real user code here...This is a generic user Statement object and something needs fixed.";
             return Code;
         }
     }
@@ -71,6 +78,13 @@ namespace TEST
             return Code;
         }
 
+        public override String getUserCode()
+        {
+            String Code;
+            Code = "Display to user \u2610";
+            return Code;
+        }
+
         public String getOutput()
         {
             return outputString;
@@ -83,7 +97,6 @@ namespace TEST
         //Fields
         private String aTo;
         private String aFrom;
-        private bool varInit = false;
         private String dataType;
 
         //Constructor for progObject/progObject - Overrides parent class
@@ -133,18 +146,22 @@ namespace TEST
         public AssignStatement(progObject AssignTo, String AssignFrom, String StatementName, String type)
             : base(StatementName)
         {
-            //aFrom = String.valueOf(AssignFrom);
             aFrom = AssignFrom.ToString();
             aTo = AssignTo.getJCode();
-            varInit = true;
             dataType = type;
         }
 
         public override String getJCode()
         {
             String Code;
-            if (varInit == false) Code = aTo + " = " + aFrom + ";";
-            else Code = dataType + " " + aTo + " = " + aFrom + ";";
+            Code = dataType + " " + aTo + " = " + aFrom + ";";
+            return Code;
+        }
+
+        public override String getUserCode()
+        {
+            String Code;
+            Code = "Declare variable [" + aTo + "] to be equal to [" + aFrom + "]";
             return Code;
         }
     }
@@ -167,7 +184,12 @@ namespace TEST
         }
 
 
-
+        public override String getUserCode()
+        {
+            String Code;
+            Code = "Calculate \u2610 and store the result as \u2610";
+            return Code;
+        }
 
         public override String getJCode()
         {
