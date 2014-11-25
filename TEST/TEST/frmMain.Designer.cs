@@ -95,38 +95,38 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(100, 6);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(100, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -187,27 +187,27 @@
             this.textBox1.Size = new System.Drawing.Size(415, 0);
             this.textBox1.TabIndex = 4;
             // 
-            // toolStripButton1
+            // toolStripButton1 - Variable
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("VariableButton.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Name = "VariableButton";
             this.toolStripButton1.Size = new System.Drawing.Size(39, 22);
-            this.toolStripButton1.Text = "X = Y";
-            this.toolStripButton1.ToolTipText = "Assignment Statement";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.toolStripButton1.Text = "Variable";
+            this.toolStripButton1.ToolTipText = "Initialize a Variable";
+            this.toolStripButton1.Click += new System.EventHandler(this.VariableButton_Click);
             // 
-            // toolStripButton2
+            // toolStripButton2 - Arithmetic Statement
             // 
             this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("CalculateButton.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Name = "CaluculateButton";
             this.toolStripButton2.Size = new System.Drawing.Size(48, 22);
-            this.toolStripButton2.Text = "If Then";
-            this.toolStripButton2.ToolTipText = "Branch Statement";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            this.toolStripButton2.Text = "Calculate";
+            this.toolStripButton2.ToolTipText = "Calculate (arithmetic)";
+            this.toolStripButton2.Click += new System.EventHandler(this.CalculateButton_Click);
             // 
             // toolStrip1
             // 
@@ -225,7 +225,7 @@
             // 
             // toolStripButton3
             // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            /*this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
@@ -244,17 +244,18 @@
             this.toolStripButton4.Text = "Input";
             this.toolStripButton4.ToolTipText = "Input Statement";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
+            */
             // 
-            // toolStripButton5
+            // toolStripButton5 - Output
             // 
             this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("OutputButton.Image")));
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Name = "OutputButton";
             this.toolStripButton5.Size = new System.Drawing.Size(49, 22);
             this.toolStripButton5.Text = "Output";
-            this.toolStripButton5.ToolTipText = "Output Statement";
-            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
+            this.toolStripButton5.ToolTipText = "Output to user";
+            this.toolStripButton5.Click += new System.EventHandler(this.OutputButton_Click);
             // 
             // splitContainer1
             // 
@@ -294,7 +295,7 @@
             // txtCodeBox
             // 
             this.txtCodeBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtCodeBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+            this.txtCodeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.txtCodeBox.Location = new System.Drawing.Point(0, 0);
             this.txtCodeBox.Multiline = true;
             this.txtCodeBox.Name = "txtCodeBox";
@@ -307,7 +308,7 @@
             // treeDirectory
             // 
             this.treeDirectory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeDirectory.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+            this.treeDirectory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.treeDirectory.Location = new System.Drawing.Point(0, 0);
             this.treeDirectory.Name = "treeDirectory";
             this.treeDirectory.Size = new System.Drawing.Size(274, 269);
@@ -317,7 +318,7 @@
             // txtOutputBox
             // 
             this.txtOutputBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtOutputBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+            this.txtOutputBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.txtOutputBox.Location = new System.Drawing.Point(0, 0);
             this.txtOutputBox.Multiline = true;
             this.txtOutputBox.Name = "txtOutputBox";
@@ -325,6 +326,7 @@
             this.txtOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtOutputBox.Size = new System.Drawing.Size(556, 129);
             this.txtOutputBox.TabIndex = 0;
+            this.txtOutputBox.TextChanged += new System.EventHandler(this.txtOutputBox_TextChanged);
             // 
             // frmMain
             // 

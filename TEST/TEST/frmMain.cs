@@ -17,6 +17,9 @@ namespace TEST
         {
             InitializeComponent();
         }
+        //Instantiate linked list of Statements which can add statement objects to it. 
+        LinkedList<Statement> list1 = new LinkedList<Statement>();
+        String codeString;
 
 
         private void Form1_Load(object sender, EventArgs e)
@@ -25,18 +28,31 @@ namespace TEST
         }
 
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void VariableButton_Click(object sender, EventArgs e)
         {
             
-            txtCodeBox.Text += "\u2610 = \u2610\r\n";
+            string varName = Microsoft.VisualBasic.Interaction.InputBox("Enter varible name:", "Variable Name");
+            string varVal = Microsoft.VisualBasic.Interaction.InputBox("Enter varible value:", "Variable Value");
+            //string varVal = System.Windows.Forms.DialogResult.OK;
+            progObject objectA = new progObject(varName, 1); //new integer type variable
+            objectA.setValue(varVal);
+            list1.AddFirst(objectA.getStatement());
+
+            //put visual code in Code Box
+            txtCodeBox.Text += objectA.getName() + "=" + objectA.getValue() + "\r\n";
+
+            update_txtOutputBox();
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        private void CalculateButton_Click(object sender, EventArgs e)
         {
-            txtCodeBox.Text += "If \u2610 Then \u2610\r\n";
+
+            string operatorA = Microsoft.VisualBasic.Interaction.InputBox("Enter Arithmetic operation\r\n (+, -, *,or  /", "Which math operation?");
+
+            txtCodeBox.Text += "\u2610 = \u2610 " + operatorA + " \u2610\r\n";
         }
 
-        private void toolStripButton3_Click(object sender, EventArgs e)
+        /*private void toolStripButton3_Click(object sender, EventArgs e)
         {
             txtCodeBox.Text += "While \u2610 Loop \u2610\r\n";
         }
@@ -44,11 +60,20 @@ namespace TEST
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
             txtCodeBox.Text += "\u2610 = Input\r\n";
-        }
+        }*/
 
-        private void toolStripButton5_Click(object sender, EventArgs e)
+        private void OutputButton_Click(object sender, EventArgs e)
         {
-            txtCodeBox.Text += "Output = \u2610\r\n";
+            string varOut = Microsoft.VisualBasic.Interaction.InputBox("Enter value to output to user", "Output Value");
+            progObject objectA = new progObject(varOut, 1); //new integer type variable
+            OutputStatement stmtA = new OutputStatement(objectA, "Output Statement n"); //New Output Statement
+            list1.AddLast(stmtA);
+
+            //put visual code in Code Box
+            txtCodeBox.Text += "Output: " + stmtA.getOutput() + "\r\n";
+
+            update_txtOutputBox();
+            //txtCodeBox.Text += "Output = \u2610\r\n";
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -69,6 +94,8 @@ namespace TEST
                     //Get new program name
                     string NewProgName = Microsoft.VisualBasic.Interaction.InputBox("New Program", "Enter new program name:");
                     txtOutputBox.Text = NewProgName;
+
+
                 }
             } 
             else
@@ -137,6 +164,23 @@ namespace TEST
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void txtOutputBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void update_txtOutputBox()
+        {
+            //iterate through linked list and get statement code.
+            codeString = "";
+            foreach (var stat in list1)
+            {
+                codeString += stat.getJCode() + "\r\n";
+            }
+            txtOutputBox.Text = "";
+            txtOutputBox.Text = codeString;
         }
     }
 }
