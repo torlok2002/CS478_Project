@@ -51,7 +51,6 @@ namespace TEST
         //Fields
         private String outputString;
 
-
         //Constructor - Overrides parent class
         public OutputStatement(string input)
         {
@@ -185,6 +184,64 @@ namespace TEST
             String Code;
             Code = assignTo +" = " + express.ToString() + ";";
             return Code;
+        }
+    }
+
+    class IfStatement : Statement
+    {
+        //Fields
+        private Expression conditional;
+        private Statement ifTrue;
+ 
+        //Constructor
+        public IfStatement ()
+        {
+
+        }
+
+        public string getJCode()
+        {
+            return "If \u2610 Do \u2610\r\n";
+        }
+
+        public string getCCode()
+        {
+            return "If \u2610 Do \u2610\r\n";
+        }
+
+        public string getUserCode()
+        {
+            return "If \u2610 Do \u2610\r\n";
+
+        }
+    }
+
+    class WhileStatement : Statement
+    {
+        //Fields
+        private Expression conditional;
+        private Statement ifTrue;
+ 
+        //Constructor
+        public WhileStatement ()
+        {
+
+        }
+
+        public string getJCode()
+        {
+            return "While \u2610 Do \u2610\r\n";
+        }
+
+        public string getCCode()
+        {
+            return "While \u2610 Do \u2610\r\n";
+        }
+
+        public string getUserCode()
+        {
+            return "While \u2610 Do \u2610\r\n";
+
         }
     }
 

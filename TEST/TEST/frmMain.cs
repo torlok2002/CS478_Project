@@ -60,14 +60,17 @@ namespace TEST
             update_txtOutputBox();
         }
 
-        private void toolStripButton3_Click(object sender, EventArgs e)
+        private void IfButton_Click(object sender, EventArgs e)
         {
-            txtCodeBox.Text += "While \u2610 Loop \u2610\r\n";
+            txtCodeBox.Text += "If \u2610 Do \u2610\r\n";
+
+
+
         }
 
-        private void toolStripButton4_Click(object sender, EventArgs e)
+        private void WhileButton_Click(object sender, EventArgs e)
         {
-            txtCodeBox.Text += "\u2610 = Input\r\n";
+            txtCodeBox.Text += "while \u2610 loop \u2610\r\n";
         }
 
         private void OutputButton_Click(object sender, EventArgs e)

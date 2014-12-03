@@ -43,9 +43,9 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
@@ -224,13 +224,23 @@
             // 
             // toolStripButton3
             // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton3.Size = new System.Drawing.Size(39, 22);
+            this.toolStripButton3.Text = "If";
+            this.toolStripButton3.ToolTipText = "Execute statements if a conditional is met";
+            this.toolStripButton3.Click += new System.EventHandler(this.IfButton_Click);
             // 
             // toolStripButton4
             // 
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton4.Size = new System.Drawing.Size(39, 22);
+            this.toolStripButton4.Text = "While";
+            this.toolStripButton4.ToolTipText = "Continue to execute statements until a conditional is met.";
+            this.toolStripButton4.Click += new System.EventHandler(this.WhileButton_Click);
             // 
             // toolStripButton5
             // 
@@ -375,8 +385,7 @@
         private System.Windows.Forms.Button btnRunProg;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.SplitContainer splitContainer1;
@@ -384,6 +393,8 @@
         private System.Windows.Forms.TextBox txtCodeBox;
         private System.Windows.Forms.TreeView treeDirectory;
         private System.Windows.Forms.TextBox txtOutputBox;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolStripButton toolStripButton5;

@@ -41,35 +41,35 @@ namespace TEST
         }
         public string getAssignStatement(AssignStatement Assign)
         {
-            String tempString = assignmentStatement.Split(',').ElementAt(2);
-            tempString = tempString.Replace("<Var>", Assign.getVar());
-            tempString = tempString.Replace("<Exp>", Assign.getExp());
+            String tempString = "";//assignmentStatement.Split(',').ElementAt(2);
+            //tempString = tempString.Replace("<Var>", Assign.getVar());
+            //tempString = tempString.Replace("<Exp>", Assign.getExp());
             return tempString;
         }
-        public string getBranchStatement(BranchStatement Branch)
+        public string getBranchStatement(IfStatement Branch)
         {
-            String tempString = branchStatement.Split(',').ElementAt(2);
-            tempString = tempString.Replace("<Con>", Branch.getVar());
-            tempString = tempString.Replace("<Sta>", Branch.getExp());
+            String tempString = "";//branchStatement.Split(',').ElementAt(2);
+            //tempString = tempString.Replace("<Con>", Branch.getVar());
+            //tempString = tempString.Replace("<Sta>", Branch.getExp());
             return tempString;
         }
-        public string getLoopStatement(LoopStatement Loop)
+        public string getLoopStatement(WhileStatement Loop)
         {
-            String tempString = loopStatement.Split(',').ElementAt(2);
-            tempString = tempString.Replace("<Con>", Loop.getVar());
-            tempString = tempString.Replace("<Sta>", Loop.getExp());
+            String tempString = "";//"loopStatement.Split(',').ElementAt(2);
+            //tempString = tempString.Replace("<Con>", Loop.getVar());
+            //tempString = tempString.Replace("<Sta>", Loop.getExp());
             return tempString;
         }
         public string getInputStatement(InputStatement Input)
         {
-            String tempString = inputStatement.Split(',').ElementAt(2);
-            tempString = tempString.Replace("<Var>", Input.getVar());
+            String tempString = "";//inputStatement.Split(',').ElementAt(2);
+            //tempString = tempString.Replace("<Var>", Input.getVar());
             return tempString;
         }
         public string getOutputStatement(OutputStatement Output)
         {
-            String tempString = outputStatement.Split(',').ElementAt(2);
-            tempString = tempString.Replace("<Var>", Output.getVar());
+            String tempString = "";//outputStatement.Split(',').ElementAt(2);
+            //tempString = tempString.Replace("<Var>", Output.getVar());
             return tempString;
         }
         public String[] getHotkeys()
