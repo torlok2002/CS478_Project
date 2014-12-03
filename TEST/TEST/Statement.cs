@@ -13,9 +13,9 @@ namespace TEST
         private String Icon;	//change to image/icon/shape
 
         //Constructor method
-        public Statement(String StatementName)
+        public Statement()
         {
-            Name = StatementName;
+           // Name = StatementName;
         }
 
         //Methods	
@@ -24,20 +24,17 @@ namespace TEST
             return Icon;
         }
 
-        public String GetName()
-        {
-            return Name;
-        }
-
-        public String toString()
-        {
-            return Name;
-        }
-
         public virtual String getJCode()
         {
             String Code;
             Code = "There should be real code here...This is a generic Java Statement object and something needs fixed.";
+            return Code;
+        }
+
+        public virtual String getCCode()
+        {
+            String Code;
+            Code = "There should be real code here...This is a generic C# Statement object and something needs fixed.";
             return Code;
         }
 
@@ -56,22 +53,19 @@ namespace TEST
 
 
         //Constructor - Overrides parent class
-        public OutputStatement(progObject input, String StatementName)
-            : base(StatementName)
+        public OutputStatement(string input)
         {
-            outputString = input.getJCode();
+            outputString = input;
         }
 
-        //Constructor - Overrides parent class
-        public OutputStatement(Statement input, String StatementName)
-            : base(StatementName)
+                public override String getJCode()
         {
-            outputString = input.getJCode();
+            String Code;
+            Code = "System.out.println(" + outputString + ");";
+            return Code;
         }
 
-
-
-        public override String getJCode()
+        public override String getCCode()
         {
             String Code;
             Code = "System.out.println(" + outputString + ");";
@@ -81,7 +75,7 @@ namespace TEST
         public override String getUserCode()
         {
             String Code;
-            Code = "Display to user \u2610";
+            Code = "Display to user [" + outputString + "]";
             return Code;
         }
 
@@ -91,127 +85,122 @@ namespace TEST
         }
     }
 
+    class InputStatement : Statement
+    {
+        //Fields
+        private string messageString;
+        private string varTo;
+
+
+        //Constructor - Overrides parent class
+        public InputStatement(string message, string varTo)
+        {
+            messageString = message;
+            this.varTo = varTo;
+        }
+
+                public override String getJCode()
+        {
+            String Code;
+            Code = "System.out.println(\"" + messageString + "\"); Scanner in = new Scanner(System.in); String " + varTo + " = in.next();";
+            return Code;
+        }
+
+        public override String getCCode()
+        {
+            String Code;
+            Code = "string input = Microsoft.VisualBasic.Interaction.InputBox(" + messageString + ", \"Input\");";
+            return Code;
+        }
+
+        public override String getUserCode()
+        {
+            String Code;
+            Code = "Ask user for input with message [" + messageString + "] and store result as [ " + varTo + " ]";
+            return Code;
+        }
+
+        
+    }
+
     class AssignStatement : Statement
     {
 
         //Fields
-        private String aTo;
-        private String aFrom;
-        private String dataType;
+        private string aTo;
+        private Expression aFrom;
 
-        //Constructor for progObject/progObject - Overrides parent class
-        public AssignStatement(progObject AssignTo, progObject AssignFrom, String StatementName)
-            : base(StatementName)
+        //Constructor for progObject assigned from expression
+        public AssignStatement(string AssignTo, Expression AssignFrom)
         {
-            //super(StatementName);
-
-            aFrom = AssignFrom.getJCode();
-            aTo = AssignTo.getJCode();
+            aFrom = AssignFrom;
+            aTo = AssignTo;
         }
 
-        //Constructor for Statement/Statement - Overrides parent class
-        public AssignStatement(Statement AssignTo, Statement AssignFrom, String StatementName)
-            : base(StatementName)
+       /* //Constructor for progObject assigned from progObject - Can this be used for example to do a=b?
+        public AssignStatement(string AssignTo, string AssignFrom)
         {
-            aFrom = AssignFrom.getJCode();
-            aTo = AssignTo.getJCode();
-        }
-
-        //Constructor for Statement/progObject - Overrides parent class
-        public AssignStatement(Statement AssignTo, progObject AssignFrom, String StatementName)
-            : base(StatementName)
-        {
-            aFrom = AssignFrom.getJCode();
-            aTo = AssignTo.getJCode();
-        }
-
-        //Constructor for progObject/statement - Overrides parent class
-        public AssignStatement(progObject AssignTo, Statement AssignFrom, String StatementName)
-            : base(StatementName)
-        {
-            aFrom = AssignFrom.getJCode();
-            aTo = AssignTo.getJCode();
-        }
-
-        //Constructor for progObject/int - Overrides parent class
-        public AssignStatement(progObject AssignTo, String AssignFrom, String StatementName)
-            : base(StatementName)
-        {
-            //aFrom = String.valueOf(AssignFrom);
-            aFrom = AssignFrom.ToString();
-            aTo = AssignTo.getJCode();
-        }
-
-        //Constructor for progObject/int - Overrides parent class
-        public AssignStatement(progObject AssignTo, String AssignFrom, String StatementName, String type)
-            : base(StatementName)
-        {
-            aFrom = AssignFrom.ToString();
-            aTo = AssignTo.getJCode();
-            dataType = type;
-        }
+            aFrom = AssignFrom;
+            aTo = AssignTo;
+        }*/
 
         public override String getJCode()
         {
             String Code;
-            Code = dataType + " " + aTo + " = " + aFrom + ";";
+            Code = aTo + " = " + aFrom.ToString() + ";";
             return Code;
         }
 
         public override String getUserCode()
         {
             String Code;
-            Code = "Declare variable [" + aTo + "] to be equal to [" + aFrom + "]";
+            Code = "Declare variable [" + aTo.ToString() + "] to be equal to [" + aFrom.GetLeft()+ "]";
             return Code;
         }
     }
 
-    class ArithStatement : Statement
+    class CalcStatement : Statement
     {
         //Fields
-        private String operA;
-        private String operB;
-        private String operator1;
+        private Expression express;
+        private String assignTo;
 
         //Constructor - Overrides parent class
-        public ArithStatement(progObject OperandA, progObject OperandB, String Operator, String StatementName)
-            : base(StatementName)
+        public CalcStatement(string assignTo, Expression assignFrom)
         {
-            operA = OperandA.getJCode();
-            operB = OperandB.getJCode();
-            operator1 = Operator;
-
+            express = assignFrom;
+            this.assignTo = assignTo;
         }
 
 
         public override String getUserCode()
         {
             String Code;
-            Code = "Calculate \u2610 and store the result as \u2610";
+            Code = "Calculate [" + express.ToString() +"] and store the result as [" + assignTo +"]";
             return Code;
         }
 
         public override String getJCode()
         {
             String Code;
-            Code = "(" + operA + " " + operator1 + " " + operB + ")";
+            Code = assignTo +" = " + express.ToString() + ";";
             return Code;
         }
     }
 
-    class progObject
+    class Variable
     {
 
         //Fields
+        private int type; //type of datatype this object is. 1=int, 2=char, 3=string
         private String name;
         private String value;
-        private int type; //type of datatype this object is. 1=int, 2=char, 3=string
 
 
         //constructor
-        public progObject(String name, int type)
+        public Variable(int type, string name, String value)
         {
-            //this.value = 0;
+            this.value = value;
             this.name = name;
             this.type = type;
 
@@ -235,11 +224,9 @@ namespace TEST
 
         public AssignStatement getStatement()
         {
-            String i = "";
-            if (this.getType() == 1) i = "int";
-            else if (this.getType() == 2) i = "char";
-            else if (this.getType() == 3) i = "String";
-            AssignStatement a = new AssignStatement(this, this.getValue(), this.name, i);
+            //AssignStatement a = new AssignStatement(this, this.getValue(), this.name, i);
+            Expression e = new Expression(this.getValue());
+            AssignStatement a = new AssignStatement(name, e);
             return a;
         }
 
@@ -254,4 +241,66 @@ namespace TEST
         }
 
     }
+    
+    class Expression  //Class used to create any expressions
+    {
+        // Fields
+        string left;
+        string right;
+        string operation;
+
+
+        //Constructor for one string
+        public Expression(string only)
+        {
+            this.left = only;
+        }
+
+
+        //Constructor for left expression
+        public Expression(Expression left, string operation, string right)
+        {
+            this.left = left.ToString();
+            this.right = right;
+            this.operation = operation;
+        }
+
+        //Constructor for right expression
+        public Expression(string left, string operation, Expression right)
+        {
+            this.left = left;
+            this.right = right.ToString();
+            this.operation = operation;
+        }
+
+        //Constructor for both expression
+        public Expression(Expression left, string operation, Expression right)
+        {
+            this.left = left.ToString();
+            this.right = right.ToString();
+            this.operation = operation;
+        }
+
+        //Constructor for both Strings
+        public Expression(string left, string operation, string right)
+        {
+            this.left = left;
+            this.right = right;
+            this.operation = operation;
+        }
+
+        public string ToString()
+        {
+            string s = "(" + left + " " + operation + " " + right + ")";
+            return s;
+        }
+
+        public string GetLeft()
+        {
+            string s = left.ToString();
+            return s;
+        }
+    }
+
+
 }

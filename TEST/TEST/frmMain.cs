@@ -31,11 +31,16 @@ namespace TEST
         private void VariableButton_Click(object sender, EventArgs e)
         {
             
+            int varType = 0;
+            while (varType == 0 || varType > 3)
+            {
+                int.TryParse(Microsoft.VisualBasic.Interaction.InputBox("Enter varible type:\r\n 1 = integer\r\n 2 = character\r\n 3 = string", "Variable type"), out varType);
+                //display to user that selection didnt match 1, 2, or 3
+            }
             string varName = Microsoft.VisualBasic.Interaction.InputBox("Enter varible name:", "Variable Name");
             string varVal = Microsoft.VisualBasic.Interaction.InputBox("Enter varible value:", "Variable Value");
-            progObject objectA = new progObject(varName, 1); //new integer type variable
-            objectA.setValue(varVal);
-            list1.AddLast(objectA.getStatement());
+            Variable varObject = new Variable(varType,varName, varVal);
+            list1.AddLast(varObject.getStatement());
 
             update_codeOutputBox();
             update_txtOutputBox();
@@ -43,22 +48,19 @@ namespace TEST
 
         private void CalculateButton_Click(object sender, EventArgs e)
         {
-            string operA = Microsoft.VisualBasic.Interaction.InputBox("Enter first operand to calculate: ", "Enter operand 1");
-            string calculation = Microsoft.VisualBasic.Interaction.InputBox("Enter arithmetic operator: \r\n (+, -, *,or  /", "Enter operator");
-            string operB = Microsoft.VisualBasic.Interaction.InputBox("Enter Second operand to calculate: ", "Enter operand 2");
-            string toVar = Microsoft.VisualBasic.Interaction.InputBox("Enter variable to assign it to:\r\n (+, -, *,or  /", "Enter assignment");
-            progObject objectA = new progObject("A", 1);
-            progObject objectB = new progObject("B", 1);
-            objectA.setValue(operA);
-            objectB.setValue(operB);
-            ArithStatement stat1 = new ArithStatement(objectA, objectB, calculation, "statement1");
+            string left = Microsoft.VisualBasic.Interaction.InputBox("Enter left side of calculation: ", "Enter left");
+            string operation = Microsoft.VisualBasic.Interaction.InputBox("Enter arithmetic operator: \r\n (+, -, *,or  /", "Enter operator");
+            string right = Microsoft.VisualBasic.Interaction.InputBox("Enter right side of calculation: ", "Enter right");
+            string toVar = Microsoft.VisualBasic.Interaction.InputBox("Enter variable to assign it to:\r\n", "Enter assignment");
+            Expression express = new Expression(left, operation, right);
+            CalcStatement stat1 = new CalcStatement(toVar, express);
             list1.AddLast(stat1);
 
             update_codeOutputBox();
             update_txtOutputBox();
         }
 
-        /*private void toolStripButton3_Click(object sender, EventArgs e)
+        private void toolStripButton3_Click(object sender, EventArgs e)
         {
             txtCodeBox.Text += "While \u2610 Loop \u2610\r\n";
         }
@@ -66,21 +68,25 @@ namespace TEST
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
             txtCodeBox.Text += "\u2610 = Input\r\n";
-        }*/
+        }
 
         private void OutputButton_Click(object sender, EventArgs e)
         {
-            string varOut = Microsoft.VisualBasic.Interaction.InputBox("Enter value to output to user", "Output Value");
-            progObject objectA = new progObject(varOut, 1); //new integer type variable
-            OutputStatement stmtA = new OutputStatement(objectA, "Output Statement n"); //New Output Statement
+            string input = Microsoft.VisualBasic.Interaction.InputBox("Enter value to output to user", "Output Value");
+            OutputStatement stmtA = new OutputStatement(input); //New Output Statement
             list1.AddLast(stmtA);
-
-            //put visual code in Code Box
-            txtCodeBox.Text += "Output: " + stmtA.getOutput() + "\r\n";
-
             update_txtOutputBox();
             update_codeOutputBox();
-            //txtCodeBox.Text += "Output = \u2610\r\n";
+        }
+
+        private void InputButton_Click(object sender, EventArgs e)
+        {
+            string message = Microsoft.VisualBasic.Interaction.InputBox("Enter message to prompt user for input", "Message for user");
+            string varTo = Microsoft.VisualBasic.Interaction.InputBox("Which Variable would you like to assign user's response to?", "Variable");
+            InputStatement stmtA = new InputStatement(message, varTo); //New Input Statement
+            list1.AddLast(stmtA);
+            update_txtOutputBox();
+            update_codeOutputBox();
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -96,25 +102,27 @@ namespace TEST
                     }
                     //Clear code box and exit program
                     //Either add empty program to program list or clear program object
-                    txtCodeBox.Text = "";
+                    list1.Clear();
+                    update_codeOutputBox();
+                    update_txtOutputBox();
 
                     //Get new program name
-                    string NewProgName = Microsoft.VisualBasic.Interaction.InputBox("New Program", "Enter new program name:");
-                    txtOutputBox.Text = NewProgName;
-
-
+                    string NewProgName = Microsoft.VisualBasic.Interaction.InputBox( "Enter new program name:","New Program");
+                    update_StatusBar("New Program " + NewProgName + " started.");
                 }
             } 
-            else
+            /*else
             {
                 //Clear code box and exit program
                 //Either add empty program to program list or clear program object
-                txtCodeBox.Text = "";
+                list1.Clear();
+                update_codeOutputBox();
+                update_txtOutputBox();
 
                 //Get new program name
                 string NewProgName = Microsoft.VisualBasic.Interaction.InputBox("New Program", "Enter new program name:");
                 txtOutputBox.Text = NewProgName;
-            }
+            }*/
 
         }
 
@@ -200,5 +208,14 @@ namespace TEST
             txtOutputBox.Text = "";
             txtOutputBox.Text = codeString;
         }
+
+        private void update_StatusBar(string s)
+        {
+            toolStripStatusLabel1.Text = s;
+        }
+
+
+
+
     }
 }
