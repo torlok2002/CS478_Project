@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TEST
 {
+    [Serializable]
     class Statement
     {
         //Fields
@@ -46,6 +47,7 @@ namespace TEST
         }
     }
 
+    [Serializable]
     class OutputStatement : Statement
     {
         //Fields
@@ -84,6 +86,7 @@ namespace TEST
         }
     }
 
+    [Serializable]
     class InputStatement : Statement
     {
         //Fields
@@ -121,7 +124,8 @@ namespace TEST
 
         
     }
-
+    
+    [Serializable]
     class AssignStatement : Statement
     {
 
@@ -187,6 +191,7 @@ namespace TEST
         }
     }
 
+    [Serializable]
     class IfStatement : Statement
     {
         //Fields
@@ -216,6 +221,7 @@ namespace TEST
         }
     }
 
+    [Serializable]
     class WhileStatement : Statement
     {
         //Fields
@@ -245,6 +251,7 @@ namespace TEST
         }
     }
 
+    [Serializable]
     class Variable
     {
 
@@ -298,7 +305,7 @@ namespace TEST
         }
 
     }
-    
+    [Serializable]
     class Expression  //Class used to create any expressions
     {
         // Fields
