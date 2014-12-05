@@ -126,7 +126,7 @@ namespace TEST
     }
     
     [Serializable]
-    class AssignStatement : Statement
+    /*class badAssignStatement : Statement
     {
 
         //Fields
@@ -140,12 +140,7 @@ namespace TEST
             aTo = AssignTo;
         }
 
-       /* //Constructor for progObject assigned from progObject - Can this be used for example to do a=b?
-        public AssignStatement(string AssignTo, string AssignFrom)
-        {
-            aFrom = AssignFrom;
-            aTo = AssignTo;
-        }*/
+
 
         public override String getJCode()
         {
@@ -160,16 +155,16 @@ namespace TEST
             Code = "Declare variable [" + aTo.ToString() + "] to be equal to [" + aFrom.GetLeft()+ "]";
             return Code;
         }
-    }
+    }*/
 
-    class CalcStatement : Statement
+    class AssignStatement : Statement
     {
         //Fields
         private Expression express;
         private String assignTo;
 
         //Constructor - Overrides parent class
-        public CalcStatement(string assignTo, Expression assignFrom)
+        public AssignStatement(string assignTo, Expression assignFrom)
         {
             express = assignFrom;
             this.assignTo = assignTo;
@@ -179,7 +174,7 @@ namespace TEST
         public override String getUserCode()
         {
             String Code;
-            Code = "Calculate [" + express.ToString() +"] and store the result as [" + assignTo +"]";
+            Code = "Calculate [ " + express.ToString() +" ] and store the result as [ " + assignTo +" ]";
             return Code;
         }
 
@@ -250,7 +245,44 @@ namespace TEST
 
         }
     }
+    
+    [Serializable]
+    class VarInitStatement : Statement
+    {
+        //fields 
+        private Variable var;
 
+        //constructor
+        public VarInitStatement(Variable varin)
+        {
+            var = varin;
+        }
+
+        public Variable GetVar()
+        {
+            return var;
+        }
+
+        public void SetVar(Variable varin)
+        {
+            var = varin;
+        } 
+
+        public override String getJCode()
+        {
+            string vartype = var.getType();
+            string varname = var.getName();
+            string code = vartype + " " + varname + ";"; 
+            return code;
+        }
+        public override String getUserCode()
+        {
+            string vartype = var.getType();
+            string varname = var.getName();
+            string code = "Declare variable named [ " + varname + " ] as type [ " + vartype + " ]";
+            return code;
+        }
+    }
     [Serializable]
     class Variable
     {
@@ -262,7 +294,7 @@ namespace TEST
 
 
         //constructor
-        public Variable(int type, string name, String value)
+        public Variable(int type, string name)
         {
             this.value = value;
             this.name = name;
@@ -276,9 +308,13 @@ namespace TEST
             //return String.valueOf(value);
         }
 
-        public int getType()
+        public string getType()
         {
-            return type;
+            string typestr;
+            if (type == 1) { typestr = "int";}
+            else if(type == 2){typestr = "char";}
+            else { typestr = "string"; }
+            return typestr;
         }
 
         public String getName()

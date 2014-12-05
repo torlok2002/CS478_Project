@@ -38,22 +38,23 @@ namespace TEST
                 //display to user that selection didnt match 1, 2, or 3
             }
             string varName = Microsoft.VisualBasic.Interaction.InputBox("Enter varible name:", "Variable Name");
-            string varVal = Microsoft.VisualBasic.Interaction.InputBox("Enter varible value:", "Variable Value");
-            Variable varObject = new Variable(varType,varName, varVal);
-            list1.AddLast(varObject.getStatement());
+            //string varVal = Microsoft.VisualBasic.Interaction.InputBox("Enter varible value:", "Variable Value");
+            Variable varObject = new Variable(varType,varName);
+            VarInitStatement varStatement = new VarInitStatement(varObject);
+            list1.AddLast(varStatement);
 
             update_codeOutputBox();
             update_txtOutputBox();
         }
 
-        private void CalculateButton_Click(object sender, EventArgs e)
+        private void AssignButton_Click(object sender, EventArgs e)
         {
-            string left = Microsoft.VisualBasic.Interaction.InputBox("Enter left side of calculation: ", "Enter left");
+            string left = Microsoft.VisualBasic.Interaction.InputBox("Enter left side of expression: ", "Enter left");
             string operation = Microsoft.VisualBasic.Interaction.InputBox("Enter arithmetic operator: \r\n (+, -, *,or  /", "Enter operator");
-            string right = Microsoft.VisualBasic.Interaction.InputBox("Enter right side of calculation: ", "Enter right");
+            string right = Microsoft.VisualBasic.Interaction.InputBox("Enter right side of expression: ", "Enter right");
             string toVar = Microsoft.VisualBasic.Interaction.InputBox("Enter variable to assign it to:\r\n", "Enter assignment");
             Expression express = new Expression(left, operation, right);
-            CalcStatement stat1 = new CalcStatement(toVar, express);
+            AssignStatement stat1 = new AssignStatement(toVar, express);
             list1.AddLast(stat1);
 
             update_codeOutputBox();

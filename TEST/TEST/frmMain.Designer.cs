@@ -203,9 +203,9 @@
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(60, 22);
-            this.toolStripButton2.Text = "Calculate";
-            this.toolStripButton2.ToolTipText = "Calculate (arithmetic)";
-            this.toolStripButton2.Click += new System.EventHandler(this.CalculateButton_Click);
+            this.toolStripButton2.Text = "Assignment";
+            this.toolStripButton2.ToolTipText = "Assign a variable the result of an expression";
+            this.toolStripButton2.Click += new System.EventHandler(this.AssignButton_Click);
             // 
             // toolStrip1
             // 
