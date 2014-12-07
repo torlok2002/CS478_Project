@@ -85,13 +85,14 @@ namespace TEST
             }
         }
 
-        public string[] getCSCode()
+        public string[] getCCode()
         {
             string[] aCSLines = new string[oStatements.Count];
-
-            foreach (Object oTempObject in oStatements)
+            int i=0;
+            foreach (Statement oTempObject in oStatements)
             {
-                //if (oTempObject.GetType == System.Type.
+                aCSLines[i] = oTempObject.getCCode();
+                i++;
             }
 
             return aCSLines;

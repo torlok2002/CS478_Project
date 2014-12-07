@@ -62,6 +62,7 @@
             this.btnUp = new System.Windows.Forms.ToolStripButton();
             this.btnHome = new System.Windows.Forms.ToolStripButton();
             this.txtOutputBox = new System.Windows.Forms.TextBox();
+            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tlsStatementStrip.SuspendLayout();
@@ -345,7 +346,8 @@
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnRefresh,
             this.btnUp,
-            this.btnHome});
+            this.btnHome,
+            this.toolStripButton7});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(154, 27);
@@ -396,6 +398,16 @@
             this.txtOutputBox.Size = new System.Drawing.Size(677, 153);
             this.txtOutputBox.TabIndex = 0;
             this.txtOutputBox.TextChanged += new System.EventHandler(this.txtOutputBox_TextChanged);
+            // 
+            // toolStripButton7
+            // 
+            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
+            this.toolStripButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton7.Name = "toolStripButton7";
+            this.toolStripButton7.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton7.Text = "toolStripButton7";
             // 
             // frmMain
             // 
@@ -474,6 +486,7 @@
         private System.Windows.Forms.ToolStripButton btnRefresh;
         private System.Windows.Forms.ToolStripButton btnUp;
         private System.Windows.Forms.ToolStripButton btnHome;
+        private System.Windows.Forms.ToolStripButton toolStripButton7;
 
     }
 }
