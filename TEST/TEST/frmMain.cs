@@ -30,17 +30,7 @@ namespace TEST
 
         private void VariableButton_Click(object sender, EventArgs e)
         {
-            
-            int varType = 0;
-            while (varType == 0 || varType > 3)
-            {
-                int.TryParse(Microsoft.VisualBasic.Interaction.InputBox("Enter varible type:\r\n 1 = integer\r\n 2 = character\r\n 3 = string", "Variable type"), out varType);
-                //display to user that selection didnt match 1, 2, or 3
-            }
-            string varName = Microsoft.VisualBasic.Interaction.InputBox("Enter varible name:", "Variable Name");
-            //string varVal = Microsoft.VisualBasic.Interaction.InputBox("Enter varible value:", "Variable Value");
-            Variable varObject = new Variable(varType,varName);
-            VarInitStatement varStatement = new VarInitStatement(varObject);
+            VarInitStatement varStatement = new VarInitStatement();
             list1.AddLast(varStatement);
 
             update_codeOutputBox();
@@ -49,12 +39,7 @@ namespace TEST
 
         private void AssignButton_Click(object sender, EventArgs e)
         {
-            string left = Microsoft.VisualBasic.Interaction.InputBox("Enter left side of expression: ", "Enter left");
-            string operation = Microsoft.VisualBasic.Interaction.InputBox("Enter arithmetic operator: \r\n (+, -, *,or  /", "Enter operator");
-            string right = Microsoft.VisualBasic.Interaction.InputBox("Enter right side of expression: ", "Enter right");
-            string toVar = Microsoft.VisualBasic.Interaction.InputBox("Enter variable to assign it to:\r\n", "Enter assignment");
-            Expression express = new Expression(left, operation, right);
-            AssignStatement stat1 = new AssignStatement(toVar, express);
+            AssignStatement stat1 = new AssignStatement();
             list1.AddLast(stat1);
 
             update_codeOutputBox();
@@ -63,8 +48,11 @@ namespace TEST
 
         private void IfButton_Click(object sender, EventArgs e)
         {
-            txtCodeBox.Text += "If \u2610 Do \u2610\r\n";
+            IfStatement stat1 = new IfStatement();
+            list1.AddLast(stat1);
 
+            update_codeOutputBox();
+            update_txtOutputBox();
 
 
         }
@@ -76,8 +64,7 @@ namespace TEST
 
         private void OutputButton_Click(object sender, EventArgs e)
         {
-            string input = Microsoft.VisualBasic.Interaction.InputBox("Enter value to output to user", "Output Value");
-            OutputStatement stmtA = new OutputStatement(input); //New Output Statement
+            OutputStatement stmtA = new OutputStatement(); //New Output Statement
             list1.AddLast(stmtA);
             update_txtOutputBox();
             update_codeOutputBox();
@@ -85,9 +72,8 @@ namespace TEST
 
         private void InputButton_Click(object sender, EventArgs e)
         {
-            string message = Microsoft.VisualBasic.Interaction.InputBox("Enter message to prompt user for input", "Message for user");
-            string varTo = Microsoft.VisualBasic.Interaction.InputBox("Which Variable would you like to assign user's response to?", "Variable");
-            InputStatement stmtA = new InputStatement(message, varTo); //New Input Statement
+            
+            InputStatement stmtA = new InputStatement(); //New Input Statement
             list1.AddLast(stmtA);
             update_txtOutputBox();
             update_codeOutputBox();

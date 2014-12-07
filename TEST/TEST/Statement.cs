@@ -53,6 +53,11 @@ namespace TEST
         //Fields
         private String outputString;
 
+        //generic constructor
+        public OutputStatement()
+        {
+            outputString = Microsoft.VisualBasic.Interaction.InputBox("Enter value to output to user", "Output Value");
+        }
         //Constructor - Overrides parent class
         public OutputStatement(string input)
         {
@@ -93,7 +98,12 @@ namespace TEST
         private string messageString;
         private string varTo;
 
-
+        //generic constructor
+        public InputStatement()
+        {
+            messageString = Microsoft.VisualBasic.Interaction.InputBox("Enter message to prompt user for input", "Message for user");
+            varTo = Microsoft.VisualBasic.Interaction.InputBox("Which Variable would you like to assign user's response to?", "Variable");
+        }
         //Constructor - Overrides parent class
         public InputStatement(string message, string varTo)
         {
@@ -125,8 +135,9 @@ namespace TEST
         
     }
     
-    [Serializable]
-    /*class badAssignStatement : Statement
+    /*
+     [serializable]
+     class badAssignStatement : Statement
     {
 
         //Fields
@@ -157,11 +168,23 @@ namespace TEST
         }
     }*/
 
+     
+    [Serializable]
     class AssignStatement : Statement
     {
         //Fields
         private Expression express;
         private String assignTo;
+
+        //generic Constructor
+        public AssignStatement()
+        {
+            
+            string toVar = Microsoft.VisualBasic.Interaction.InputBox("Enter variable to assign expression to:\r\n", "Enter assignment");
+            express = new Expression();
+            assignTo = toVar;
+
+        }
 
         //Constructor - Overrides parent class
         public AssignStatement(string assignTo, Expression assignFrom)
@@ -190,28 +213,39 @@ namespace TEST
     class IfStatement : Statement
     {
         //Fields
-        private Expression conditional;
-        private Statement ifTrue;
+        private Conditional conditional;
+        private AssignStatement ifTrue;
  
-        //Constructor
-        public IfStatement ()
+        //Generic constructor
+        public IfStatement()
         {
+            conditional = new Conditional();
+            ifTrue = new AssignStatement();
+
+        }
+        
+        //Constructor
+        public IfStatement (Conditional cond, AssignStatement statements)
+        {
+            this.conditional = cond;
+            this.ifTrue = statements;
 
         }
 
         public string getJCode()
         {
-            return "If \u2610 Do \u2610\r\n";
+            
+            return "if (" + conditional.ToString() + ") {" + ifTrue.getJCode() + "};\r\n";
         }
 
         public string getCCode()
         {
-            return "If \u2610 Do \u2610\r\n";
+            return "if (" + conditional.ToString() + ") {" + ifTrue.getJCode() + "};\r\n";
         }
 
         public string getUserCode()
         {
-            return "If \u2610 Do \u2610\r\n";
+            return "If [ " + conditional.ToString() + " ] Do [ " + ifTrue.getJCode() + " ]\r\n";
 
         }
     }
@@ -252,6 +286,21 @@ namespace TEST
         //fields 
         private Variable var;
 
+        //generic constructor
+        public VarInitStatement()
+        {
+            int varType = 0;
+            while (varType == 0 || varType > 3)
+            {
+                int.TryParse(Microsoft.VisualBasic.Interaction.InputBox("Enter varible type:\r\n 1 = integer\r\n 2 = character\r\n 3 = string", "Variable type"), out varType);
+                //display to user that selection didnt match 1, 2, or 3
+            }
+            string varName = Microsoft.VisualBasic.Interaction.InputBox("Enter varible name:", "Variable Name");
+            //string varVal = Microsoft.VisualBasic.Interaction.InputBox("Enter varible value:", "Variable Value");
+            Variable varObject = new Variable(varType, varName);
+            var = varObject;
+        }
+
         //constructor
         public VarInitStatement(Variable varin)
         {
@@ -268,7 +317,8 @@ namespace TEST
             var = varin;
         } 
 
-        public override String getJCode()
+        public override String getJCode()
+
         {
             string vartype = var.getType();
             string varname = var.getName();
@@ -283,6 +333,7 @@ namespace TEST
             return code;
         }
     }
+    
     [Serializable]
     class Variable
     {
@@ -341,6 +392,7 @@ namespace TEST
         }
 
     }
+    
     [Serializable]
     class Expression  //Class used to create any expressions
     {
@@ -349,6 +401,25 @@ namespace TEST
         string right;
         string operation;
 
+        //generic constructor
+        public Expression()
+        {
+            String type = "";
+            while(type != "S" && type != "s" && type != "Simple" && type != "C" && type != "c" && type!= "Complex")
+            {
+             type = Microsoft.VisualBasic.Interaction.InputBox("Enter (S)imple or (C)omplex expression: ", "Enter type");
+            }
+            if (type == "S" || type == "s" || type == "Simple")
+            {
+                left = Microsoft.VisualBasic.Interaction.InputBox("Enter simple expression: ", "Enter expression");
+            }
+            else
+            {
+                left = Microsoft.VisualBasic.Interaction.InputBox("Enter left side of expression: ", "Enter left");
+                operation = Microsoft.VisualBasic.Interaction.InputBox("Enter arithmetic operator: \r\n (+, -, *,or  /", "Enter operator");
+                right = Microsoft.VisualBasic.Interaction.InputBox("Enter right side of expression: ", "Enter right");
+            }
+        }
 
         //Constructor for one string
         public Expression(string only)
@@ -400,7 +471,93 @@ namespace TEST
             string s = left.ToString();
             return s;
         }
+
+        public string GetRight()
+        {
+            string s = right.ToString();
+            return s;
+        }
+
+        public string GetOperation()
+        {
+            return operation;
+        }
     }
 
+    [Serializable]
+    class Conditional
+    {
+        // Fields
+        Expression left;
+        Expression right;
+        string comparator;
 
+
+        //Constructor for one string
+        public Conditional()
+        {
+            left = new Expression();
+            comparator = Microsoft.VisualBasic.Interaction.InputBox("Enter left side of expression: ", "Enter left");
+            right = new Expression();
+
+            
+        }
+
+
+        /*//Constructor for left expression
+        public Conditional(Expression left, string comparator, string right)
+        {
+            this.left = left.ToString();
+            this.right = right;
+            this.comparator = comparator;
+        }
+
+        //Constructor for right expression
+        public Conditional(string left, string comparator, Expression right)
+        {
+            this.left = left;
+            this.right = right.ToString();
+            this.comparator = comparator;
+        }
+
+        //Constructor for both expression
+        public Conditional(Expression left, string comparator, Expression right)
+        {
+            this.left = left.ToString();
+            this.right = right.ToString();
+            this.comparator = comparator;
+        }
+
+        //Constructor for both Strings
+        public Conditional(string left, string comparator, string right)
+        {
+            this.left = left;
+            this.right = right;
+            this.comparator = comparator;
+        }*/
+
+        public string ToString()
+        {
+            string s = "(" + left + " " + comparator + " " + right + ")";
+            return s;
+        }
+
+        public string GetLeft()
+        {
+            string s = left.ToString();
+            return s;
+        }
+
+        public string GetRight()
+        {
+            string s = right.ToString();
+            return s;
+        }
+
+        public string GetComparator()
+        {
+            string s = comparator;
+            return s;
+        }
+    }
 }
