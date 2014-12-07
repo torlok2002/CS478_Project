@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,16 +10,16 @@ namespace TEST
     [Serializable]
     class StudentProgram
     {
-        private String sFilename;
+        [OptionalField] private String sFilename;
         private String sName;
         private String sLanguage;
         private Language oUserLanguage, oCompileLanguage;
-        private List<Object> oStatements;
+        private List<Statement> oStatements;
         private List<Variable> oVariables;
 
         public StudentProgram(String sLanguage, String sName, String sFilename)
         {
-            oStatements = new List<object>();
+            oStatements = new List<Statement>();
             this.sLanguage = sLanguage;
             this.sName = sName;
             this.sFilename = sFilename;
@@ -31,7 +32,7 @@ namespace TEST
         {
             oVariables.RemoveAt(iIndex);
         }
-        public void AddStatement(Object oStatement)
+        public void AddStatement(Statement oStatement)
         {
             oStatements.Add(oStatement);
         }
@@ -40,8 +41,8 @@ namespace TEST
             oStatements.RemoveAt(iIndex);
         }
         public void MoveStatement(int iOldIndex, int iNewIndex)
-        {   
-            Object oStatement = oStatements.ElementAt(iOldIndex);
+        {
+            Statement oStatement = oStatements.ElementAt(iOldIndex);
             oStatements.RemoveAt(iOldIndex);
             if (iNewIndex > iOldIndex) { iNewIndex--; }
             oStatements.Insert(iNewIndex, oStatement);
@@ -64,7 +65,7 @@ namespace TEST
         {
             this.sFilename = sNewFileName;
         }
-        public List<Object> Statements
+        public List<Statement> Statements
         {
             get
             {
@@ -82,6 +83,18 @@ namespace TEST
                 }
                 return vars;
             }
+        }
+
+        public string[] getCSCode()
+        {
+            string[] aCSLines = new string[oStatements.Count];
+
+            foreach (Object oTempObject in oStatements)
+            {
+                //if (oTempObject.GetType == System.Type.
+            }
+
+            return aCSLines;
         }
     }
 }

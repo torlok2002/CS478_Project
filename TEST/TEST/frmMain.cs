@@ -35,6 +35,7 @@ namespace TEST
             VarInitStatement varStatement = new VarInitStatement();
             list1.AddLast(varStatement);
             //IDEProgram.AddStatement(varStatement);
+            
             update_codeOutputBox();
             update_txtOutputBox();
         }
@@ -143,7 +144,7 @@ namespace TEST
 
         private void treeDirectory_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (e.Node.ImageIndex == 1)
+            if (e.Node.ImageIndex == -1)
             {
                 //Bring up menu? Load Object?
                 if (bChanged == true)

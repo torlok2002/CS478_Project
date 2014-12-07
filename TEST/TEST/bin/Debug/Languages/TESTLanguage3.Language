@@ -1,0 +1,5 @@
+O,Output,Output variable <Var>
+I,Input,Get value and save in <Var>
+A,Assignment,Calculate <Exp> and save result in <Var>
+B,Branch,If <Con> Then <Sta>
+L,Loop,While <Con> Then <Sta>

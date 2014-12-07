@@ -89,6 +89,11 @@ namespace TEST
         {
             return outputString;
         }
+
+        internal string getVar()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     [Serializable]
@@ -132,7 +137,12 @@ namespace TEST
             return Code;
         }
 
-        
+
+
+        internal string getVar()
+        {
+            throw new NotImplementedException();
+        }
     }
     
     /*
@@ -207,6 +217,16 @@ namespace TEST
             Code = assignTo +" = " + express.ToString() + ";";
             return Code;
         }
+
+        internal string getVar()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal string getExp()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     [Serializable]
@@ -248,6 +268,16 @@ namespace TEST
             return "If [ " + conditional.ToString() + " ] Do [ " + ifTrue.getJCode() + " ]\r\n";
 
         }
+
+        internal string getCon()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal string getStatements()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     [Serializable]
@@ -277,6 +307,16 @@ namespace TEST
         {
             return "While \u2610 Do \u2610\r\n";
 
+        }
+
+        internal string getStatements()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal string getCon()
+        {
+            throw new NotImplementedException();
         }
     }
     

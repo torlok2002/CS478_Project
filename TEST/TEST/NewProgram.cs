@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace TEST
 
         private void NewProgram_Load(object sender, EventArgs e)
         {
-
+            cboLanguage.DataSource = Languages();
         }
 
         private void btnFileDialog_Click(object sender, EventArgs e)
@@ -30,10 +31,13 @@ namespace TEST
 
             SaveFileDialog fb = new SaveFileDialog();
             fb.InitialDirectory = sInitialPath;
-            fb.Filter = ".prog";
+            fb.Filter = "Program files (*.prog)|*.prog";
             fb.Title = "Open Program";
             fb.AddExtension = true;
-            fb.ShowDialog();
+            if (fb.ShowDialog() == DialogResult.OK)
+            {
+                txtFilePath.Text = fb.FileName;
+            }
             
         }
         public String ChoosenLanguage
@@ -60,6 +64,19 @@ namespace TEST
             }
         }
 
-        
+        public List<String> Languages()
+        {   
+            List<String> lLanguages = new List<String>();
+            DirectoryInfo dirInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\Languages");
+            foreach (FileInfo file in dirInfo.GetFiles())
+            {
+                if(file.Extension == ".Language")
+                {
+                    lLanguages.Add(file.Name.Substring(0,file.Name.Length-9));
+                }
+                
+            }
+            return lLanguages;
+        }
     }
 }
