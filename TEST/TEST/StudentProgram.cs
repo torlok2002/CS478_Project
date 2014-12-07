@@ -12,7 +12,9 @@ namespace TEST
         private String sFilename;
         private String sName;
         private String sLanguage;
+        private Language oUserLanguage, oCompileLanguage;
         private List<Object> oStatements;
+        private List<Variable> oVariables;
 
         public StudentProgram(String sLanguage, String sName, String sFilename)
         {
@@ -20,6 +22,14 @@ namespace TEST
             this.sLanguage = sLanguage;
             this.sName = sName;
             this.sFilename = sFilename;
+        }
+        public void AddVariable(Variable oVariable)
+        {
+            oVariables.Add(oVariable);
+        }
+        public void RemoveVariable(int iIndex)
+        {
+            oVariables.RemoveAt(iIndex);
         }
         public void AddStatement(Object oStatement)
         {
@@ -43,9 +53,35 @@ namespace TEST
                 return sLanguage;
             }
         }
+        public String FilePath
+        {
+            get
+            {
+                return sFilename;
+            }
+        }
         public void newFileName(String sNewFileName)
         {
             this.sFilename = sNewFileName;
+        }
+        public List<Object> Statements
+        {
+            get
+            {
+                return oStatements;
+            }
+        }
+        public String[] Variables
+        {
+            get
+            {
+                String[] vars = new String[oVariables.Count];
+                for (int i = 0; i < oVariables.Count; i++)
+                {
+                    vars[i] = oVariables.ElementAt(i).getName();
+                }
+                return vars;
+            }
         }
     }
 }
