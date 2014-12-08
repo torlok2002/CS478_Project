@@ -38,3 +38,5 @@ C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project
 C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.exe.manifest
 C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.application
 C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.NewProgram.resources
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.NewProgram.resources
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.NewExpressionForm.resources

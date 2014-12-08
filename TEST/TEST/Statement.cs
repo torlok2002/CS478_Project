@@ -16,7 +16,7 @@ namespace TEST
         //Constructor method
         public Statement()
         {
-           // Name = StatementName;
+           
         }
 
         //Methods	
@@ -262,26 +262,30 @@ namespace TEST
         public string getJCode()
         {
             
-            return "if (" + conditional.ToString() + ") {" + ifTrue.getJCode() + "};\r\n";
+            return "if (" + conditional.ToString() + ") {" + ifTrue.getCCode() + "};\r\n";
         }
 
         public string getCCode()
         {
-            return "if (" + conditional.ToString() + ") {" + ifTrue.getJCode() + "};\r\n";
+            return "if (" + conditional.ToString() + ") {" + ifTrue.getCCode() + "};\r\n";
         }
 
         public string getUserCode()
         {
-            return "If [ " + conditional.ToString() + " ] Do [ " + ifTrue.getJCode() + " ]\r\n";
-
+            return "If [ " + conditional.ToString() + " ] Do [ " + ifTrue.getCCode() + " ]\r\n";
         }
 
-        internal string getCon()
+        internal string getConditonal()
         {
             throw new NotImplementedException();
         }
 
         internal string getStatements()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal string getCon()
         {
             throw new NotImplementedException();
         }
@@ -291,35 +295,87 @@ namespace TEST
     class WhileStatement : Statement
     {
         //Fields
-        private Expression conditional;
+        private Conditional conditional;
         private Statement ifTrue;
  
-        //Constructor
-        public WhileStatement ()
-        {
+        //Fields
+        private Conditional cond;
+        //private Statement iftrue;
+        private List<Statement> stmtlist;
 
+        //Generic constructor
+        public WhileStatement()
+        {
+            cond = new Conditional();
+            //Statement tempstat = new Statement();
+            // Ask user which type of statment they want to create and create one based on that.
+            string statType = Microsoft.VisualBasic.Interaction.InputBox("Enter the type of statement you would like to add\r\n (V)ariable initialization\r\n(A)ssignment\r\n(I)nput\r\n(O)utput\r\n(If)\r\n(W)hile", "Statement Type");
+            if (statType == "v" || statType == "V")
+            {
+                VarInitStatement varStat = new VarInitStatement();
+                stmtlist.Add(varStat);
+            }
+            else if (statType == "a" || statType == "A")
+            {
+                AssignStatement assignstat = new AssignStatement();
+                stmtlist.Add(assignstat);
+            }
+            else if (statType == "i" || statType == "I")
+            {
+                AssignStatement instat = new AssignStatement();
+                stmtlist.Add(instat);
+            }
+            else if (statType == "o" || statType == "O")
+            {
+                AssignStatement outstat = new AssignStatement();
+                stmtlist.Add(outstat);
+            }
+            else if (statType == "if" || statType == "IF" || statType == "If")
+            {
+                AssignStatement ifstat = new AssignStatement();
+                stmtlist.Add(ifstat);
+            }
+            else if (statType == "w" || statType == "W")
+            {
+                AssignStatement whilestat = new AssignStatement();
+                stmtlist.Add(whilestat);
+            }
+
+        }
+        
+        //Constructor
+        public WhileStatement (Conditional cond, AssignStatement statements)
+        {
+            this.conditional = cond;
+            this.ifTrue = statements;
         }
 
         public string getJCode()
         {
-            return "While \u2610 Do \u2610\r\n";
+            return "if (" + conditional.ToString() + ") {" + ifTrue.getJCode() + "};\r\n";
         }
 
         public string getCCode()
         {
-            return "While \u2610 Do \u2610\r\n";
+            return "if (" + conditional.ToString() + ") {" + ifTrue.getCCode() + "};\r\n";
         }
 
         public string getUserCode()
         {
-            return "While \u2610 Do \u2610\r\n";
+            return "If [ " + conditional.ToString() + " ] Do [ " + ifTrue.getCCode() + " ]\r\n";
 
+        }
+
+        internal string getConditional()
+        {
+            return cond.ToString();
         }
 
         internal string getStatements()
         {
             throw new NotImplementedException();
         }
+
 
         internal string getCon()
         {
@@ -463,21 +519,12 @@ namespace TEST
         //generic constructor
         public Expression()
         {
-            String type = "";
-            while(type != "S" && type != "s" && type != "Simple" && type != "C" && type != "c" && type!= "Complex")
-            {
-             type = Microsoft.VisualBasic.Interaction.InputBox("Enter (S)imple or (C)omplex expression: ", "Enter type");
-            }
-            if (type == "S" || type == "s" || type == "Simple")
-            {
-                left = Microsoft.VisualBasic.Interaction.InputBox("Enter simple expression: ", "Enter expression");
-            }
-            else
-            {
-                left = Microsoft.VisualBasic.Interaction.InputBox("Enter left side of expression: ", "Enter left");
-                operation = Microsoft.VisualBasic.Interaction.InputBox("Enter arithmetic operator: \r\n (+, -, *,or  /", "Enter operator");
-                right = Microsoft.VisualBasic.Interaction.InputBox("Enter right side of expression: ", "Enter right");
-            }
+            NewExpressionForm ef =  new NewExpressionForm();
+
+            left = ef.left;
+            operation = ef.oper;
+            right = ef.right;
+                
         }
 
         //Constructor for one string
@@ -627,4 +674,6 @@ namespace TEST
             return s;
         }
     }
+
+
 }

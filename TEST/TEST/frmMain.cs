@@ -21,7 +21,7 @@ namespace TEST
         //StudentProgram IDEProgram;
         StudentProgram IDEProgram = new StudentProgram("Language1", "NewProg", "NewProg");
         //Instantiate linked list of Statements which can add statement objects to it. 
-        LinkedList<Statement> list1 = new LinkedList<Statement>();
+        //LinkedList<Statement> list1 = new LinkedList<Statement>();
         String codeString;
 
 
@@ -211,10 +211,17 @@ namespace TEST
         private void update_codeOutputBox() //iterate through linked list and get user statement code.
         {
             codeString = "START\r\n";
-            //foreach (var stat in list1)
-            //{codeString += stat.getUserCode() + "\r\n";}
-            codeString += IDEProgram.getUserCode();
-            codeString += "\r\nEND";
+
+            //get temp sting array in order to grab each individual line
+            string[] stmtArray;
+            stmtArray = IDEProgram.getUserCode();
+            foreach (string s in stmtArray)
+            {
+                codeString += s;
+                codeString += "\r\n";
+            }
+            
+            codeString += "END";
 
             txtCodeBox.Text = "";
             txtCodeBox.Text = codeString;
@@ -225,10 +232,16 @@ namespace TEST
         {
             codeString = "class "+ IDEProgram.getName() + "\r\n {\r\n";
             
-            codeString += IDEProgram.getCCode();
-            //foreach (Statement stat in IDEProgram)
-            //{codeString += stat.getJCode() + "\r\n";}
-            codeString += "\r\n}";
+            //get temp sting array in order to grab each individual line
+            string[] stmtArray;
+            stmtArray = IDEProgram.getCCode();
+            foreach (string s in stmtArray)
+            {
+                codeString += s;
+                codeString += "\r\n";
+            }
+
+            codeString += "}";
 
             txtOutputBox.Text = "";
             txtOutputBox.Text = codeString;

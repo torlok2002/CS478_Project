@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace TEST
 {
-    public partial class NewProgram : Form
+    public partial class NewExpressionDiag : Form
     {
         public String sInitialPath;
-        public NewProgram()
+        public NewExpressionDiag()
         {
             InitializeComponent();
             this.AcceptButton = btnOk;
@@ -38,7 +38,7 @@ namespace TEST
             {
                 txtFilePath.Text = fb.FileName;
             }
-            
+
         }
         public String ChoosenLanguage
         {
@@ -60,28 +60,23 @@ namespace TEST
             {
                 String[] aTempArray = txtFilePath.Text.Split('\\');
                 String aTempString = aTempArray.ElementAt(aTempArray.Length - 1);
-                return aTempString.Substring(0,aTempString.Length-6);
+                return aTempString.Substring(0, aTempString.Length - 6);
             }
         }
 
         public List<String> Languages()
-        {   
+        {
             List<String> lLanguages = new List<String>();
             DirectoryInfo dirInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\Languages");
             foreach (FileInfo file in dirInfo.GetFiles())
             {
-                if(file.Extension == ".Language")
+                if (file.Extension == ".Language")
                 {
-                    lLanguages.Add(file.Name.Substring(0,file.Name.Length-9));
+                    lLanguages.Add(file.Name.Substring(0, file.Name.Length - 9));
                 }
-                
+
             }
             return lLanguages;
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
