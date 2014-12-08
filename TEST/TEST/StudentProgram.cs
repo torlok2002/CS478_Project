@@ -97,5 +97,23 @@ namespace TEST
 
             return aCSLines;
         }
+
+        public string[] getUserCode()
+        {
+            string[] aCSLines = new string[oStatements.Count];
+            int i = 0;
+            foreach (Statement oTempObject in oStatements)
+            {
+                aCSLines[i] = oTempObject.getUserCode();
+                i++;
+            }
+
+            return aCSLines;
+        }
+
+        public string getName()
+        {
+            return sName;
+        }
     }
 }

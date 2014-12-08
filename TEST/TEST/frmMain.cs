@@ -18,7 +18,8 @@ namespace TEST
             InitializeComponent();
         }
         ProgramDir IDEDir;
-        StudentProgram IDEProgram;
+        //StudentProgram IDEProgram;
+        StudentProgram IDEProgram = new StudentProgram("Language1", "NewProg", "NewProg");
         //Instantiate linked list of Statements which can add statement objects to it. 
         LinkedList<Statement> list1 = new LinkedList<Statement>();
         String codeString;
@@ -32,9 +33,9 @@ namespace TEST
 
         private void VariableButton_Click(object sender, EventArgs e)
         {
-            VarInitStatement varStatement = new VarInitStatement();
-            list1.AddLast(varStatement);
-            //IDEProgram.AddStatement(varStatement);
+            VarInitStatement stat1 = new VarInitStatement();
+            //list1.AddLast(stat1);
+            IDEProgram.AddStatement(stat1);
             
             update_codeOutputBox();
             update_txtOutputBox();
@@ -43,7 +44,8 @@ namespace TEST
         private void AssignButton_Click(object sender, EventArgs e)
         {
             AssignStatement stat1 = new AssignStatement();
-            list1.AddLast(stat1);
+            //list1.AddLast(stat1);
+            IDEProgram.AddStatement(stat1);
 
             update_codeOutputBox();
             update_txtOutputBox();
@@ -52,32 +54,39 @@ namespace TEST
         private void IfButton_Click(object sender, EventArgs e)
         {
             IfStatement stat1 = new IfStatement();
-            list1.AddLast(stat1);
+            //list1.AddLast(stat1);
+            IDEProgram.AddStatement(stat1);
 
             update_codeOutputBox();
             update_txtOutputBox();
-
-
         }
 
         private void WhileButton_Click(object sender, EventArgs e)
         {
-            txtCodeBox.Text += "while \u2610 loop \u2610\r\n";
+            WhileStatement stat1 = new WhileStatement();
+            //list1.AddLast(stat1);
+            IDEProgram.AddStatement(stat1);
+
+            update_codeOutputBox();
+            update_txtOutputBox();
         }
 
         private void OutputButton_Click(object sender, EventArgs e)
         {
-            OutputStatement stmtA = new OutputStatement(); //New Output Statement
-            list1.AddLast(stmtA);
+            OutputStatement stat1 = new OutputStatement(); //New Output Statement
+            //list1.AddLast(stat1);
+            IDEProgram.AddStatement(stat1);
+
             update_txtOutputBox();
             update_codeOutputBox();
         }
 
         private void InputButton_Click(object sender, EventArgs e)
         {
-            
-            InputStatement stmtA = new InputStatement(); //New Input Statement
-            list1.AddLast(stmtA);
+            InputStatement stat1 = new InputStatement(); //New Input Statement
+            //list1.AddLast(stat1);
+            IDEProgram.AddStatement(stat1);
+
             update_txtOutputBox();
             update_codeOutputBox();
         }
@@ -201,11 +210,12 @@ namespace TEST
 
         private void update_codeOutputBox() //iterate through linked list and get user statement code.
         {
-            codeString = "";
-            foreach (var stat in list1)
-            {
-                codeString += stat.getUserCode() + "\r\n";
-            }
+            codeString = "START\r\n";
+            //foreach (var stat in list1)
+            //{codeString += stat.getUserCode() + "\r\n";}
+            codeString += IDEProgram.getUserCode();
+            codeString += "\r\nEND";
+
             txtCodeBox.Text = "";
             txtCodeBox.Text = codeString;
         }
@@ -213,11 +223,13 @@ namespace TEST
         private void update_txtOutputBox() //iterate through linked list and get java statement code.
 
         {
-            codeString = "";
-            foreach (var stat in list1)
-            {
-                codeString += stat.getJCode() + "\r\n";
-            }
+            codeString = "class "+ IDEProgram.getName() + "\r\n {\r\n";
+            
+            codeString += IDEProgram.getCCode();
+            //foreach (Statement stat in IDEProgram)
+            //{codeString += stat.getJCode() + "\r\n";}
+            codeString += "\r\n}";
+
             txtOutputBox.Text = "";
             txtOutputBox.Text = codeString;
         }

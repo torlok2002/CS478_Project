@@ -64,7 +64,7 @@ namespace TEST
             outputString = input;
         }
 
-                public override String getJCode()
+        public override String getJCode()
         {
             String Code;
             Code = "System.out.println(" + outputString + ");";
@@ -218,6 +218,13 @@ namespace TEST
             return Code;
         }
 
+        public override String getCCode()
+        {
+            String Code;
+            Code = assignTo + " = " + express.ToString() + ";";
+            return Code;
+        }
+
         internal string getVar()
         {
             throw new NotImplementedException();
@@ -358,13 +365,21 @@ namespace TEST
         } 
 
         public override String getJCode()
-
         {
             string vartype = var.getType();
             string varname = var.getName();
             string code = vartype + " " + varname + ";"; 
             return code;
         }
+
+        public override String getCCode()
+        {
+            string vartype = var.getType();
+            string varname = var.getName();
+            string code = vartype + " " + varname + ";";
+            return code;
+        }
+
         public override String getUserCode()
         {
             string vartype = var.getType();
@@ -387,13 +402,17 @@ namespace TEST
         //constructor
         public Variable(int type, string name)
         {
-            this.value = value;
             this.name = name;
             this.type = type;
-
         }
 
         public String getJCode()
+        {
+            return name;
+            //return String.valueOf(value);
+        }
+
+        public String getCCode()
         {
             return name;
             //return String.valueOf(value);
@@ -413,13 +432,13 @@ namespace TEST
             return name;
         }
 
-        public AssignStatement getStatement()
+        /*public AssignStatement getStatement()
         {
             //AssignStatement a = new AssignStatement(this, this.getValue(), this.name, i);
             Expression e = new Expression(this.getValue());
             AssignStatement a = new AssignStatement(name, e);
             return a;
-        }
+        }*/
 
         public void setValue(String value)
         {
@@ -539,8 +558,6 @@ namespace TEST
             left = new Expression();
             comparator = Microsoft.VisualBasic.Interaction.InputBox("Enter left side of expression: ", "Enter left");
             right = new Expression();
-
-            
         }
 
 
@@ -588,10 +605,20 @@ namespace TEST
             return s;
         }
 
+        public void SetLeft(Expression l)
+        {
+            left = l;
+        }
+
         public string GetRight()
         {
             string s = right.ToString();
             return s;
+        }
+
+        public void SetRight(Expression r)
+        {
+            right = r;
         }
 
         public string GetComparator()
