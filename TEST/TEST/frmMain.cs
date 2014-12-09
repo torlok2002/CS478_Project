@@ -44,7 +44,6 @@ namespace TEST
         private void AssignButton_Click(object sender, EventArgs e)
         {
             AssignStatement stat1 = new AssignStatement();
-            //list1.AddLast(stat1);
             IDEProgram.AddStatement(stat1);
 
             update_codeOutputBox();
@@ -54,7 +53,6 @@ namespace TEST
         private void IfButton_Click(object sender, EventArgs e)
         {
             IfStatement stat1 = new IfStatement();
-            //list1.AddLast(stat1);
             IDEProgram.AddStatement(stat1);
 
             update_codeOutputBox();

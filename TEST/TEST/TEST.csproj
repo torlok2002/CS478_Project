@@ -93,11 +93,23 @@
     <Compile Include="NewExpressionForm.Designer.cs">
       <DependentUpon>NewExpressionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewOutputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewOutputForm.Designer.cs">
+      <DependentUpon>NewOutputForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewProgram.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="NewProgram.Designer.cs">
       <DependentUpon>NewProgram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewVariableform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewVariableform.Designer.cs">
+      <DependentUpon>NewVariableform.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProgramDir.cs" />
@@ -110,8 +122,14 @@
     <EmbeddedResource Include="NewExpressionForm.resx">
       <DependentUpon>NewExpressionForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NewOutputForm.resx">
+      <DependentUpon>NewOutputForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NewProgram.resx">
       <DependentUpon>NewProgram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewVariableform.resx">
+      <DependentUpon>NewVariableform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

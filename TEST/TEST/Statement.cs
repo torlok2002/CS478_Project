@@ -56,8 +56,11 @@ namespace TEST
         //generic constructor
         public OutputStatement()
         {
-            outputString = Microsoft.VisualBasic.Interaction.InputBox("Enter value to output to user", "Output Value");
+            NewOutputForm outform = new NewOutputForm();
+            outform.ShowDialog();
+            outputString = outform.outtext;
         }
+
         //Constructor - Overrides parent class
         public OutputStatement(string input)
         {
@@ -190,10 +193,9 @@ namespace TEST
         public AssignStatement()
         {
             
-            string toVar = Microsoft.VisualBasic.Interaction.InputBox("Enter variable to assign expression to:\r\n", "Enter assignment");
+            assignTo = Microsoft.VisualBasic.Interaction.InputBox("Enter variable to assign expression to:\r\n", "Enter assignment");
             express = new Expression();
-            assignTo = toVar;
-
+            
         }
 
         //Constructor - Overrides parent class
@@ -234,6 +236,8 @@ namespace TEST
         {
             throw new NotImplementedException();
         }
+
+
     }
 
     [Serializable]
@@ -388,20 +392,15 @@ namespace TEST
     {
         //fields 
         private Variable var;
+        
 
         //generic constructor
         public VarInitStatement()
         {
-            int varType = 0;
-            while (varType == 0 || varType > 3)
-            {
-                int.TryParse(Microsoft.VisualBasic.Interaction.InputBox("Enter varible type:\r\n 1 = integer\r\n 2 = character\r\n 3 = string", "Variable type"), out varType);
-                //display to user that selection didnt match 1, 2, or 3
-            }
-            string varName = Microsoft.VisualBasic.Interaction.InputBox("Enter varible name:", "Variable Name");
-            //string varVal = Microsoft.VisualBasic.Interaction.InputBox("Enter varible value:", "Variable Value");
-            Variable varObject = new Variable(varType, varName);
-            var = varObject;
+            NewVariableform varform = new NewVariableform();
+            varform.ShowDialog();
+            var = new Variable(varform.type, varform.name);
+            
         }
 
         //constructor
@@ -456,22 +455,20 @@ namespace TEST
 
 
         //constructor
-        public Variable(int type, string name)
+        public Variable(int type, string nam)
         {
-            this.name = name;
+            this.name = nam;
             this.type = type;
         }
 
         public String getJCode()
         {
             return name;
-            //return String.valueOf(value);
         }
 
         public String getCCode()
         {
             return name;
-            //return String.valueOf(value);
         }
 
         public string getType()
@@ -487,14 +484,6 @@ namespace TEST
         {
             return name;
         }
-
-        /*public AssignStatement getStatement()
-        {
-            //AssignStatement a = new AssignStatement(this, this.getValue(), this.name, i);
-            Expression e = new Expression(this.getValue());
-            AssignStatement a = new AssignStatement(name, e);
-            return a;
-        }*/
 
         public void setValue(String value)
         {
@@ -519,12 +508,11 @@ namespace TEST
         //generic constructor
         public Expression()
         {
-            NewExpressionForm ef =  new NewExpressionForm();
-
-            left = ef.left;
-            operation = ef.oper;
-            right = ef.right;
-                
+            NewExpressionForm expressform =  new NewExpressionForm();
+            expressform.ShowDialog();
+            left = expressform.left;
+            operation = expressform.oper;
+            right = expressform.right;
         }
 
         //Constructor for one string
