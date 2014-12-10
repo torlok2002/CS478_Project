@@ -26,11 +26,16 @@ namespace TEST
         private int temptype;
         private bool typesetflag;
         private bool namesetflag;
+        private string[] varlist;
         
-        public NewVariableform()
+        //constructor
+        public NewVariableform(string[] ExistingVarList)
         {
-            
+            varlist = ExistingVarList;
             InitializeComponent();
+            this.AcceptButton = button1;
+            this.radioButton1.Checked = true;
+            this.temptype = 1;
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -65,14 +70,31 @@ namespace TEST
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            namesetflag = true;
-            if (typesetflag == true) { this.button1.Enabled = true; }
 
+            namesetflag = true;
+            if (typesetflag == true && !varlist.Contains(this.textBox1.Text)) 
+            {
+                this.button1.Enabled = true;
+                toolStripStatusLabel1.Text = "";
+            }
+            else if(varlist.Contains(this.textBox1.Text))
+            {
+                toolStripStatusLabel1.Text = "Variable already defined";
+                this.button1.Enabled = false;
+                namesetflag = false;
+            }
+            statusStrip1.Refresh();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (this.textBox1.Text == "")
+            {
+                toolStripStatusLabel1.Text = "No variable name entered";
+                namesetflag = false;
+                this.button1.Enabled = false;
+            }           
+            else this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -82,6 +104,11 @@ namespace TEST
             this.radioButton2.Checked = false;
             this.radioButton3.Checked = false;
             this.Close();
+        }
+
+        private void NewVariableform_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

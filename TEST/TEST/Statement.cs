@@ -16,7 +16,7 @@ namespace TEST
         //Constructor method
         public Statement()
         {
-           
+            
         }
 
         //Methods	
@@ -54,9 +54,9 @@ namespace TEST
         private String outputString;
 
         //generic constructor
-        public OutputStatement()
+        public OutputStatement(string[] ExistingVarList)
         {
-            NewOutputForm outform = new NewOutputForm();
+            NewOutputForm outform = new NewOutputForm(ExistingVarList);
             outform.ShowDialog();
             outputString = outform.outtext;
         }
@@ -190,12 +190,17 @@ namespace TEST
         private String assignTo;
 
         //generic Constructor
-        public AssignStatement()
+        public AssignStatement(string[] ExistingVarList)
         {
             
-            assignTo = Microsoft.VisualBasic.Interaction.InputBox("Enter variable to assign expression to:\r\n", "Enter assignment");
-            express = new Expression();
+            //assignTo = Microsoft.VisualBasic.Interaction.InputBox("Enter variable to assign expression to:\r\n", "Enter assignment");
             
+            //VariableSelection Varform = new VariableSelection(ExistingVarList);
+            //Varform.ShowDialog();
+            NewExpressionForm expressform = new NewExpressionForm(ExistingVarList);
+            expressform.ShowDialog();
+            express = new Expression(expressform.left, expressform.oper, expressform.right);
+            assignTo = expressform.varTo;
         }
 
         //Constructor - Overrides parent class
@@ -244,39 +249,56 @@ namespace TEST
     class IfStatement : Statement
     {
         //Fields
+        private string codeString;
         private Conditional conditional;
-        private AssignStatement ifTrue;
+        private List<Statement> stmtlist;
+        private Conditional bob;
  
         //Generic constructor
-        public IfStatement()
+        public IfStatement(string[] ExistingVarList)
         {
-            conditional = new Conditional();
-            ifTrue = new AssignStatement();
+            conditional = new Conditional(ExistingVarList);
+            stmtlist = new List<Statement>();
+            VarInitStatement stat1 = new VarInitStatement(ExistingVarList);
+            stmtlist.Add(stat1);
 
         }
         
-        //Constructor
-        public IfStatement (Conditional cond, AssignStatement statements)
+        public override string getJCode()
         {
-            this.conditional = cond;
-            this.ifTrue = statements;
 
+            codeString = "if " + conditional.ToString() + " do {";
+            foreach (Statement stat in stmtlist)
+            {
+                codeString += stat.GetType();
+            }
+            codeString += "}";
+
+            return codeString;
         }
 
-        public string getJCode()
+        public override string getCCode()
         {
-            
-            return "if (" + conditional.ToString() + ") {" + ifTrue.getCCode() + "};\r\n";
+            codeString = "if " + conditional.ToString() +  " do {";
+            foreach (Statement stat in stmtlist)
+            {
+                codeString += stat.GetType();
+            }
+            codeString += "}";
+
+            return codeString;
         }
 
-        public string getCCode()
+        public override string getUserCode()
         {
-            return "if (" + conditional.ToString() + ") {" + ifTrue.getCCode() + "};\r\n";
-        }
+            codeString = "if " + conditional.ToString() + " do {";
+            foreach (Statement stat in stmtlist)
+            {
+                codeString += stat.GetType();
+            }
+            codeString += "}";
 
-        public string getUserCode()
-        {
-            return "If [ " + conditional.ToString() + " ] Do [ " + ifTrue.getCCode() + " ]\r\n";
+            return codeString;
         }
 
         internal string getConditonal()
@@ -308,40 +330,40 @@ namespace TEST
         private List<Statement> stmtlist;
 
         //Generic constructor
-        public WhileStatement()
+        public WhileStatement(string[] ExistingVarList)
         {
-            cond = new Conditional();
+            cond = new Conditional(ExistingVarList);
             //Statement tempstat = new Statement();
             // Ask user which type of statment they want to create and create one based on that.
             string statType = Microsoft.VisualBasic.Interaction.InputBox("Enter the type of statement you would like to add\r\n (V)ariable initialization\r\n(A)ssignment\r\n(I)nput\r\n(O)utput\r\n(If)\r\n(W)hile", "Statement Type");
             if (statType == "v" || statType == "V")
             {
-                VarInitStatement varStat = new VarInitStatement();
+                VarInitStatement varStat = new VarInitStatement(ExistingVarList);
                 stmtlist.Add(varStat);
             }
             else if (statType == "a" || statType == "A")
             {
-                AssignStatement assignstat = new AssignStatement();
+                AssignStatement assignstat = new AssignStatement(ExistingVarList);
                 stmtlist.Add(assignstat);
             }
             else if (statType == "i" || statType == "I")
             {
-                AssignStatement instat = new AssignStatement();
+                AssignStatement instat = new AssignStatement(ExistingVarList);
                 stmtlist.Add(instat);
             }
             else if (statType == "o" || statType == "O")
             {
-                AssignStatement outstat = new AssignStatement();
+                AssignStatement outstat = new AssignStatement(ExistingVarList);
                 stmtlist.Add(outstat);
             }
             else if (statType == "if" || statType == "IF" || statType == "If")
             {
-                AssignStatement ifstat = new AssignStatement();
+                AssignStatement ifstat = new AssignStatement(ExistingVarList);
                 stmtlist.Add(ifstat);
             }
             else if (statType == "w" || statType == "W")
             {
-                AssignStatement whilestat = new AssignStatement();
+                AssignStatement whilestat = new AssignStatement(ExistingVarList);
                 stmtlist.Add(whilestat);
             }
 
@@ -395,9 +417,9 @@ namespace TEST
         
 
         //generic constructor
-        public VarInitStatement()
+        public VarInitStatement(string[] ExistingVarList)
         {
-            NewVariableform varform = new NewVariableform();
+            NewVariableform varform = new NewVariableform(ExistingVarList);
             varform.ShowDialog();
             var = new Variable(varform.type, varform.name);
             
@@ -506,13 +528,10 @@ namespace TEST
         string operation;
 
         //generic constructor
-        public Expression()
+        public Expression(string[] ExistingVarList)
         {
-            NewExpressionForm expressform =  new NewExpressionForm();
-            expressform.ShowDialog();
-            left = expressform.left;
-            operation = expressform.oper;
-            right = expressform.right;
+            
+            
         }
 
         //Constructor for one string
@@ -556,7 +575,8 @@ namespace TEST
 
         public string ToString()
         {
-            string s = "(" + left + " " + operation + " " + right + ")";
+            //string s = "(" + left + " " + operation + " " + right + ")";
+            string s = "(" + left + operation + right + ")";
             return s;
         }
 
@@ -576,23 +596,28 @@ namespace TEST
         {
             return operation;
         }
+
+
     }
 
     [Serializable]
     class Conditional
     {
         // Fields
-        Expression left;
-        Expression right;
+        string left;
+        string right;
         string comparator;
 
 
         //Constructor for one string
-        public Conditional()
+        public Conditional(string[] ExistingVarList)
         {
-            left = new Expression();
-            comparator = Microsoft.VisualBasic.Interaction.InputBox("Enter left side of expression: ", "Enter left");
-            right = new Expression();
+            ConditionalForm condform = new ConditionalForm(ExistingVarList);
+            condform.ShowDialog();
+            left = condform.left;
+            comparator = condform.oper;
+            right = condform.right;
+
         }
 
 
@@ -640,7 +665,7 @@ namespace TEST
             return s;
         }
 
-        public void SetLeft(Expression l)
+        public void SetLeft(string l)
         {
             left = l;
         }
@@ -651,7 +676,7 @@ namespace TEST
             return s;
         }
 
-        public void SetRight(Expression r)
+        public void SetRight(string r)
         {
             right = r;
         }

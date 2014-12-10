@@ -1,0 +1,83 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace TEST
+{
+    public partial class ConditionalForm : Form
+    {
+        
+        //fields
+        public string left
+        {
+            get { return comboBoxLeft.Text; }
+            set { }
+        }
+        
+        public string right
+        {
+            get { return comboBoxRight.Text; }
+            set {}
+        }
+
+        public string oper
+        {
+            get { return comboBoxEqual.Text; }
+            set {} 
+        }
+
+        //constructor
+        public ConditionalForm(string[] ExistingVarList)
+        {
+            InitializeComponent();
+            foreach (string str in ExistingVarList)
+            {
+                this.comboBoxLeft.Items.Add(str);
+                this.comboBoxRight.Items.Add(str);
+            }
+            this.AcceptButton = button1;
+        }
+
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+                this.Close();
+        }
+
+        private void comboBoxLeft_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxLeft.Text != "" && this.comboBoxRight.Text != "" && this.comboBoxEqual.Text != "")
+                this.button1.Enabled = true;
+        }
+
+        private void comboBoxEqual_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxLeft.Text != "" && this.comboBoxRight.Text != "" && this.comboBoxEqual.Text != "")
+                this.button1.Enabled = true;
+        }
+
+        private void comboBoxRight_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxLeft.Text != "" && this.comboBoxRight.Text != "" && this.comboBoxEqual.Text != "")
+                this.button1.Enabled = true;
+        }
+
+
+    }
+}

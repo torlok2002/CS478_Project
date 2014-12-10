@@ -18,12 +18,9 @@ namespace TEST
             InitializeComponent();
         }
         ProgramDir IDEDir;
-        //StudentProgram IDEProgram;
         StudentProgram IDEProgram = new StudentProgram("Language1", "NewProg", "NewProg");
-        //Instantiate linked list of Statements which can add statement objects to it. 
-        //LinkedList<Statement> list1 = new LinkedList<Statement>();
         String codeString;
-
+        string[] varlist;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -33,60 +30,67 @@ namespace TEST
 
         private void VariableButton_Click(object sender, EventArgs e)
         {
-            VarInitStatement stat1 = new VarInitStatement();
-            //list1.AddLast(stat1);
+            varlist = IDEProgram.Variables;
+            VarInitStatement stat1 = new VarInitStatement(varlist);
+            Variable var1 = stat1.GetVar();
+            IDEProgram.AddVariable(var1);
             IDEProgram.AddStatement(stat1);
-            
-            update_codeOutputBox();
-            update_txtOutputBox();
+
+            refreshUI();
         }
 
         private void AssignButton_Click(object sender, EventArgs e)
         {
-            AssignStatement stat1 = new AssignStatement();
-            IDEProgram.AddStatement(stat1);
+            varlist = IDEProgram.Variables;
+            if (varlist.Count() == 0)
+            {
+                toolStripStatusLabel1.Text = "No Variables defined: Unable to create assignment statement";
+                statusStrip1.Refresh();
+            }
+            else
+            {
+                AssignStatement stat1 = new AssignStatement(varlist);
+                IDEProgram.AddStatement(stat1);
 
-            update_codeOutputBox();
-            update_txtOutputBox();
+                refreshUI();
+            }
         }
 
         private void IfButton_Click(object sender, EventArgs e)
         {
-            IfStatement stat1 = new IfStatement();
+            varlist = IDEProgram.Variables;
+            IfStatement stat1 = new IfStatement(varlist);
             IDEProgram.AddStatement(stat1);
 
-            update_codeOutputBox();
-            update_txtOutputBox();
+            refreshUI();
         }
+
+        
 
         private void WhileButton_Click(object sender, EventArgs e)
         {
-            WhileStatement stat1 = new WhileStatement();
-            //list1.AddLast(stat1);
+            varlist = IDEProgram.Variables;
+            WhileStatement stat1 = new WhileStatement(varlist);
             IDEProgram.AddStatement(stat1);
 
-            update_codeOutputBox();
-            update_txtOutputBox();
+            refreshUI();
         }
 
         private void OutputButton_Click(object sender, EventArgs e)
         {
-            OutputStatement stat1 = new OutputStatement(); //New Output Statement
-            //list1.AddLast(stat1);
+            varlist = IDEProgram.Variables;
+            OutputStatement stat1 = new OutputStatement(varlist); //New Output Statement
             IDEProgram.AddStatement(stat1);
 
-            update_txtOutputBox();
-            update_codeOutputBox();
+            refreshUI();
         }
 
         private void InputButton_Click(object sender, EventArgs e)
         {
             InputStatement stat1 = new InputStatement(); //New Input Statement
-            //list1.AddLast(stat1);
             IDEProgram.AddStatement(stat1);
 
-            update_txtOutputBox();
-            update_codeOutputBox();
+            refreshUI();
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -265,7 +269,26 @@ namespace TEST
             IDEDir.LoadTree();
         }
 
+        //method to refresh UI
+        private void refreshUI()
+        {
+            toolStripStatusLabel1.Text = "";
+            statusStrip1.Refresh();
+            update_codeOutputBox();
+            update_txtOutputBox();
+        }
 
+        //hotkey controls
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.V)){VariableButton_Click(null, null);}
+            if (keyData == (Keys.Control | Keys.A)){AssignButton_Click(null, null);}
+            if (keyData == (Keys.Control | Keys.F)) {IfButton_Click(null, null); }
+            if (keyData == (Keys.Control | Keys.W)) { WhileButton_Click(null, null); }
+            if (keyData == (Keys.Control | Keys.O)) {OutputButton_Click(null, null); }
+            if (keyData == (Keys.Control | Keys.I)) {InputButton_Click(null, null); }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
 
 
     }

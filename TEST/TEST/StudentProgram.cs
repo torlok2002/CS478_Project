@@ -20,6 +20,7 @@ namespace TEST
         public StudentProgram(String sLanguage, String sName, String sFilename)
         {
             oStatements = new List<Statement>();
+            oVariables = new List<Variable>();
             this.sLanguage = sLanguage;
             this.sName = sName;
             this.sFilename = sFilename;

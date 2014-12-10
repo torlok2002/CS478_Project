@@ -80,6 +80,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Compiler.cs" />
+    <Compile Include="ConditionalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConditionalForm.Designer.cs">
+      <DependentUpon>ConditionalForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +122,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Statement.cs" />
     <Compile Include="StudentProgram.cs" />
+    <Compile Include="VariableSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VariableSelection.Designer.cs">
+      <DependentUpon>VariableSelection.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ConditionalForm.resx">
+      <DependentUpon>ConditionalForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,6 +156,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="VariableSelection.resx">
+      <DependentUpon>VariableSelection.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

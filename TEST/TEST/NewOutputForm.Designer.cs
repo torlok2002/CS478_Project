@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButtonVar = new System.Windows.Forms.RadioButton();
-            this.radioButtonStr = new System.Windows.Forms.RadioButton();
-            this.textBoxStr = new System.Windows.Forms.TextBox();
             this.radioButtonExp = new System.Windows.Forms.RadioButton();
+            this.radioButtonStr = new System.Windows.Forms.RadioButton();
+            this.radioButtonVar = new System.Windows.Forms.RadioButton();
+            this.textBoxStr = new System.Windows.Forms.TextBox();
             this.labelStr = new System.Windows.Forms.Label();
             this.buttonAccept = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,17 +51,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Output Type";
             // 
-            // radioButtonVar
+            // radioButtonExp
             // 
-            this.radioButtonVar.AutoSize = true;
-            this.radioButtonVar.Location = new System.Drawing.Point(6, 42);
-            this.radioButtonVar.Name = "radioButtonVar";
-            this.radioButtonVar.Size = new System.Drawing.Size(63, 17);
-            this.radioButtonVar.TabIndex = 1;
-            this.radioButtonVar.TabStop = true;
-            this.radioButtonVar.Text = "Variable";
-            this.radioButtonVar.UseVisualStyleBackColor = true;
-            this.radioButtonVar.Visible = false;
+            this.radioButtonExp.AutoSize = true;
+            this.radioButtonExp.Location = new System.Drawing.Point(6, 65);
+            this.radioButtonExp.Name = "radioButtonExp";
+            this.radioButtonExp.Size = new System.Drawing.Size(76, 17);
+            this.radioButtonExp.TabIndex = 2;
+            this.radioButtonExp.TabStop = true;
+            this.radioButtonExp.Text = "Expression";
+            this.radioButtonExp.UseVisualStyleBackColor = true;
+            this.radioButtonExp.Visible = false;
             // 
             // radioButtonStr
             // 
@@ -74,25 +75,27 @@
             this.radioButtonStr.UseVisualStyleBackColor = true;
             this.radioButtonStr.CheckedChanged += new System.EventHandler(this.radioButtonStr_CheckedChanged);
             // 
+            // radioButtonVar
+            // 
+            this.radioButtonVar.AutoSize = true;
+            this.radioButtonVar.Location = new System.Drawing.Point(6, 42);
+            this.radioButtonVar.Name = "radioButtonVar";
+            this.radioButtonVar.Size = new System.Drawing.Size(63, 17);
+            this.radioButtonVar.TabIndex = 1;
+            this.radioButtonVar.TabStop = true;
+            this.radioButtonVar.Text = "Variable";
+            this.radioButtonVar.UseVisualStyleBackColor = true;
+            this.radioButtonVar.CheckedChanged += new System.EventHandler(this.radioButtonVar_CheckedChanged);
+            // 
             // textBoxStr
             // 
+            this.textBoxStr.Enabled = false;
             this.textBoxStr.Location = new System.Drawing.Point(156, 31);
             this.textBoxStr.Name = "textBoxStr";
             this.textBoxStr.Size = new System.Drawing.Size(216, 20);
             this.textBoxStr.TabIndex = 1;
+            this.textBoxStr.Visible = false;
             this.textBoxStr.TextChanged += new System.EventHandler(this.textBoxStr_TextChanged);
-            // 
-            // radioButtonExp
-            // 
-            this.radioButtonExp.AutoSize = true;
-            this.radioButtonExp.Location = new System.Drawing.Point(6, 65);
-            this.radioButtonExp.Name = "radioButtonExp";
-            this.radioButtonExp.Size = new System.Drawing.Size(76, 17);
-            this.radioButtonExp.TabIndex = 2;
-            this.radioButtonExp.TabStop = true;
-            this.radioButtonExp.Text = "Expression";
-            this.radioButtonExp.UseVisualStyleBackColor = true;
-            this.radioButtonExp.Visible = false;
             // 
             // labelStr
             // 
@@ -114,17 +117,30 @@
             this.buttonAccept.UseVisualStyleBackColor = true;
             this.buttonAccept.Click += new System.EventHandler(this.buttonAccept_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.Enabled = false;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(156, 31);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 4;
+            this.comboBox1.Visible = false;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // NewOutputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(391, 112);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.buttonAccept);
             this.Controls.Add(this.labelStr);
             this.Controls.Add(this.textBoxStr);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "NewOutputForm";
-            this.Text = "Text to Output";
+            this.Text = "Define Output";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -141,5 +157,6 @@
         private System.Windows.Forms.TextBox textBoxStr;
         private System.Windows.Forms.Label labelStr;
         private System.Windows.Forms.Button buttonAccept;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

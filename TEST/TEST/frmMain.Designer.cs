@@ -61,8 +61,8 @@
             this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.btnUp = new System.Windows.Forms.ToolStripButton();
             this.btnHome = new System.Windows.Forms.ToolStripButton();
-            this.txtOutputBox = new System.Windows.Forms.TextBox();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            this.txtOutputBox = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tlsStatementStrip.SuspendLayout();
@@ -219,7 +219,7 @@
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(53, 22);
             this.toolStripButton1.Text = "Variable";
-            this.toolStripButton1.ToolTipText = "Initialize a Variable";
+            this.toolStripButton1.ToolTipText = "Initialize a Variable\r\n(Ctrl+V)";
             this.toolStripButton1.Click += new System.EventHandler(this.VariableButton_Click);
             // 
             // toolStripButton2
@@ -229,7 +229,7 @@
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(74, 22);
             this.toolStripButton2.Text = "Assignment";
-            this.toolStripButton2.ToolTipText = "Assign a variable the result of an expression";
+            this.toolStripButton2.ToolTipText = "Assign a variable the result of an expression\r\n(Ctrl+A)";
             this.toolStripButton2.Click += new System.EventHandler(this.AssignButton_Click);
             // 
             // toolStripButton3
@@ -239,7 +239,7 @@
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton3.Text = "If";
-            this.toolStripButton3.ToolTipText = "Execute statements if a conditional is met";
+            this.toolStripButton3.ToolTipText = "Execute statements if a conditional is met\r\n(Ctrl+F)";
             this.toolStripButton3.Click += new System.EventHandler(this.IfButton_Click);
             // 
             // toolStripButton4
@@ -249,7 +249,7 @@
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Size = new System.Drawing.Size(41, 22);
             this.toolStripButton4.Text = "While";
-            this.toolStripButton4.ToolTipText = "Continue to execute statements until a conditional is met.";
+            this.toolStripButton4.ToolTipText = "Continue to execute statements until a conditional is met.\r\n(Ctrl+W)";
             this.toolStripButton4.Click += new System.EventHandler(this.WhileButton_Click);
             // 
             // toolStripButton5
@@ -259,7 +259,7 @@
             this.toolStripButton5.Name = "toolStripButton5";
             this.toolStripButton5.Size = new System.Drawing.Size(49, 22);
             this.toolStripButton5.Text = "Output";
-            this.toolStripButton5.ToolTipText = "Prompt user for input";
+            this.toolStripButton5.ToolTipText = "Output to user\r\n(Ctrl+O)";
             this.toolStripButton5.Click += new System.EventHandler(this.OutputButton_Click);
             // 
             // toolStripButton6
@@ -269,7 +269,7 @@
             this.toolStripButton6.Name = "toolStripButton6";
             this.toolStripButton6.Size = new System.Drawing.Size(39, 22);
             this.toolStripButton6.Text = "Input";
-            this.toolStripButton6.ToolTipText = "Prompt user to input a value and assign it to a variable";
+            this.toolStripButton6.ToolTipText = "Prompt user to input a value and assign it to a variable\r\n(Ctrl+I)";
             this.toolStripButton6.Click += new System.EventHandler(this.InputButton_Click);
             // 
             // splitContainer1
@@ -386,6 +386,16 @@
             this.btnHome.Size = new System.Drawing.Size(24, 24);
             this.btnHome.Text = "toolStripButton7";
             // 
+            // toolStripButton7
+            // 
+            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
+            this.toolStripButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton7.Name = "toolStripButton7";
+            this.toolStripButton7.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton7.Text = "toolStripButton7";
+            // 
             // txtOutputBox
             // 
             this.txtOutputBox.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -398,16 +408,6 @@
             this.txtOutputBox.Size = new System.Drawing.Size(677, 153);
             this.txtOutputBox.TabIndex = 0;
             this.txtOutputBox.TextChanged += new System.EventHandler(this.txtOutputBox_TextChanged);
-            // 
-            // toolStripButton7
-            // 
-            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
-            this.toolStripButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton7.Text = "toolStripButton7";
             // 
             // frmMain
             // 
@@ -422,6 +422,7 @@
             this.Controls.Add(this.btnRunProg);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;

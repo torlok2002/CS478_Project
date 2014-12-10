@@ -42,3 +42,5 @@ C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project
 C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.NewExpressionForm.resources
 C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.NewVariableform.resources
 C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.NewOutputForm.resources
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.VariableSelection.resources
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.ConditionalForm.resources
