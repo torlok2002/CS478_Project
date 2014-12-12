@@ -17,19 +17,25 @@ namespace TEST
         public string left
         {
             get { return comboBoxLeft.Text; }
-            set { }
+            set { comboBoxLeft.Text = left; }
         }
         
         public string right
         {
             get { return comboBoxRight.Text; }
-            set {}
+            set { comboBoxRight.Text = right; }
         }
 
         public string oper
         {
             get { return comboBoxEqual.Text; }
-            set {} 
+            set { comboBoxEqual.Text = oper; } 
+        }
+
+        public string type
+        {
+            get { return label1.Text; }
+            set { label1.Text = type; }
         }
 
         //constructor

@@ -186,27 +186,24 @@ namespace TEST
     class AssignStatement : Statement
     {
         //Fields
-        private Expression express;
-        private String assignTo;
+        //private Expression express;
+        private string express;
+        private string assignTo;
 
         //generic Constructor
         public AssignStatement(string[] ExistingVarList)
         {
-            
-            //assignTo = Microsoft.VisualBasic.Interaction.InputBox("Enter variable to assign expression to:\r\n", "Enter assignment");
-            
-            //VariableSelection Varform = new VariableSelection(ExistingVarList);
-            //Varform.ShowDialog();
-            NewExpressionForm expressform = new NewExpressionForm(ExistingVarList);
-            expressform.ShowDialog();
-            express = new Expression(expressform.left, expressform.oper, expressform.right);
-            assignTo = expressform.varTo;
+            AssignmentForm assignform = new AssignmentForm(ExistingVarList);
+            assignform.ShowDialog();
+            assignTo = assignform.to;
+            //express = assignform.express;//used for passing object
+            express = assignform.expressString;//used for passing string
         }
 
         //Constructor - Overrides parent class
         public AssignStatement(string assignTo, Expression assignFrom)
         {
-            express = assignFrom;
+            express = assignFrom.ToString();
             this.assignTo = assignTo;
         }
 
@@ -270,7 +267,7 @@ namespace TEST
             codeString = "if " + conditional.ToString() + " do {";
             foreach (Statement stat in stmtlist)
             {
-                codeString += stat.GetType();
+                codeString += stat.getJCode();
             }
             codeString += "}";
 
@@ -282,7 +279,7 @@ namespace TEST
             codeString = "if " + conditional.ToString() +  " do {";
             foreach (Statement stat in stmtlist)
             {
-                codeString += stat.GetType();
+                codeString += stat.getCCode();
             }
             codeString += "}";
 
@@ -294,7 +291,7 @@ namespace TEST
             codeString = "if " + conditional.ToString() + " do {";
             foreach (Statement stat in stmtlist)
             {
-                codeString += stat.GetType();
+                codeString += stat.getUserCode();
             }
             codeString += "}";
 
@@ -520,7 +517,7 @@ namespace TEST
     }
     
     [Serializable]
-    class Expression  //Class used to create any expressions
+    public class Expression  //Class used to create any expressions
     {
         // Fields
         string left;
@@ -530,7 +527,11 @@ namespace TEST
         //generic constructor
         public Expression(string[] ExistingVarList)
         {
-            
+            NewExpressionForm expform = new NewExpressionForm(ExistingVarList);
+            expform.ShowDialog();
+            left = expform.left;
+            operation = expform.oper;
+            right = expform.right;
             
         }
 
@@ -653,7 +654,7 @@ namespace TEST
             this.comparator = comparator;
         }*/
 
-        public string ToString()
+        public override string ToString()
         {
             string s = "(" + left + " " + comparator + " " + right + ")";
             return s;
