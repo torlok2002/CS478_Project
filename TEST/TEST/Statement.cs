@@ -84,7 +84,7 @@ namespace TEST
         public override String getUserCode()
         {
             String Code;
-            Code = "Display to user [" + outputString + "]";
+            Code = "Display to user [ " + outputString + " ]";
             return Code;
         }
 
@@ -107,10 +107,12 @@ namespace TEST
         private string varTo;
 
         //generic constructor
-        public InputStatement()
+        public InputStatement(string[] existvarlist)
         {
-            messageString = Microsoft.VisualBasic.Interaction.InputBox("Enter message to prompt user for input", "Message for user");
-            varTo = Microsoft.VisualBasic.Interaction.InputBox("Which Variable would you like to assign user's response to?", "Variable");
+            InputForm inform = new InputForm(existvarlist);
+            inform.ShowDialog();
+            messageString = inform.message;
+            varTo = inform.VarName;
         }
         //Constructor - Overrides parent class
         public InputStatement(string message, string varTo)
@@ -416,7 +418,7 @@ namespace TEST
         //generic constructor
         public VarInitStatement(string[] ExistingVarList)
         {
-            NewVariableform varform = new NewVariableform(ExistingVarList);
+            VariableForm varform = new VariableForm(ExistingVarList);
             varform.ShowDialog();
             var = new Variable(varform.type, varform.name);
             
@@ -527,7 +529,7 @@ namespace TEST
         //generic constructor
         public Expression(string[] ExistingVarList)
         {
-            NewExpressionForm expform = new NewExpressionForm(ExistingVarList);
+            ExpressionForm expform = new ExpressionForm(ExistingVarList);
             expform.ShowDialog();
             left = expform.left;
             operation = expform.oper;
@@ -576,7 +578,6 @@ namespace TEST
 
         public string ToString()
         {
-            //string s = "(" + left + " " + operation + " " + right + ")";
             string s = "(" + left + operation + right + ")";
             return s;
         }

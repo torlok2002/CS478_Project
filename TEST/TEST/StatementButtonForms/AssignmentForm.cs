@@ -65,7 +65,7 @@ namespace TEST
             {
                 comboBox1.Text = "(Expression)";
                 comboBox1.Enabled = false; 
-                NewExpressionForm expform = new NewExpressionForm(existvarlist);
+                ExpressionForm expform = new ExpressionForm(existvarlist);
                 expform.ShowDialog();
                 express = expform.expression;
                 

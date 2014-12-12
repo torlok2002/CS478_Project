@@ -87,10 +87,19 @@ namespace TEST
 
         private void InputButton_Click(object sender, EventArgs e)
         {
-            InputStatement stat1 = new InputStatement(); //New Input Statement
-            IDEProgram.AddStatement(stat1);
+            varlist = IDEProgram.Variables;
+            if (varlist.Count() == 0)
+            {
+                toolStripStatusLabel1.Text = "No Variables defined: Unable to create assignment statement";
+                statusStrip1.Refresh();
+            }
+            else
+            {
+                InputStatement stat1 = new InputStatement(varlist);
+                IDEProgram.AddStatement(stat1);
 
-            refreshUI();
+                refreshUI();
+            }
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)

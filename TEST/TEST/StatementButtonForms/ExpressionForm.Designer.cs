@@ -1,6 +1,6 @@
 ﻿namespace TEST
 {
-    partial class NewExpressionForm
+    partial class ExpressionForm
     {
         /// <summary>
         /// Required designer variable.
@@ -63,7 +63,7 @@
             this.btnAccept.Location = new System.Drawing.Point(172, 95);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(70, 24);
-            this.btnAccept.TabIndex = 3;
+            this.btnAccept.TabIndex = 5;
             this.btnAccept.Text = "Accept";
             this.btnAccept.UseVisualStyleBackColor = true;
             this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
@@ -79,7 +79,7 @@
             this.comboBox2.Location = new System.Drawing.Point(72, 33);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(49, 21);
-            this.comboBox2.TabIndex = 1;
+            this.comboBox2.TabIndex = 2;
             // 
             // label4
             // 
@@ -105,7 +105,7 @@
             this.comboBoxRVar.Location = new System.Drawing.Point(72, 59);
             this.comboBoxRVar.Name = "comboBoxRVar";
             this.comboBoxRVar.Size = new System.Drawing.Size(87, 21);
-            this.comboBoxRVar.TabIndex = 2;
+            this.comboBoxRVar.TabIndex = 3;
             // 
             // checkBox1
             // 
@@ -113,7 +113,7 @@
             this.checkBox1.Location = new System.Drawing.Point(165, 7);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(77, 17);
-            this.checkBox1.TabIndex = 6;
+            this.checkBox1.TabIndex = 1;
             this.checkBox1.Text = "Expression";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
@@ -124,7 +124,7 @@
             this.checkBox2.Location = new System.Drawing.Point(165, 63);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(77, 17);
-            this.checkBox2.TabIndex = 7;
+            this.checkBox2.TabIndex = 4;
             this.checkBox2.Text = "Expression";
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);

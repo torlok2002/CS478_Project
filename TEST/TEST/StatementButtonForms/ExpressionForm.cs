@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace TEST
 {
-    public partial class NewExpressionForm : Form
+    public partial class ExpressionForm : Form
     {
         //fields
         private string[] existvarlist;
@@ -43,7 +43,7 @@ namespace TEST
          }
 
         //constructor
-        public NewExpressionForm(string[] ExistVarList)
+        public ExpressionForm(string[] ExistVarList)
         {
             InitializeComponent();
             this.AcceptButton = btnAccept;
@@ -53,6 +53,7 @@ namespace TEST
                 this.comboBoxRVar.Items.Add(VarName);
             }
             existvarlist = ExistVarList;
+            
 
         }
 
@@ -89,9 +90,17 @@ namespace TEST
             if (checkBox1.Checked == true)
             {
                 comboBoxLVar.Enabled = false;
-                NewExpressionForm lexpressform = new NewExpressionForm(existvarlist);
+                ExpressionForm lexpressform = new ExpressionForm(existvarlist);
+                //set child form to another location to avoid user confusion
+                Point point = this.Location;
+                point.X = point.X + 10;
+                point.Y = point.Y + 10;
+                lexpressform.Location = point;
                 lexpressform.ShowDialog();
-                comboBoxLVar.Text = lexpressform.left + lexpressform.oper + lexpressform.right;
+
+                
+                
+                comboBoxLVar.Text = lexpressform.expression.ToString();
                 checkAcceptButtonEnable();
             }
             else
@@ -107,9 +116,16 @@ namespace TEST
             if (checkBox2.Checked == true)
             {
                 comboBoxRVar.Enabled = false;
-                NewExpressionForm rexpressform = new NewExpressionForm(existvarlist);
+                ExpressionForm rexpressform = new ExpressionForm(existvarlist);
+                //set child form to another location to avoid user confusion
+                Point point = this.Location;
+                point.X = point.X + 10;
+                point.Y = point.Y + 10;
+                rexpressform.Location = point;
                 rexpressform.ShowDialog();
-                comboBoxRVar.Text = rexpressform.left + rexpressform.oper + rexpressform.right;
+                                
+
+                comboBoxRVar.Text = rexpressform.expression.ToString();
                 checkAcceptButtonEnable();
             }
             else
@@ -119,6 +135,7 @@ namespace TEST
                 comboBoxRVar.Text = right;
             }
         }
+
 
         
     }

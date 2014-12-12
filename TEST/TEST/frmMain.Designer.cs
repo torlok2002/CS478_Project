@@ -54,7 +54,8 @@
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.txtCodeBox = new System.Windows.Forms.TextBox();
+            //this.txtCodeBox = new System.Windows.Forms.TextBox();
+            this.txtCodeBox = new System.Windows.Forms.RichTextBox();
             this.tvTreeDirectory = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -316,7 +317,7 @@
             this.txtCodeBox.Multiline = true;
             this.txtCodeBox.Name = "txtCodeBox";
             this.txtCodeBox.ReadOnly = true;
-            this.txtCodeBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtCodeBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;//  ScrollBars.Vertical;
             this.txtCodeBox.Size = new System.Drawing.Size(519, 316);
             this.txtCodeBox.TabIndex = 0;
             this.txtCodeBox.TextChanged += new System.EventHandler(this.txtCodeBox_TextChanged);
@@ -471,7 +472,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.TextBox txtCodeBox;
+        private System.Windows.Forms.RichTextBox txtCodeBox;
         private System.Windows.Forms.TreeView tvTreeDirectory;
         private System.Windows.Forms.TextBox txtOutputBox;
         private System.Windows.Forms.ToolStripButton toolStripButton1;

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace TEST
 {
-    public partial class VariableSelection : Form
+    public partial class InputForm : Form
     {
         //fields
         public string VarName
@@ -18,8 +18,14 @@ namespace TEST
             get { return comboBoxVarName.Text; }
             set { }
         }
-        
-        public VariableSelection(string[] ExistingVarList)
+
+        public string message 
+        {
+            get { return "\"" + textBox1.Text + "\""; }
+            set { } 
+        }
+
+        public InputForm(string[] ExistingVarList)
         {
             
             InitializeComponent();
@@ -27,24 +33,22 @@ namespace TEST
             {
                 this.comboBoxVarName.Items.Add(VarName);
             }
-            
-            
+            this.AcceptButton = buttonAccept;
         }
 
         private void comboBoxVarName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.buttonAccept.Enabled = true;
+            buttonAccept.Enabled = false;
+            if (comboBoxVarName.Text != "") { this.buttonAccept.Enabled = true; }
         }
 
-        private void VariableSelection_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void buttonAccept_Click(object sender, EventArgs e)
         {
             VarName = this.comboBoxVarName.Text;
             this.Close();
         }
+
+        
     }
 }
