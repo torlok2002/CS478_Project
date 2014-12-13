@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 namespace TEST
 {
     [Serializable]
-    class Statement
+    abstract class Statement
     {
-        //Fields
-        private String Name;
-        private String Icon;	//change to image/icon/shape
 
         //Constructor method
         public Statement()
@@ -19,32 +16,13 @@ namespace TEST
             
         }
 
+
         //Methods	
-        public String GetIcon()
-        {//change to image/icon/shape
-            return Icon;
-        }
+        public abstract String getCCode();
 
-        public virtual String getJCode()
-        {
-            String Code;
-            Code = "There should be real code here...This is a generic Java Statement object and something needs fixed.";
-            return Code;
-        }
+        public abstract String getUserCode(Language oLanguage);
 
-        public virtual String getCCode()
-        {
-            String Code;
-            Code = "There should be real code here...This is a generic C# Statement object and something needs fixed.";
-            return Code;
-        }
-
-        public virtual String getUserCode()
-        {
-            String Code;
-            Code = "There should be real user code here...This is a generic user Statement object and something needs fixed.";
-            return Code;
-        }
+        public abstract String getStatementType();
     }
 
     [Serializable]
@@ -67,25 +45,21 @@ namespace TEST
             outputString = input;
         }
 
-        public override String getJCode()
-        {
-            String Code;
-            Code = "System.out.println(" + outputString + ");";
-            return Code;
-        }
-
         public override String getCCode()
         {
             String Code;
-            Code = "System.out.println(" + outputString + ");";
+            Code = "IDEQueue.Send(" + outputString + @"+"""",""Output"");";
             return Code;
         }
 
-        public override String getUserCode()
+        public override String getUserCode(Language oLanguage)
         {
-            String Code;
-            Code = "Display to user [ " + outputString + " ];";
-            return Code;
+            return oLanguage.getOutputStatement(outputString);
+        }
+
+        public override string getStatementType()
+        {
+            return "output";
         }
 
         public String getOutput()
@@ -105,6 +79,7 @@ namespace TEST
         //Fields
         private string messageString;
         private string varTo;
+        private string varType="";
 
         //generic constructor
         public InputStatement(string[] existvarlist)
@@ -113,76 +88,40 @@ namespace TEST
             inform.ShowDialog();
             messageString = inform.message;
             varTo = inform.VarName;
+            
         }
         //Constructor - Overrides parent class
-        public InputStatement(string message, string varTo)
+        public InputStatement(string message, string varTo, string varType)
         {
             messageString = message;
             this.varTo = varTo;
         }
 
-                public override String getJCode()
-        {
-            String Code;
-            Code = "System.out.println(\"" + messageString + "\"); Scanner in = new Scanner(System.in); String " + varTo + " = in.next();";
-            return Code;
-        }
-
         public override String getCCode()
         {
             String Code;
-            Code = "string input = Microsoft.VisualBasic.Interaction.InputBox(" + messageString + ", \"Input\");";
+            Code = @"IDEQueue.Send("""",""InputRequest" + varType + @""");\n";
+            if (varType == "int") { Code += varTo + @" = int.Parse(GetMessage().Body.ToString()); "; }
+            else if (varType == "string") { Code += varTo + @" = GetMessage().Body.ToString(); "; }
+            else if (varType == "char") { Code += varTo + @" = GetMessage().Body.ToString().ToCharArray().ElementAt(0); "; }
             return Code;
         }
 
-        public override String getUserCode()
+        public override String getUserCode(Language oLanguage)
         {
-            String Code;
-            Code = "Ask user for input with message [" + messageString + "] and store result as [ " + varTo + " ];";
-            return Code;
+            return oLanguage.getInputStatement(varTo);
         }
 
-
+        public override string getStatementType()
+        {
+            return "input";
+        }
 
         internal string getVar()
         {
             throw new NotImplementedException();
         }
     }
-    
-    /*
-     [serializable]
-     class badAssignStatement : Statement
-    {
-
-        //Fields
-        private string aTo;
-        private Expression aFrom;
-
-        //Constructor for progObject assigned from expression
-        public AssignStatement(string AssignTo, Expression AssignFrom)
-        {
-            aFrom = AssignFrom;
-            aTo = AssignTo;
-        }
-
-
-
-        public override String getJCode()
-        {
-            String Code;
-            Code = aTo + " = " + aFrom.ToString() + ";";
-            return Code;
-        }
-
-        public override String getUserCode()
-        {
-            String Code;
-            Code = "Declare variable [" + aTo.ToString() + "] to be equal to [" + aFrom.GetLeft()+ "]";
-            return Code;
-        }
-    }*/
-
      
     [Serializable]
     class AssignStatement : Statement
@@ -210,18 +149,9 @@ namespace TEST
         }
 
 
-        public override String getUserCode()
+        public override String getUserCode(Language oLanguage)
         {
-            String Code;
-            Code = "Calculate [ " + express.ToString() +" ] and store the result as [ " + assignTo +" ];";
-            return Code;
-        }
-
-        public override String getJCode()
-        {
-            String Code;
-            Code = assignTo +" = " + express.ToString() + ";";
-            return Code;
+            return oLanguage.getAssignStatement(assignTo,express);
         }
 
         public override String getCCode()
@@ -229,6 +159,11 @@ namespace TEST
             String Code;
             Code = assignTo + " = " + express.ToString() + ";";
             return Code;
+        }
+
+        public override string getStatementType()
+        {
+            return "assign";
         }
 
         internal string getVar()
@@ -253,26 +188,13 @@ namespace TEST
         private List<Statement> stmtlist;
  
         //Generic constructor
-        public IfStatement(string[] ExistingVarList)
+        public IfStatement(string[] ExistingVarList,Language oLanguage)
         {
-            If_WhileForm ifform = new If_WhileForm(ExistingVarList, "If");
+            If_WhileForm ifform = new If_WhileForm(ExistingVarList, "If",oLanguage);
             ifform.ShowDialog();
             stmtlist = ifform.getStatlist();
             conditional = ifform.condition;
 
-        }
-        
-        public override string getJCode()
-        {
-
-            codeString = "if " + conditional.ToString() + " {";
-            foreach (Statement stat in stmtlist)
-            {
-                codeString += stat.getJCode();
-            }
-            codeString += "}";
-
-            return codeString;
         }
 
         public override string getCCode()
@@ -287,18 +209,14 @@ namespace TEST
             return codeString;
         }
 
-        public override string getUserCode()
+        public override string getUserCode(Language oLanguage)
         {
-            codeString = "if " + conditional.ToString() + " do {";
-            foreach (Statement stat in stmtlist)
-            {
-                codeString += stat.getUserCode();
-            }
-            codeString += "}";
-
-            return codeString;
+            return oLanguage.getBranchStatement(conditional.ToString());
         }
-
+        public override string getStatementType()
+        {
+            return "if";
+        }
         internal string getConditonal()
         {
             throw new NotImplementedException();
@@ -324,27 +242,15 @@ namespace TEST
         private List<Statement> stmtlist;
 
         //Generic constructor
-        public WhileStatement(string[] ExistingVarList)
+        public WhileStatement(string[] ExistingVarList, Language oLanguage)
         {
-            If_WhileForm whileform = new If_WhileForm(ExistingVarList, "While");
+            If_WhileForm whileform = new If_WhileForm(ExistingVarList, "While", oLanguage);
             whileform.ShowDialog();
             stmtlist = whileform.getStatlist();
             conditional = whileform.condition;
 
         }
         
-        public override string getJCode()
-        {
-            codeString = "while " + conditional.ToString() + " {";
-            foreach (Statement stat in stmtlist)
-            {
-                codeString += stat.getJCode();
-            }
-            codeString += "}";
-
-            return codeString;
-        }
-
         public override string getCCode()
         {
             codeString = "while " + conditional.ToString() + " {";
@@ -357,17 +263,14 @@ namespace TEST
             return codeString;
         }
 
-        public override string getUserCode()
+        public override string getUserCode(Language oLanguage)
         {
-            codeString = "while " + conditional.ToString() + " do {";
-            foreach (Statement stat in stmtlist)
-            {
-                codeString += stat.getUserCode();
-            }
-            codeString += "}";
+            return oLanguage.getLoopStatement(conditional.ToString());
 
-            return codeString;
-
+        }
+        public override string getStatementType()
+        {
+            return "while";
         }
 
         internal string getConditional()
@@ -423,14 +326,6 @@ namespace TEST
             var = varin;
         } 
 
-        public override String getJCode()
-        {
-            string vartype = var.getType();
-            string varname = var.getName();
-            string code = vartype + " " + varname + ";"; 
-            return code;
-        }
-
         public override String getCCode()
         {
             string vartype = var.getType();
@@ -439,12 +334,13 @@ namespace TEST
             return code;
         }
 
-        public override String getUserCode()
+        public override String getUserCode(Language oLanguage)
         {
-            string vartype = var.getType();
-            string varname = var.getName();
-            string code = "Declare variable named [ " + varname + " ] as type [ " + vartype + " ];";
-            return code;
+            return oLanguage.getVariableStatement(var.getName(), var.getType());
+        }
+        public override string getStatementType()
+        {
+            return "variable";
         }
     }
     
@@ -560,7 +456,7 @@ namespace TEST
             this.operation = operation;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             string s = "(" + left + operation + right + ")";
             return s;

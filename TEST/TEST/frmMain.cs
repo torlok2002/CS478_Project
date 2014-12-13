@@ -18,7 +18,7 @@ namespace TEST
             InitializeComponent();
         }
         ProgramDir IDEDir;
-        StudentProgram IDEProgram = new StudentProgram("Language1", "NewProg", "NewProg");
+        StudentProgram IDEProgram;
         String codeString;
         string[] varlist;
 
@@ -59,7 +59,7 @@ namespace TEST
         private void IfButton_Click(object sender, EventArgs e)
         {
             varlist = IDEProgram.Variables;
-            IfStatement stat1 = new IfStatement(varlist);
+            IfStatement stat1 = new IfStatement(varlist,IDEProgram.ProgramLanguage);
             IDEProgram.AddStatement(stat1);
             statusStrip1.Refresh();
             refreshUI();
@@ -68,7 +68,7 @@ namespace TEST
         private void WhileButton_Click(object sender, EventArgs e)
         {
             varlist = IDEProgram.Variables;
-            WhileStatement stat1 = new WhileStatement(varlist);
+            WhileStatement stat1 = new WhileStatement(varlist,IDEProgram.ProgramLanguage);
             IDEProgram.AddStatement(stat1);
 
             refreshUI();
@@ -110,30 +110,24 @@ namespace TEST
                 if (bChanged == true)
                 {
                     DialogResult Dr = MessageBox.Show("Would you like to save the project?", "Save Project", MessageBoxButtons.YesNoCancel);
-                    if (Dr == DialogResult.Yes || Dr == DialogResult.No)
+
+                    if (Dr == DialogResult.Yes)
                     {
-                        if (Dr == DialogResult.Yes)
-                        {
-                            //Save the file
-                            IDEDir.SaveFile(IDEProgram);
-                            bChanged = false;
-                        }
-                        //Clear code box and exit program
-                        update_codeOutputBox();
-                        update_txtOutputBox();
-                        IDEProgram = new StudentProgram(frmNew.ChoosenLanguage, frmNew.ProgramName, frmNew.Path);
+                        //Save the file
+                        IDEDir.SaveFile(IDEProgram);
+                        bChanged = false;
                     }
+
                 }
-                else
-                {
-                    //Clear code box and exit program
-                    //Either add empty program to program list or clear program object
-                    //list1.Clear();
-                    update_codeOutputBox();
-                    update_txtOutputBox();
-                    IDEProgram = new StudentProgram(frmNew.ChoosenLanguage, frmNew.ProgramName, frmNew.Path);
-                    txtOutputBox.Text = "";
-                }
+                //Clear code box and exit program
+                //Either add empty program to program list or clear program object
+                //list1.Clear();
+                IDEProgram = new StudentProgram(frmNew.ChoosenLanguage, frmNew.ProgramName, frmNew.Path);
+                tlsStatementStrip.Enabled = true;
+                txtOutputBox.Text = "";
+                update_codeOutputBox();
+                update_txtOutputBox();
+
             }
 
         }
@@ -147,17 +141,23 @@ namespace TEST
         {
             OpenFileDialog fb = new OpenFileDialog();
             fb.InitialDirectory = IDEDir.Path;
-            fb.Filter = ".prog";
+            fb.Filter = "Program Files(.prog)|*.prog";
             fb.Multiselect = false;
             fb.Title = "Open Program";
             fb.AddExtension = true;
             fb.ShowDialog();
 
-            IDEProgram = IDEDir.LoadFile(fb.FileName);
-            tlsStatementStrip.Enabled = true;
-            //Load Program object from serialized file
-            //txtCodeBox.Text = Language.Parse(Program);
-            //treeDirectory.Select? select correct node
+            try
+            {
+                IDEProgram = IDEDir.LoadFile(fb.FileName);
+                tlsStatementStrip.Enabled = true;
+                refreshUI();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void treeDirectory_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -168,36 +168,40 @@ namespace TEST
                 if (bChanged == true)
                 {
                     DialogResult Dr = MessageBox.Show("Would you like to save the project?", "Save Project", MessageBoxButtons.YesNoCancel);
-                    if (Dr == DialogResult.Yes || Dr == DialogResult.No)
+
+                    if (Dr == DialogResult.Yes)
                     {
-                        if (Dr == DialogResult.Yes)
-                        {
-                            IDEDir.SaveFile(IDEProgram);
-                            bChanged = false;
-                        }
-                        //Load Object
-                        IDEDir.LoadFile(IDEDir.ParentPath + "\\" + e.Node.FullPath);
-                        tlsStatementStrip.Enabled = true;
+                        IDEDir.SaveFile(IDEProgram);
+                        bChanged = false;
                     }
                 }
-                else
+                //Load Object
+                try
                 {
-                    //Load Object
-                    IDEDir.LoadFile(IDEDir.ParentPath + "\\" + e.Node.FullPath);
+                    IDEProgram = IDEDir.LoadFile(IDEDir.ParentPath + "\\" + e.Node.FullPath);
                     tlsStatementStrip.Enabled = true;
+                    refreshUI();
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                
             }
         }
 
         private void btnRunProg_Click(object sender, EventArgs e)
         {
-            //Compiler.Compile(Program.ToJava());
-            //if (Compiler.Error() == "0") {
-                //txtOutputBox.Text += Compiler.Result + "\r\nRUN COMPELETED SUCCESSFULLY"
-            //}
-            //else
-            //{
-            //txtOutPutBox.Text += "RUN FAILED\r\n" + Compiler.Error() + "\r\n"
+
+            try
+            {
+                ProgramHandler RUNPROG = new ProgramHandler(IDEProgram, txtOutputBox);
+                RUNPROG.Run();
+            }
+            catch (Exception ex)
+            {
+
+            }
 
         }
 
@@ -219,21 +223,7 @@ namespace TEST
 
         private void update_codeOutputBox() //iterate through linked list and get user statement code.
         {
-            codeString = "START\r\n";
-
-            //get temp sting array in order to grab each individual line
-            string[] stmtArray;
-            stmtArray = IDEProgram.getUserCode();
-            foreach (string s in stmtArray)
-            {
-                codeString += s;
-                codeString += "\r\n";
-            }
-            
-            codeString += "END";
-
-            txtCodeBox.Text = "";
-            txtCodeBox.Text = codeString;
+           txtCodeBox.Text =  IDEProgram.getUserCode();
         }
 
         private void update_txtOutputBox() //iterate through linked list and get java statement code.
@@ -242,13 +232,8 @@ namespace TEST
             codeString = "class "+ IDEProgram.getName() + "\r\n {\r\n";
             
             //get temp sting array in order to grab each individual line
-            string[] stmtArray;
-            stmtArray = IDEProgram.getCCode();
-            foreach (string s in stmtArray)
-            {
-                codeString += s;
-                codeString += "\r\n";
-            }
+            codeString += IDEProgram.getCCode();
+            
 
             codeString += "}";
 
@@ -282,7 +267,7 @@ namespace TEST
             toolStripStatusLabel1.Text = "";
             statusStrip1.Refresh();
             update_codeOutputBox();
-            update_txtOutputBox();
+            //update_txtOutputBox();
         }
 
         //hotkey controls
@@ -296,6 +281,18 @@ namespace TEST
             if (keyData == (Keys.Control | Keys.I)) {InputButton_Click(null, null); }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
+        private void txtCodeBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (txtCodeBox.Text != "") { IDEProgram.editStatement(txtCodeBox.GetLineFromCharIndex(txtCodeBox.GetCharIndexFromPosition(new Point(e.X, e.Y)))); }
+        }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+       
 
 
     }

@@ -77,7 +77,7 @@ namespace TEST
         private void checkAcceptButtonEnable()
         {
             this.btnAccept.Enabled = false;
-            if (comboBoxLVar.Text != "" && comboBox2.Text != "" && comboBoxRVar.Text != "") ;
+            if (comboBoxLVar.Text != "" && comboBox2.Text != "" && comboBoxRVar.Text != "")
             {
                 this.btnAccept.Enabled = true;
             }

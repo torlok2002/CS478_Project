@@ -83,5 +83,10 @@ namespace TEST
         {
 
         }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
     }
 }

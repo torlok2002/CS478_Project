@@ -46,3 +46,10 @@ C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project
 C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.VariableForm.resources
 C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.InputForm.resources
 C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.If_WhileForm.resources
+C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.AssignmentForm.resources
+C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.ConditionalForm.resources
+C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.ExpressionForm.resources
+C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.NewOutputForm.resources
+C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.If_WhileForm.resources
+C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.VariableForm.resources
+C:\Users\Slowbro\Documents\GitHub\CS478_Project\TEST\TEST\obj\x86\Debug\TEST.InputForm.resources

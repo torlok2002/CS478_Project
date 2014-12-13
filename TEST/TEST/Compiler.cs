@@ -40,79 +40,78 @@ namespace TEST
                 System.Collections.Specialized.StringCollection stringCol = new System.Collections.Specialized.StringCollection();
 
                 String exeName = oProgram.FilePath.Substring(0, oProgram.FilePath.Length - 5) + ".exe";
-                String code = @" 
-                using System;
-                using System.Collections.Generic;
-                using System.Text;
-                using System.Threading.Tasks;
-                using System.Messaging;
+                String code = @" using System;
+                    using System.Collections.Generic;
+                    using System.Text;
+                    using System.Threading.Tasks;
+                    using System.Messaging;
                     
-                namespace testCompile 
-                {
-                    class Program
+                    namespace testCompile 
                     {
-                        static MessageQueue IDEQueue;
-                        static public void ExecuteStatements()
+                        class Program
                         {
+                            static MessageQueue IDEQueue;
+                            static public void ExecuteStatements()
+                            {
                             
-                            IDEQueue = GetQ(@"".\Private$\IDEQueue"");
-                            IDEQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(string) });
-                            IDEQueue.Purge();
-                            "
-                            + oProgram.getCCode() + @"
-                            IDEQueue.Send("""",""EndProgram"");
-                            IDEQueue.Close();
-                        }         
-                        private static MessageQueue GetQ(string queueName)
-                        {
-                            MessageQueue msgQ;
+                               IDEQueue = GetQ(@"".\Private$\IDEQueue"");
+                               IDEQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(string) });
+                               IDEQueue.Purge();
+                               "
+                                + oProgram.getCCode() + @"
+                               IDEQueue.Send("""",""EndProgram"");
+                               IDEQueue.Close();
+                            }         
+                            private static MessageQueue GetQ(string queueName)
+                            {
+                                MessageQueue msgQ;
 
-                            if (!MessageQueue.Exists(queueName))
+                                if (!MessageQueue.Exists(queueName))
+                                {
+                                    try
+                                    {
+                                        msgQ = MessageQueue.Create(queueName);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        throw new Exception(""Error creating queue"", ex);
+                                    }
+                                }
+                                else
+                                {
+                                    try
+                                    {
+                                        msgQ = new MessageQueue(queueName);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        throw new Exception(""Error getting queue"", ex);
+                                    }
+                                }
+                                return msgQ;
+                            }      
+                            private static Message GetMessage() 
                             {
-                                try
-                                {
-                                    msgQ = MessageQueue.Create(queueName);
-                                }
-                                catch (Exception ex)
-                                {
-                                    throw new Exception(""Error creating queue"", ex);
-                                }
-                            }
-                            else
-                            {
-                                try
-                                {
-                                    msgQ = new MessageQueue(queueName);
-                                }
-                                catch (Exception ex)
-                                {
-                                    throw new Exception(""Error getting queue"", ex);
-                                }
-                            }
-                            return msgQ;
-                        }      
-                        private static Message GetMessage() 
-                        {
-                            bool recievedMsg = false;
+                                bool recievedMsg = false;
                             
-                            while (true)
-                            {
-                                try 
+                                while (true)
                                 {
-                                    if (IDEQueue.Peek(new TimeSpan(5)).Label == ""Input"" && recievedMsg == false) { return IDEQueue.Receive(new TimeSpan(5)); }
+                                    try 
+                                    {
+                                        if (IDEQueue.Peek(new TimeSpan(5)).Label == ""Input"" && recievedMsg == false) { return IDEQueue.Receive(new TimeSpan(5)); }
+                                    }
+                                    catch { }
                                 }
-                                catch { }
+                                return null;
                             }
-                            return null;
                         }
-                    }
-                }";
+                    }";
+
                 System.IO.File.WriteAllText(oProgram.FilePath.Substring(0, oProgram.FilePath.Length - 5) + ".cs", code);
                 CompilerParameters cp = new CompilerParameters();
 
                 cp.ReferencedAssemblies.Add("System.dll");
                 cp.ReferencedAssemblies.Add("System.Messaging.dll");
-                //cp.OutputAssembly = oProgram.FilePath.Substring(0, oProgram.FilePath.Length - 5) + ".exe";
                 cp.GenerateExecutable = false;
                 cp.GenerateInMemory = true;
                 cp.TreatWarningsAsErrors = false;
@@ -120,14 +119,13 @@ namespace TEST
                 // Invoke compilation of the source file.
                 cr = provider.CompileAssemblyFromSource(cp, new string[] { code });
 
-                //oProgram.getCCode());
-
                 if (cr.Errors.Count > 0)
                 {
-                   
+                    // Display compilation errors.
+                    
                     foreach (CompilerError ce in cr.Errors)
                     {
-                        MessageBox.Show("  {0}", ce.ToString());
+                        MessageBox.Show(ce.ErrorText);
                     }
                 }
                 else
