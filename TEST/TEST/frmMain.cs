@@ -61,11 +61,9 @@ namespace TEST
             varlist = IDEProgram.Variables;
             IfStatement stat1 = new IfStatement(varlist);
             IDEProgram.AddStatement(stat1);
-
+            statusStrip1.Refresh();
             refreshUI();
         }
-
-        
 
         private void WhileButton_Click(object sender, EventArgs e)
         {

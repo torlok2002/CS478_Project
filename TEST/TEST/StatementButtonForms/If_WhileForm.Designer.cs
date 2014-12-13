@@ -42,8 +42,11 @@
             this.label_ifwhile = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tlsStatementStrip.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlsStatementStrip
@@ -122,19 +125,19 @@
             // 
             // txtCodeBox
             // 
-            this.txtCodeBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtCodeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.txtCodeBox.Location = new System.Drawing.Point(0, 0);
             this.txtCodeBox.Name = "txtCodeBox";
             this.txtCodeBox.ReadOnly = true;
             this.txtCodeBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.txtCodeBox.Size = new System.Drawing.Size(745, 175);
+            this.txtCodeBox.Size = new System.Drawing.Size(745, 150);
             this.txtCodeBox.TabIndex = 4;
             this.txtCodeBox.TabStop = false;
             this.txtCodeBox.Text = "";
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.statusStrip1);
             this.panel1.Controls.Add(this.buttonAccept);
             this.panel1.Controls.Add(this.txtCodeBox);
             this.panel1.Location = new System.Drawing.Point(0, 106);
@@ -144,7 +147,7 @@
             // 
             // buttonAccept
             // 
-            this.buttonAccept.Location = new System.Drawing.Point(667, 141);
+            this.buttonAccept.Location = new System.Drawing.Point(667, 127);
             this.buttonAccept.Name = "buttonAccept";
             this.buttonAccept.Size = new System.Drawing.Size(75, 23);
             this.buttonAccept.TabIndex = 1;
@@ -174,6 +177,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(12, 55);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(253, 20);
@@ -188,6 +192,22 @@
             this.label1.Size = new System.Drawing.Size(26, 15);
             this.label1.TabIndex = 9;
             this.label1.Text = "Do:";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 153);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(745, 22);
+            this.statusStrip1.TabIndex = 5;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // If_WhileForm
             // 
@@ -206,6 +226,9 @@
             this.tlsStatementStrip.ResumeLayout(false);
             this.tlsStatementStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,6 +250,8 @@
         private System.Windows.Forms.Label label_ifwhile;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
 
     }
 }

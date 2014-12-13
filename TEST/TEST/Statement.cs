@@ -399,7 +399,11 @@ namespace TEST
         {
             VariableForm varform = new VariableForm(ExistingVarList);
             varform.ShowDialog();
-            var = new Variable(varform.type, varform.name);
+            //if (varform.DialogResult == System.Windows.Forms.DialogResult.OK)
+            //{
+                var = new Variable(varform.type, varform.name);
+            //}
+            
             
         }
 

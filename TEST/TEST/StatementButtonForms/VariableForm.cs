@@ -81,7 +81,12 @@ namespace TEST
                 toolStripStatusLabel1.Text = "No variable name entered";
                 this.button1.Enabled = false;
             }           
-            else this.Close();
+            
+            else 
+            {
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                this.Close();
+            }
         }
     }
 }
