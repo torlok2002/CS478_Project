@@ -1,3 +1,4 @@
+V,Variable,Declare variable <Var> as type <Typ>
 O,Output,Output variable <Var>
 I,Input,Get value and save in <Var>
 A,Assignment,Calculate <Exp> and save result in <Var>

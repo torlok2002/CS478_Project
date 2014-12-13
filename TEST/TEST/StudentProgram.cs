@@ -13,7 +13,7 @@ namespace TEST
         [OptionalField] private String sFilename;
         private String sName;
         private String sLanguage;
-        private Language oUserLanguage, oCompileLanguage;
+        private Language oUserLanguage;
         private List<Statement> oStatements;
         private List<Variable> oVariables;
 
@@ -22,6 +22,7 @@ namespace TEST
             oStatements = new List<Statement>();
             oVariables = new List<Variable>();
             this.sLanguage = sLanguage;
+            oUserLanguage = new Language(sLanguage);
             this.sName = sName;
             this.sFilename = sFilename;
         }
@@ -48,13 +49,14 @@ namespace TEST
             if (iNewIndex > iOldIndex) { iNewIndex--; }
             oStatements.Insert(iNewIndex, oStatement);
         }
-        public String ProgramLanguage
+        public Language ProgramLanguage
         {
             get
             {
-                return sLanguage;
+                return oUserLanguage;
             }
         }
+        
         public String FilePath
         {
             get
@@ -86,27 +88,26 @@ namespace TEST
             }
         }
 
-        public string[] getCCode()
+        public string getCCode()
         {
-            string[] aCSLines = new string[oStatements.Count];
-            int i=0;
+            string aCSLines ="";
+            
             foreach (Statement oTempObject in oStatements)
             {
-                aCSLines[i] = oTempObject.getCCode();
-                i++;
+                aCSLines += oTempObject.getCCode() + Environment.NewLine;
             }
 
             return aCSLines;
         }
 
-        public string[] getUserCode()
+        public string getUserCode()
         {
-            string[] aCSLines = new string[oStatements.Count];
-            int i = 0;
+            string aCSLines="";
+            
             foreach (Statement oTempObject in oStatements)
             {
-                aCSLines[i] = oTempObject.getUserCode();
-                i++;
+                aCSLines += oTempObject.getUserCode(oUserLanguage) + Environment.NewLine;
+
             }
 
             return aCSLines;
@@ -115,6 +116,46 @@ namespace TEST
         public string getName()
         {
             return sName;
+        }
+        public void editStatement(int iIndex)
+        {
+            if (oStatements[iIndex].getStatementType() == "assign")
+            {
+                AssignStatement Temp = oStatements[iIndex] as AssignStatement;
+                //HERE IS THE FORM EDITING
+                oStatements[iIndex] = Temp;
+            }
+            else if (oStatements[iIndex].getStatementType() == "variable")
+            {
+                VarInitStatement Temp = oStatements[iIndex] as VarInitStatement;
+                //HERE IS THE FORM EDITING
+                oStatements[iIndex] = Temp;
+            }
+            else if (oStatements[iIndex].getStatementType() == "output")
+            {
+                OutputStatement Temp = oStatements[iIndex] as OutputStatement;
+                //HERE IS THE FORM EDITING
+                oStatements[iIndex] = Temp;
+            }
+            else if (oStatements[iIndex].getStatementType() == "input")
+            {
+                InputStatement Temp = oStatements[iIndex] as InputStatement;
+                //HERE IS THE FORM EDITING
+                oStatements[iIndex] = Temp;
+            }
+            else if (oStatements[iIndex].getStatementType() == "if")
+            {
+                IfStatement Temp = oStatements[iIndex] as IfStatement;
+                //HERE IS THE FORM EDITING
+                oStatements[iIndex] = Temp;
+            }
+            else if (oStatements[iIndex].getStatementType() == "while")
+            {
+                WhileStatement Temp = oStatements[iIndex] as WhileStatement;
+                //HERE IS THE FORM EDITING
+                oStatements[iIndex] = Temp;
+            }
+
         }
     }
 }

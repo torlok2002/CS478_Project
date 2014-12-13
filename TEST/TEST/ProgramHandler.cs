@@ -5,6 +5,7 @@ using System.Messaging;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 
 namespace TEST
@@ -13,13 +14,16 @@ namespace TEST
     {
         MessageQueue IDEQueue;
         StudentProgram IDEProgram;
+        TextBox txtOutputBox;
 
-        public ProgramHandler(StudentProgram oProgram)
+        public ProgramHandler(StudentProgram oProgram, TextBox txtOutputBox)
         {
             this.IDEProgram = oProgram;
+            this.txtOutputBox = txtOutputBox;
         }
         public void Run()
         {
+
             IDECompiler comp = new IDECompiler();
             comp.CompileExecutable(IDEProgram);
             Thread myThread = new System.Threading.Thread(delegate()
@@ -29,7 +33,8 @@ namespace TEST
             myThread.Start();
             IDEQueue = GetQ(@".\Private$\IDEQueue");
             IDEQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(string) });
-            while (myThread.IsAlive)
+            
+            while (! IDEQueue.Peek().Label.Contains("EndProgram"))
             {
                 if (IDEQueue.Peek().Label.Contains("InputRequest"))
                 {
@@ -38,7 +43,12 @@ namespace TEST
                     
                     IDEQueue.Send(Microsoft.VisualBasic.Interaction.InputBox("Input " + type.Substring(12), "Input"));
                 }
+                else if (IDEQueue.Peek().Label.Contains("Output"))
+                {
+                    txtOutputBox.Text += "Output: " + GetMessage().Body.ToString() + Environment.NewLine;
+                }
             }
+
         }
         private MessageQueue GetQ(string queueName)
         {
@@ -80,7 +90,6 @@ namespace TEST
                 }
                 catch { }
             }
-            return null;
         }
     }
 }

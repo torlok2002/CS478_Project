@@ -14,7 +14,6 @@ namespace TEST
     class ProgramDir
     {
         private TreeView tvTreeDirectory;
-        private String sCurProgName;
         private String sCurDirectory;
 
         public ProgramDir(TreeView tvControl)
@@ -26,22 +25,17 @@ namespace TEST
 
         public StudentProgram LoadFile(String sFileName)
         {
-            try
-            {
-                IFormatter formatter = new BinaryFormatter();
-                Stream stream = new FileStream(sFileName,
-                                          FileMode.Open,
-                                          FileAccess.Read,
-                                          FileShare.Read);
-                StudentProgram oFile = (StudentProgram)formatter.Deserialize(stream);
-                stream.Close();
-                return oFile;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return null;
-            }
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(sFileName,
+                                        FileMode.Open,
+                                        FileAccess.Read,
+                                        FileShare.Read);
+            StudentProgram oFile = (StudentProgram)formatter.Deserialize(stream);
+            stream.Close();
+            return oFile;
+            
+            
+
             
         }
         public void SaveFile(StudentProgram oFile)
@@ -128,6 +122,17 @@ namespace TEST
             {
                 DirectoryInfo directoryInfo = new DirectoryInfo(sCurDirectory);
                 return directoryInfo.Parent.FullName; 
+            }
+        }
+
+        public String ProgramName
+        {
+            get
+            {
+                string[] nameAr = sCurDirectory.Split('\\');
+                string name = nameAr[nameAr.Length];
+                
+                return name.Substring(0,name.Length-5);
             }
         }
         

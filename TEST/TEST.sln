@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEST", "TEST\TEST.csproj", "{B8AE7462-85D3-4350-B718-C879F87B9CDA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E960CE84-AF59-4F9F-8A6D-489B80DA1CDB}"
-	ProjectSection(SolutionItems) = preProject
-		TEST\ProgramHandler.cs = TEST\ProgramHandler.cs
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

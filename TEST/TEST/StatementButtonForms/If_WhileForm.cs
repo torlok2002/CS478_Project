@@ -17,8 +17,10 @@ namespace TEST
         private string[] varlist;
         private string codeString;
         public Conditional condition { get; set; }
+        private Language oLanguage;
+        
 
-        public If_WhileForm(string[] ExistVarList, string if_while)
+        public If_WhileForm(string[] ExistVarList, string if_while, Language oLanguage)
         {
             
             InitializeComponent();
@@ -26,6 +28,8 @@ namespace TEST
             label_ifwhile.Text = if_while;
             varlist = ExistVarList;
             statlist = new List<Statement>();
+            this.oLanguage = oLanguage;
+            
         }
 
         private void refreshUI()
@@ -42,10 +46,10 @@ namespace TEST
             //stmtArray = IDEProgram.getUserCode();
             foreach (Statement s in statlist)
             {
-                codeString += s.getUserCode();
+                codeString += s.getUserCode(oLanguage);
                 codeString += "\r\n";
             }
-
+            
             codeString += "END";
 
             txtCodeBox.Text = "";
@@ -73,7 +77,7 @@ namespace TEST
 
         private void toolStripButton7_Click(object sender, EventArgs e)
         {
-            IfStatement stat1 = new IfStatement(varlist);
+            IfStatement stat1 = new IfStatement(varlist,oLanguage);
             statlist.Add(stat1);
 
             refreshUI();
@@ -81,7 +85,7 @@ namespace TEST
 
         private void toolStripButton8_Click(object sender, EventArgs e)
         {
-            WhileStatement stat1 = new WhileStatement(varlist);
+            WhileStatement stat1 = new WhileStatement(varlist, oLanguage);
             statlist.Add(stat1);
 
             refreshUI();

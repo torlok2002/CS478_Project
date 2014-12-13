@@ -33,7 +33,6 @@ namespace TEST
             {
                 this.comboBoxVarName.Items.Add(VarName);
             }
-            this.AcceptButton = buttonAccept;
         }
 
         private void comboBoxVarName_SelectedIndexChanged(object sender, EventArgs e)
@@ -46,6 +45,7 @@ namespace TEST
         private void buttonAccept_Click(object sender, EventArgs e)
         {
             VarName = this.comboBoxVarName.Text;
+            this.DialogResult = DialogResult.Yes;
             this.Close();
         }
 
