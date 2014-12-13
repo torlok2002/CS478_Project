@@ -63,6 +63,14 @@ namespace TEST
             {
                 return sFilename;
             }
+            set
+            {
+                sFilename = value;
+                String[] aTempArray = value.Split('\\');
+                String aTempString = aTempArray.ElementAt(aTempArray.Length - 1);
+                sName = aTempString.Substring(0, aTempString.Length - 5);
+
+            }
         }
         public void newFileName(String sNewFileName)
         {

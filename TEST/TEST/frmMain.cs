@@ -150,6 +150,7 @@ namespace TEST
             try
             {
                 IDEProgram = IDEDir.LoadFile(fb.FileName);
+                IDEProgram.FilePath = fb.FileName;
                 tlsStatementStrip.Enabled = true;
                 refreshUI();
             }
@@ -179,6 +180,7 @@ namespace TEST
                 try
                 {
                     IDEProgram = IDEDir.LoadFile(IDEDir.ParentPath + "\\" + e.Node.FullPath);
+                    IDEProgram.FilePath = IDEDir.ParentPath + "\\" + e.Node.FullPath;
                     tlsStatementStrip.Enabled = true;
                     refreshUI();
                 }

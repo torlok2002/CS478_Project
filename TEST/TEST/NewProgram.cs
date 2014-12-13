@@ -60,7 +60,7 @@ namespace TEST
             {
                 String[] aTempArray = txtFilePath.Text.Split('\\');
                 String aTempString = aTempArray.ElementAt(aTempArray.Length - 1);
-                return aTempString.Substring(0,aTempString.Length-6);
+                return aTempString.Substring(0,aTempString.Length-5);
             }
         }
 
