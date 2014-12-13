@@ -105,17 +105,23 @@
     <Compile Include="StatementButtonForms\ExpressionForm.Designer.cs">
       <DependentUpon>ExpressionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="StatementButtonForms\NewOutputForm.cs">
+    <Compile Include="StatementButtonForms\OutputForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StatementButtonForms\NewOutputForm.Designer.cs">
-      <DependentUpon>NewOutputForm.cs</DependentUpon>
+    <Compile Include="StatementButtonForms\OutputForm.Designer.cs">
+      <DependentUpon>OutputForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NewProgram.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="NewProgram.Designer.cs">
       <DependentUpon>NewProgram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatementButtonForms\If_WhileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatementButtonForms\If_WhileForm.Designer.cs">
+      <DependentUpon>If_WhileForm.cs</DependentUpon>
     </Compile>
     <Compile Include="StatementButtonForms\VariableForm.cs">
       <SubType>Form</SubType>
@@ -146,11 +152,14 @@
     <EmbeddedResource Include="StatementButtonForms\ExpressionForm.resx">
       <DependentUpon>ExpressionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StatementButtonForms\NewOutputForm.resx">
-      <DependentUpon>NewOutputForm.cs</DependentUpon>
+    <EmbeddedResource Include="StatementButtonForms\OutputForm.resx">
+      <DependentUpon>OutputForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewProgram.resx">
       <DependentUpon>NewProgram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatementButtonForms\If_WhileForm.resx">
+      <DependentUpon>If_WhileForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StatementButtonForms\VariableForm.resx">
       <DependentUpon>VariableForm.cs</DependentUpon>

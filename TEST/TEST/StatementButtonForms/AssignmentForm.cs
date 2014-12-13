@@ -22,7 +22,11 @@ namespace TEST
 
         public string expressString
         {
-            get { return express.ToString(); }
+            get 
+            {
+                if (checkBox1.Checked == false) { return comboBox1.Text; }
+                else { return express.ToString(); }
+            }
             set { comboBox1.Text = expressString; }
         }
         public Expression express;
@@ -45,7 +49,15 @@ namespace TEST
         private void buttonAccept_Click(object sender, EventArgs e)
         {
             to = comboBox2.Text;
-            expressString = express.ToString();
+
+            if (checkBox1.Checked == false)
+            {
+                expressString = comboBox1.Text;
+            }
+            else
+            {
+                expressString = express.ToString();
+            }
             this.Close();
         }
 

@@ -84,7 +84,7 @@ namespace TEST
         public override String getUserCode()
         {
             String Code;
-            Code = "Display to user [ " + outputString + " ]";
+            Code = "Display to user [ " + outputString + " ];";
             return Code;
         }
 
@@ -138,7 +138,7 @@ namespace TEST
         public override String getUserCode()
         {
             String Code;
-            Code = "Ask user for input with message [" + messageString + "] and store result as [ " + varTo + " ]";
+            Code = "Ask user for input with message [" + messageString + "] and store result as [ " + varTo + " ];";
             return Code;
         }
 
@@ -213,7 +213,7 @@ namespace TEST
         public override String getUserCode()
         {
             String Code;
-            Code = "Calculate [ " + express.ToString() +" ] and store the result as [ " + assignTo +" ]";
+            Code = "Calculate [ " + express.ToString() +" ] and store the result as [ " + assignTo +" ];";
             return Code;
         }
 
@@ -251,22 +251,21 @@ namespace TEST
         private string codeString;
         private Conditional conditional;
         private List<Statement> stmtlist;
-        private Conditional bob;
  
         //Generic constructor
         public IfStatement(string[] ExistingVarList)
         {
-            conditional = new Conditional(ExistingVarList);
-            stmtlist = new List<Statement>();
-            VarInitStatement stat1 = new VarInitStatement(ExistingVarList);
-            stmtlist.Add(stat1);
+            If_WhileForm ifform = new If_WhileForm(ExistingVarList, "If");
+            ifform.ShowDialog();
+            stmtlist = ifform.getStatlist();
+            conditional = ifform.condition;
 
         }
         
         public override string getJCode()
         {
 
-            codeString = "if " + conditional.ToString() + " do {";
+            codeString = "if " + conditional.ToString() + " {";
             foreach (Statement stat in stmtlist)
             {
                 codeString += stat.getJCode();
@@ -278,7 +277,7 @@ namespace TEST
 
         public override string getCCode()
         {
-            codeString = "if " + conditional.ToString() +  " do {";
+            codeString = "if " + conditional.ToString() +  " {";
             foreach (Statement stat in stmtlist)
             {
                 codeString += stat.getCCode();
@@ -320,80 +319,60 @@ namespace TEST
     class WhileStatement : Statement
     {
         //Fields
+        private string codeString;
         private Conditional conditional;
-        private Statement ifTrue;
- 
-        //Fields
-        private Conditional cond;
-        //private Statement iftrue;
         private List<Statement> stmtlist;
 
         //Generic constructor
         public WhileStatement(string[] ExistingVarList)
         {
-            cond = new Conditional(ExistingVarList);
-            //Statement tempstat = new Statement();
-            // Ask user which type of statment they want to create and create one based on that.
-            string statType = Microsoft.VisualBasic.Interaction.InputBox("Enter the type of statement you would like to add\r\n (V)ariable initialization\r\n(A)ssignment\r\n(I)nput\r\n(O)utput\r\n(If)\r\n(W)hile", "Statement Type");
-            if (statType == "v" || statType == "V")
-            {
-                VarInitStatement varStat = new VarInitStatement(ExistingVarList);
-                stmtlist.Add(varStat);
-            }
-            else if (statType == "a" || statType == "A")
-            {
-                AssignStatement assignstat = new AssignStatement(ExistingVarList);
-                stmtlist.Add(assignstat);
-            }
-            else if (statType == "i" || statType == "I")
-            {
-                AssignStatement instat = new AssignStatement(ExistingVarList);
-                stmtlist.Add(instat);
-            }
-            else if (statType == "o" || statType == "O")
-            {
-                AssignStatement outstat = new AssignStatement(ExistingVarList);
-                stmtlist.Add(outstat);
-            }
-            else if (statType == "if" || statType == "IF" || statType == "If")
-            {
-                AssignStatement ifstat = new AssignStatement(ExistingVarList);
-                stmtlist.Add(ifstat);
-            }
-            else if (statType == "w" || statType == "W")
-            {
-                AssignStatement whilestat = new AssignStatement(ExistingVarList);
-                stmtlist.Add(whilestat);
-            }
+            If_WhileForm whileform = new If_WhileForm(ExistingVarList, "While");
+            whileform.ShowDialog();
+            stmtlist = whileform.getStatlist();
+            conditional = whileform.condition;
 
         }
         
-        //Constructor
-        public WhileStatement (Conditional cond, AssignStatement statements)
+        public override string getJCode()
         {
-            this.conditional = cond;
-            this.ifTrue = statements;
+            codeString = "while " + conditional.ToString() + " {";
+            foreach (Statement stat in stmtlist)
+            {
+                codeString += stat.getJCode();
+            }
+            codeString += "}";
+
+            return codeString;
         }
 
-        public string getJCode()
+        public override string getCCode()
         {
-            return "if (" + conditional.ToString() + ") {" + ifTrue.getJCode() + "};\r\n";
+            codeString = "while " + conditional.ToString() + " {";
+            foreach (Statement stat in stmtlist)
+            {
+                codeString += stat.getCCode();
+            }
+            codeString += "}";
+
+            return codeString;
         }
 
-        public string getCCode()
+        public override string getUserCode()
         {
-            return "if (" + conditional.ToString() + ") {" + ifTrue.getCCode() + "};\r\n";
-        }
+            codeString = "while " + conditional.ToString() + " do {";
+            foreach (Statement stat in stmtlist)
+            {
+                codeString += stat.getUserCode();
+            }
+            codeString += "}";
 
-        public string getUserCode()
-        {
-            return "If [ " + conditional.ToString() + " ] Do [ " + ifTrue.getCCode() + " ]\r\n";
+            return codeString;
 
         }
 
         internal string getConditional()
         {
-            return cond.ToString();
+            throw new NotImplementedException();
         }
 
         internal string getStatements()
@@ -460,13 +439,13 @@ namespace TEST
         {
             string vartype = var.getType();
             string varname = var.getName();
-            string code = "Declare variable named [ " + varname + " ] as type [ " + vartype + " ]";
+            string code = "Declare variable named [ " + varname + " ] as type [ " + vartype + " ];";
             return code;
         }
     }
     
     [Serializable]
-    class Variable
+    public class Variable
     {
 
         //Fields
@@ -517,9 +496,10 @@ namespace TEST
         }
 
     }
-    
+
+    //Class used to create any expressions
     [Serializable]
-    public class Expression  //Class used to create any expressions
+    public class Expression  
     {
         // Fields
         string left;
@@ -602,8 +582,9 @@ namespace TEST
 
     }
 
+    //Class used to create conditionals used for if/while statements
     [Serializable]
-    class Conditional
+    public class Conditional
     {
         // Fields
         string left;
@@ -688,7 +669,7 @@ namespace TEST
             string s = comparator;
             return s;
         }
-    }
+    } 
 
 
 }
