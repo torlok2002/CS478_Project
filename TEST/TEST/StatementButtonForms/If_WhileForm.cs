@@ -18,25 +18,18 @@ namespace TEST
         private string codeString;
         public Conditional condition { get; set; }
         private Language oLanguage;
-        
 
-<<<<<<< HEAD
-        //constructor
-        public If_WhileForm(string[] ExistVarList, string if_while)
-=======
+
         public If_WhileForm(string[] ExistVarList, string if_while, Language oLanguage)
->>>>>>> origin/Nick's-Branch
         {
-            
+
             InitializeComponent();
             AcceptButton = buttonAccept;
-            buttonAccept.Enabled = false;
             label_ifwhile.Text = if_while;
-            toolStripStatusLabel1.Text = "";
             varlist = ExistVarList;
             statlist = new List<Statement>();
             this.oLanguage = oLanguage;
-            
+
         }
 
         private void refreshUI()
@@ -56,38 +49,36 @@ namespace TEST
                 codeString += s.getUserCode(oLanguage);
                 codeString += "\r\n";
             }
-            
+
             codeString += "END";
 
             txtCodeBox.Text = "";
             txtCodeBox.Text = codeString;
         }
 
-        private void toolStripButton5_Click(object sender, EventArgs e)
+        /*private void toolStripButton5_Click(object sender, EventArgs e)
         {
 
-            //VarInitStatement stat1 = new VarInitStatement(varlist);
-            //Variable var1 = stat1.GetVar();
-            //statlist.Add(stat1);
-            toolStripStatusLabel1.Text = "Please Define variables in the main program.";
+            VarInitStatement stat1 = new VarInitStatement(varlist);
+            Variable var1 = stat1.GetVar();
+            statlist.Add(stat1);
+
             refreshUI();
              
-        }
+        }*/
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
             AssignStatement stat1 = new AssignStatement(varlist);
             statlist.Add(stat1);
-            toolStripStatusLabel1.Text = "";
 
             refreshUI();
         }
 
         private void toolStripButton7_Click(object sender, EventArgs e)
         {
-            IfStatement stat1 = new IfStatement(varlist,oLanguage);
+            IfStatement stat1 = new IfStatement(varlist, oLanguage);
             statlist.Add(stat1);
-            toolStripStatusLabel1.Text = "";
 
             refreshUI();
         }
@@ -96,7 +87,6 @@ namespace TEST
         {
             WhileStatement stat1 = new WhileStatement(varlist, oLanguage);
             statlist.Add(stat1);
-            toolStripStatusLabel1.Text = "";
 
             refreshUI();
         }
@@ -105,7 +95,6 @@ namespace TEST
         {
             OutputStatement stat1 = new OutputStatement(varlist);
             statlist.Add(stat1);
-            toolStripStatusLabel1.Text = "";
 
             refreshUI();
         }
@@ -114,7 +103,6 @@ namespace TEST
         {
             InputStatement stat1 = new InputStatement(varlist);
             statlist.Add(stat1);
-            toolStripStatusLabel1.Text = "";
 
             refreshUI();
         }
@@ -128,8 +116,6 @@ namespace TEST
         {
             condition = new Conditional(varlist);
             textBox1.Text = condition.ToString();
-            toolStripStatusLabel1.Text = "";
-            buttonAccept.Enabled = true;
         }
 
         internal List<Statement> getStatlist()
@@ -140,7 +126,7 @@ namespace TEST
         //hotkey controls
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == (Keys.Control | Keys.V)) { toolStripStatusLabel1.Text = "Please Define variables in the main program."; }
+            //if (keyData == (Keys.Control | Keys.V)) { toolStripButton5_Click(null, null); }
             if (keyData == (Keys.Control | Keys.A)) { toolStripButton6_Click(null, null); }
             if (keyData == (Keys.Control | Keys.F)) { toolStripButton7_Click(null, null); }
             if (keyData == (Keys.Control | Keys.W)) { toolStripButton8_Click(null, null); }
