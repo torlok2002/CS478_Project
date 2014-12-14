@@ -36,6 +36,14 @@ namespace TEST
                 return boolCancel;
             }
         }
+        private bool boolDelete = false;
+        public bool Deleted
+        {
+            get
+            {
+                return boolDelete;
+            }
+        }
         public InputForm(string[,] ExistingVarList)
         {
             
@@ -45,7 +53,20 @@ namespace TEST
                 this.comboBoxVarName.Items.Add(ExistingVarList[i,0]);
             }
         }
+        //construtor for editing an existing statement
+        public InputForm(string[,] ExistingVarList, InputStatement Temp)
+        {
+            InitializeComponent();
+            for (int i = 0; i < ExistingVarList.GetLength(0); i++)
+            {
+                this.comboBoxVarName.Items.Add(ExistingVarList[i, 0]);
+            }
+            comboBoxVarName.Text = Temp.getVar();
+            textBox1.Text = Temp.messageString;
+            this.buttonAccept.Enabled = true;
+            this.DeleteButton.Visible = true;
 
+        }
         private void comboBoxVarName_SelectedIndexChanged(object sender, EventArgs e)
         {
             buttonAccept.Enabled = false;
@@ -58,6 +79,12 @@ namespace TEST
             VarName = this.comboBoxVarName.Text;
             this.DialogResult = DialogResult.Yes;
             this.boolCancel = false;
+            this.Close();
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            this.boolDelete = true;
             this.Close();
         }
 

@@ -31,6 +31,16 @@ namespace TEST
                 return boolCancel;
             }
         }
+        private bool boolDelete = false;
+        public bool Deleted
+        {
+            get
+            {
+                return boolDelete;
+            }
+        }
+        private string[,] ExistingVarList;
+        private Variable varin;
         private int temptype;
         private string[,] varlist;
         
@@ -40,12 +50,27 @@ namespace TEST
         {
             varlist = ExistingVarList;
             InitializeComponent();
+            
             this.AcceptButton = button1;
             this.radioButton1.Checked = true;
             this.temptype = 1;
 
         }
+        //constructor to modify existing statement
+        public VariableForm(string[,] ExistingVarList, VarInitStatement varin)
+        {
+            varlist = ExistingVarList;
+            InitializeComponent();
+            this.ExistingVarList = ExistingVarList;
+            this.DeleteButton.Visible = true;
+            this.varin = varin.GetVar();
+            this.textBox1.Text = varin.GetVar().getName;
+            if (varin.GetVar().getType() == "int") { this.radioButton1.Checked = true; }
+            else if (varin.GetVar().getType() == "char") { this.radioButton2.Checked = true; }
+            else { this.radioButton3.Checked = true; }
+            this.button1.Enabled = true;
 
+        }
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             this.temptype = 1;
@@ -103,6 +128,12 @@ namespace TEST
                 this.boolCancel = false;
                 this.Close();
             }
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            this.boolDelete = true;
+            this.Close();
         }
     }
 }

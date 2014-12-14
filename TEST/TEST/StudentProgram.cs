@@ -90,7 +90,7 @@ namespace TEST
                 String[,] vars = new String[oVariables.Count,2];
                 for (int i = 0; i < oVariables.Count; i++)
                 {
-                    vars[i,0] = oVariables.ElementAt(i).getName();
+                    vars[i,0] = oVariables.ElementAt(i).getName;
                     vars[i,1] = oVariables.ElementAt(i).getType();
                 }
                 return vars;
@@ -131,38 +131,112 @@ namespace TEST
             if (oStatements[iIndex].getStatementType() == "assign")
             {
                 AssignStatement Temp = oStatements[iIndex] as AssignStatement;
-                //HERE IS THE FORM EDITING
-                oStatements[iIndex] = Temp;
+                AssignStatement newstat = new AssignStatement(this.Variables, Temp);
+                if (newstat.Deleted == false)
+                {
+                    if (newstat.Canceled == false)
+                    {
+                        oStatements[iIndex] = newstat;
+                    }
+                }
+                else
+                {
+                    oStatements.RemoveAt(iIndex);
+                }
             }
             else if (oStatements[iIndex].getStatementType() == "variable")
             {
                 VarInitStatement Temp = oStatements[iIndex] as VarInitStatement;
-                //HERE IS THE FORM EDITING
-                oStatements[iIndex] = Temp;
+                //
+                int varIndex = 0;
+                string searchStr = Temp.GetVar().getName;
+                for(int i = 0; i < oVariables.Count-1; i++)
+                {
+                    if (oVariables[i].getName == searchStr)
+                    {
+                        varIndex = i;
+                        break;
+                    }
+                }
+                //
+                VarInitStatement newstat = new VarInitStatement(this.Variables, Temp);
+                if (newstat.Deleted == false)
+                {
+                    if (newstat.Canceled == false)
+                    {
+                        oVariables[varIndex].getName = newstat.GetVar().getName;
+                        oStatements[iIndex] = newstat;
+                    }
+                }
+                else
+                {
+                    oVariables.RemoveAt(varIndex);
+                    oStatements.RemoveAt(iIndex);
+                }
             }
             else if (oStatements[iIndex].getStatementType() == "output")
             {
                 OutputStatement Temp = oStatements[iIndex] as OutputStatement;
-                //HERE IS THE FORM EDITING
-                oStatements[iIndex] = Temp;
+                OutputStatement newstat = new OutputStatement(this.Variables, Temp);
+                if (newstat.Deleted == false)
+                {
+                    if (newstat.Canceled == false)
+                    {
+                        oStatements[iIndex] = newstat;
+                    }
+                }
+                else
+                {
+                    oStatements.RemoveAt(iIndex);
+                }
             }
             else if (oStatements[iIndex].getStatementType() == "input")
             {
                 InputStatement Temp = oStatements[iIndex] as InputStatement;
-                //HERE IS THE FORM EDITING
-                oStatements[iIndex] = Temp;
+                InputStatement newstat = new InputStatement(this.Variables, Temp);
+                if (newstat.Deleted == false)
+                {
+                    if (newstat.Canceled == false)
+                    {
+                        oStatements[iIndex] = newstat;
+                    }
+                }
+                else
+                {
+                    oStatements.RemoveAt(iIndex);
+                }
             }
             else if (oStatements[iIndex].getStatementType() == "if")
             {
                 IfStatement Temp = oStatements[iIndex] as IfStatement;
-                //HERE IS THE FORM EDITING
-                oStatements[iIndex] = Temp;
+                IfStatement newstat = new IfStatement(this.Variables, oUserLanguage, Temp);
+                if (newstat.Deleted == false)
+                {
+                    if (newstat.Canceled == false)
+                    {
+                        oStatements[iIndex] = newstat;
+                    }
+                }
+                else
+                {
+                    oStatements.RemoveAt(iIndex);
+                }
             }
             else if (oStatements[iIndex].getStatementType() == "while")
             {
                 WhileStatement Temp = oStatements[iIndex] as WhileStatement;
-                //HERE IS THE FORM EDITING
-                oStatements[iIndex] = Temp;
+                WhileStatement newstat = new WhileStatement(this.Variables, oUserLanguage, Temp);
+                if (newstat.Deleted == false)
+                {
+                    if (newstat.Canceled == false)
+                    {
+                        oStatements[iIndex] = newstat;
+                    }
+                }
+                else
+                {
+                    oStatements.RemoveAt(iIndex);
+                }
             }
 
         }

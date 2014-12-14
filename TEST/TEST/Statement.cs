@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TEST
 {
     [Serializable]
-    abstract class Statement
+    public abstract class Statement
     {
 
         //Constructor method
@@ -26,11 +26,19 @@ namespace TEST
     }
 
     [Serializable]
-    class OutputStatement : Statement
+    public class OutputStatement : Statement
     {
         //Fields
         private String outputString;
         private bool boolCancel = true;
+        private bool boolDelete = false;
+        public bool Deleted
+        {
+            get
+            {
+                return boolDelete;
+            }
+        }
         //generic constructor
         public OutputStatement(string[,] ExistingVarList)
         {
@@ -45,7 +53,16 @@ namespace TEST
         {
             outputString = input;
         }
-
+        //constructor for editing an existing object
+        public OutputStatement(string[,] ExistingVarList, OutputStatement statin)
+        {
+            this.outputString = statin.outputString;
+            NewOutputForm outform = new NewOutputForm(ExistingVarList, statin);
+            outform.ShowDialog();
+            this.boolCancel = outform.Canceled;
+            this.boolDelete = outform.Deleted;
+            outputString = outform.outtext;
+        }
         public override String getCCode()
         {
             String Code;
@@ -82,14 +99,21 @@ namespace TEST
     }
 
     [Serializable]
-    class InputStatement : Statement
+    public class InputStatement : Statement
     {
         //Fields
-        private string messageString;
+        public string messageString;
         private string varTo;
         private string varType="";
         private bool boolCancel = true;
-
+        private bool boolDelete = false;
+        public bool Deleted
+        {
+            get
+            {
+                return boolDelete;
+            }
+        }
         //generic constructor
         public InputStatement(string[,] existvarlist)
         {
@@ -114,7 +138,16 @@ namespace TEST
             messageString = message;
             this.varTo = varTo;
         }
-
+        //constructor for editing an existing Statement
+        public InputStatement(string[,] ExistingVarList, InputStatement Temp)
+        {
+            InputForm inform = new InputForm(ExistingVarList, Temp);
+            inform.ShowDialog();
+            boolCancel = inform.Canceled;
+            boolDelete = inform.Deleted;
+            messageString = inform.message;
+            varTo = inform.VarName;
+        }
         public override String getCCode()
         {
             String Code;
@@ -135,9 +168,9 @@ namespace TEST
             return "input";
         }
 
-        internal string getVar()
+        public string getVar()
         {
-            throw new NotImplementedException();
+            return varTo;
         }
         public bool Canceled
         {
@@ -149,14 +182,21 @@ namespace TEST
     }
      
     [Serializable]
-    class AssignStatement : Statement
+    public class AssignStatement : Statement
     {
         //Fields
         //private Expression express;
-        private string express;
-        private string assignTo;
+        public string express;
+        public string assignTo;
         private bool boolCancel = true;
-
+        private bool boolDelete = false;
+        public bool Deleted
+        {
+            get
+            {
+                return boolDelete;
+            }
+        }
         //generic Constructor
         public AssignStatement(string[,] ExistingVarList)
         {
@@ -175,6 +215,18 @@ namespace TEST
             this.assignTo = assignTo;
         }
 
+        //constructor for editing an existing Statement
+        public AssignStatement(string[,] ExistingVarList, AssignStatement statIn)
+        {
+            assignTo = statIn.assignTo;
+            express = statIn.express;
+            AssignmentForm assform = new AssignmentForm(ExistingVarList, statIn);
+            assform.ShowDialog();
+            this.boolCancel = assform.Canceled;
+            this.boolDelete = assform.Deleted;
+            assignTo = assform.to;
+            express = assform.expressString;
+        }
 
         public override String getUserCode(Language oLanguage)
         {
@@ -213,14 +265,21 @@ namespace TEST
     }
 
     [Serializable]
-    class IfStatement : Statement
+    public class IfStatement : Statement
     {
         //Fields
         private string codeString;
         private Conditional conditional;
         private List<Statement> stmtlist;
         private bool boolCancel = true;
-
+        private bool boolDelete = false;
+        public bool Deleted
+        {
+            get
+            {
+                return boolDelete;
+            }
+        }
         //Generic constructor
         public IfStatement(string[,] ExistingVarList,Language oLanguage)
         {
@@ -230,7 +289,16 @@ namespace TEST
             conditional = ifform.condition;
             boolCancel = ifform.Canceled;
         }
-
+        //constructor for editing an existing Statement
+        public IfStatement(string[,] ExistingVarList, Language oLanguage, IfStatement statIn)
+        {
+            If_WhileForm ifform = new If_WhileForm(ExistingVarList, "If", oLanguage, statIn);
+            ifform.ShowDialog();
+            stmtlist = ifform.getStatlist();
+            conditional = ifform.condition;
+            this.boolCancel = ifform.Canceled;
+            this.boolDelete = ifform.Deleted;
+        }
         public override string getCCode()
         {
             codeString = "if " + conditional.ToString() +  " {";
@@ -253,17 +321,16 @@ namespace TEST
         }
         internal string getConditonal()
         {
-            throw new NotImplementedException();
+            return conditional.ToString();
         }
 
-        internal string getStatements()
+        internal Conditional getCon()
         {
-            throw new NotImplementedException();
+            return conditional;
         }
-
-        internal string getCon()
+        internal List<Statement> getStatementList()
         {
-            throw new NotImplementedException();
+            return stmtlist;
         }
         public bool Canceled
         {
@@ -275,14 +342,21 @@ namespace TEST
     }
 
     [Serializable]
-    class WhileStatement : Statement
+    public class WhileStatement : Statement
     {
         //Fields
         private string codeString;
         private Conditional conditional;
         private List<Statement> stmtlist;
         private bool boolCancel = true;
-
+        private bool boolDelete = false;
+        public bool Deleted
+        {
+            get
+            {
+                return boolDelete;
+            }
+        }
         //Generic constructor
         public WhileStatement(string[,] ExistingVarList, Language oLanguage)
         {
@@ -292,7 +366,16 @@ namespace TEST
             conditional = whileform.condition;
             boolCancel = whileform.Canceled;
         }
-        
+        //constructor for editing an existing Statement
+        public WhileStatement(string[,] ExistingVarList, Language oLanguage, WhileStatement statIn)
+        {
+            If_WhileForm whileform = new If_WhileForm(ExistingVarList, "while", oLanguage, statIn);
+            whileform.ShowDialog();
+            stmtlist = whileform.getStatlist();
+            conditional = whileform.condition;
+            this.boolCancel = whileform.Canceled;
+            this.boolDelete = whileform.Deleted;
+        }
         public override string getCCode()
         {
             codeString = "while " + conditional.ToString() + " {";
@@ -322,20 +405,19 @@ namespace TEST
             return "while";
         }
 
-        internal string getConditional()
+        internal Conditional getCon()
         {
-            throw new NotImplementedException();
+            return conditional;
         }
 
-        internal string getStatements()
+        internal List<Statement> getStatementList()
         {
-            throw new NotImplementedException();
+            return stmtlist;
         }
 
-
-        internal string getCon()
+        internal string getConditonal()
         {
-            throw new NotImplementedException();
+            return conditional.ToString();
         }
         public bool Canceled
         {
@@ -347,12 +429,19 @@ namespace TEST
     }
     
     [Serializable]
-    class VarInitStatement : Statement
+    public class VarInitStatement : Statement
     {
         //fields 
         private Variable var;
         private bool boolCancel = true;
-
+        private bool boolDelete = false;
+        public bool Deleted
+        {
+            get
+            {
+                return boolDelete;
+            }
+        }
         //generic constructor
         public VarInitStatement(string[,] ExistingVarList)
         {
@@ -372,6 +461,18 @@ namespace TEST
             var = varin;
         }
 
+        //constructor for editing an existing object
+        public VarInitStatement(string[,] ExistingVarList, VarInitStatement varin)
+        {
+            //var = varin;
+            VariableForm varform = new VariableForm(ExistingVarList, varin);
+            
+            varform.ShowDialog();
+            this.boolCancel = varform.Canceled;
+            this.boolDelete = varform.Deleted;
+            var = new Variable(varform.type, varform.name);
+        }
+
         public Variable GetVar()
         {
             return var;
@@ -385,7 +486,7 @@ namespace TEST
         public override String getCCode()
         {
             string vartype = var.getType();
-            string varname = var.getName();
+            string varname = var.getName;
             string code = "";
             if (vartype == "int") { code = vartype + " " + varname + " = 0;"; }
             else if (vartype == "string") { code = vartype + " " + varname + " = \"\";"; }
@@ -396,7 +497,7 @@ namespace TEST
 
         public override String getUserCode(Language oLanguage)
         {
-            return oLanguage.getVariableStatement(var.getName(), var.getType());
+            return oLanguage.getVariableStatement(var.getName, var.getType());
         }
         public override string getStatementType()
         {
@@ -447,10 +548,18 @@ namespace TEST
             return typestr;
         }
 
-        public String getName()
+        public String getName
         {
-            return name;
+            get
+            {
+                return name;
+            }
+            set
+            {
+                this.name = value;
+            }
         }
+        
 
         public void setValue(String value)
         {
@@ -554,9 +663,9 @@ namespace TEST
     public class Conditional
     {
         // Fields
-        string left;
-        string right;
-        string comparator;
+        public string left;
+        public string right;
+        public string comparator;
 
 
         //Constructor for one string
@@ -569,7 +678,17 @@ namespace TEST
             right = condform.right;
 
         }
+        //Constructor to Modify an Existing Conditional
+        public Conditional(string[,] ExistingVarList, Conditional ExistCond)
+        {
+            ConditionalForm condform = new ConditionalForm(ExistingVarList, ExistCond);
+            condform.ShowDialog();
+            left = condform.left;
 
+            comparator = condform.oper;
+            right = condform.right;
+
+        }
 
         /*//Constructor for left expression
         public Conditional(Expression left, string comparator, string right)

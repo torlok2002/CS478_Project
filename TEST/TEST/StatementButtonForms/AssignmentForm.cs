@@ -37,9 +37,18 @@ namespace TEST
                 return boolCancel;
             }
         }
+        private bool boolDelete = false;
+        public bool Deleted
+        {
+            get
+            {
+                return boolDelete;
+            }
+        }
         public Expression express;
         string[,] existvarlist;
-        
+        private AssignStatement statIn;
+
         //constructor
         public AssignmentForm(string[,] ExistVarList)
         {
@@ -53,6 +62,23 @@ namespace TEST
             this.existvarlist = ExistVarList;
             //express = new Expression("");
             
+        }
+
+        //constructor to modify an existing statement
+        public AssignmentForm(string[,] ExistingVarList, AssignStatement statIn)
+        {
+            InitializeComponent();
+            this.DeleteButton.Visible = true;
+            for (int i = 0; i < ExistingVarList.GetLength(0); i++)
+            {
+                this.comboBox1.Items.Add(ExistingVarList[i, 0]);
+                this.comboBox2.Items.Add(ExistingVarList[i, 0]);
+            }
+            this.existvarlist = ExistingVarList;
+            this.statIn = statIn;
+            this.comboBox1.Text = statIn.express;
+            this.comboBox2.Text = statIn.assignTo;
+
         }
 
         private void buttonAccept_Click(object sender, EventArgs e)
@@ -97,6 +123,12 @@ namespace TEST
                 comboBox1.Text = "";
                 comboBox1.Enabled = true;
             }
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            this.boolDelete = true;
+            this.Close();
         }
     }
 }

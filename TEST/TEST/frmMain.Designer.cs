@@ -367,6 +367,7 @@
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(24, 24);
             this.btnHome.Text = "toolStripButton7";
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // toolStripButton7
             // 

@@ -13,6 +13,7 @@ namespace TEST
     public partial class NewOutputForm : Form
     {
         private bool boolCancel=true;
+        private bool boolDelete = false;
         //fields
         public string outtext
         {
@@ -25,7 +26,21 @@ namespace TEST
             }
             set { }
         }
-        
+        public bool Deleted
+        {
+            get
+            {
+                return boolDelete;
+            }
+        }
+        public bool Canceled
+        {
+            get
+            {
+                return boolCancel;
+            }
+        }
+        //Constructors
         public NewOutputForm(string[,] ExistingVarList)
         {
             InitializeComponent();
@@ -36,7 +51,30 @@ namespace TEST
             this.AcceptButton = buttonAccept;
 
         }
-
+        //Constructor for edit form
+        public NewOutputForm(string[,] ExistingVarList, OutputStatement statin)
+        {
+            InitializeComponent();
+            for (int i = 0; i < ExistingVarList.GetLength(0); i++)
+            {
+                this.comboBox1.Items.Add(ExistingVarList[i, 0]);
+            }
+            this.AcceptButton = buttonAccept;
+            this.DeleteButton.Visible = true;
+            this.buttonAccept.Enabled = true;
+            if (statin.getOutput().ToCharArray()[0] == '"')
+            {
+                this.textBoxStr.Text = statin.getOutput();
+                this.textBoxStr.Enabled = true;
+                this.radioButtonStr.Checked = true;
+            }
+            else
+            {
+                this.comboBox1.Text = statin.getOutput();
+                this.comboBox1.Visible = true;
+                this.radioButtonVar.Checked = true;
+            }
+        }
         private void textBoxStr_TextChanged(object sender, EventArgs e)
         {
             if (this.textBoxStr.Text == "") this.buttonAccept.Enabled = false;
@@ -70,12 +108,11 @@ namespace TEST
             if (this.comboBox1.Text == "") this.buttonAccept.Enabled = false;
             else this.buttonAccept.Enabled = true;
         }
-        public bool Canceled
+
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
-            get
-            {
-                return boolCancel;
-            }
+            this.boolDelete = true;
+            this.Close();
         }
     }
 }

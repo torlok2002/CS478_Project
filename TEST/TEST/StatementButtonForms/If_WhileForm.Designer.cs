@@ -30,11 +30,11 @@
         {
             this.tlsStatementStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
+            this.AssignButton = new System.Windows.Forms.ToolStripButton();
+            this.IfButton = new System.Windows.Forms.ToolStripButton();
+            this.WhileButton = new System.Windows.Forms.ToolStripButton();
+            this.OutputButton = new System.Windows.Forms.ToolStripButton();
+            this.InputButton = new System.Windows.Forms.ToolStripButton();
             this.txtCodeBox = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -44,6 +44,7 @@
             this.label_ifwhile = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.DeleteButton = new System.Windows.Forms.Button();
             this.tlsStatementStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -53,16 +54,17 @@
             // 
             this.tlsStatementStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton5,
-            this.toolStripButton6,
-            this.toolStripButton7,
-            this.toolStripButton8,
-            this.toolStripButton9,
-            this.toolStripButton10});
+            this.AssignButton,
+            this.IfButton,
+            this.WhileButton,
+            this.OutputButton,
+            this.InputButton});
             this.tlsStatementStrip.Location = new System.Drawing.Point(0, 0);
             this.tlsStatementStrip.Name = "tlsStatementStrip";
             this.tlsStatementStrip.Size = new System.Drawing.Size(745, 25);
             this.tlsStatementStrip.TabIndex = 3;
             this.tlsStatementStrip.Text = "tlsStatementStrip";
+            this.tlsStatementStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tlsStatementStrip_ItemClicked);
             // 
             // toolStripButton5
             // 
@@ -72,57 +74,58 @@
             this.toolStripButton5.Size = new System.Drawing.Size(53, 22);
             this.toolStripButton5.Text = "Variable";
             this.toolStripButton5.ToolTipText = "Initialize a Variable\r\n(Ctrl+V)";
+            this.toolStripButton5.Visible = false;
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
-            // toolStripButton6
+            // AssignButton
             // 
-            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(74, 22);
-            this.toolStripButton6.Text = "Assignment";
-            this.toolStripButton6.ToolTipText = "Assign a variable the result of an expression\r\n(Ctrl+A)";
-            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
+            this.AssignButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.AssignButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AssignButton.Name = "AssignButton";
+            this.AssignButton.Size = new System.Drawing.Size(74, 22);
+            this.AssignButton.Text = "Assignment";
+            this.AssignButton.ToolTipText = "Assign a variable the result of an expression\r\n(Ctrl+A)";
+            this.AssignButton.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
-            // toolStripButton7
+            // IfButton
             // 
-            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton7.Text = "If";
-            this.toolStripButton7.ToolTipText = "Execute statements if a conditional is met\r\n(Ctrl+F)";
-            this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
+            this.IfButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.IfButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.IfButton.Name = "IfButton";
+            this.IfButton.Size = new System.Drawing.Size(23, 22);
+            this.IfButton.Text = "If";
+            this.IfButton.ToolTipText = "Execute statements if a conditional is met\r\n(Ctrl+F)";
+            this.IfButton.Click += new System.EventHandler(this.toolStripButton7_Click);
             // 
-            // toolStripButton8
+            // WhileButton
             // 
-            this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton8.Name = "toolStripButton8";
-            this.toolStripButton8.Size = new System.Drawing.Size(41, 22);
-            this.toolStripButton8.Text = "While";
-            this.toolStripButton8.ToolTipText = "Continue to execute statements until a conditional is met.\r\n(Ctrl+W)";
-            this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click);
+            this.WhileButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.WhileButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.WhileButton.Name = "WhileButton";
+            this.WhileButton.Size = new System.Drawing.Size(41, 22);
+            this.WhileButton.Text = "While";
+            this.WhileButton.ToolTipText = "Continue to execute statements until a conditional is met.\r\n(Ctrl+W)";
+            this.WhileButton.Click += new System.EventHandler(this.toolStripButton8_Click);
             // 
-            // toolStripButton9
+            // OutputButton
             // 
-            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton9.Name = "toolStripButton9";
-            this.toolStripButton9.Size = new System.Drawing.Size(49, 22);
-            this.toolStripButton9.Text = "Output";
-            this.toolStripButton9.ToolTipText = "Output to user\r\n(Ctrl+O)";
-            this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
+            this.OutputButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.OutputButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.OutputButton.Name = "OutputButton";
+            this.OutputButton.Size = new System.Drawing.Size(49, 22);
+            this.OutputButton.Text = "Output";
+            this.OutputButton.ToolTipText = "Output to user\r\n(Ctrl+O)";
+            this.OutputButton.Click += new System.EventHandler(this.toolStripButton9_Click);
             // 
-            // toolStripButton10
+            // InputButton
             // 
-            this.toolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton10.Name = "toolStripButton10";
-            this.toolStripButton10.Size = new System.Drawing.Size(39, 22);
-            this.toolStripButton10.Text = "Input";
-            this.toolStripButton10.ToolTipText = "Prompt user to input a value and assign it to a variable\r\n(Ctrl+I)";
-            this.toolStripButton10.Click += new System.EventHandler(this.toolStripButton10_Click);
+            this.InputButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.InputButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.InputButton.Name = "InputButton";
+            this.InputButton.Size = new System.Drawing.Size(39, 22);
+            this.InputButton.Text = "Input";
+            this.InputButton.ToolTipText = "Prompt user to input a value and assign it to a variable\r\n(Ctrl+I)";
+            this.InputButton.Click += new System.EventHandler(this.toolStripButton10_Click);
             // 
             // txtCodeBox
             // 
@@ -135,9 +138,11 @@
             this.txtCodeBox.TabIndex = 4;
             this.txtCodeBox.TabStop = false;
             this.txtCodeBox.Text = "";
+            this.txtCodeBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtCodeBox_MouseDown);
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.DeleteButton);
             this.panel1.Controls.Add(this.statusStrip1);
             this.panel1.Controls.Add(this.buttonAccept);
             this.panel1.Controls.Add(this.txtCodeBox);
@@ -210,6 +215,17 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Do:";
             // 
+            // DeleteButton
+            // 
+            this.DeleteButton.Location = new System.Drawing.Point(586, 127);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(75, 23);
+            this.DeleteButton.TabIndex = 6;
+            this.DeleteButton.Text = "Delete";
+            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Visible = false;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
             // If_WhileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -239,11 +255,11 @@
 
         private System.Windows.Forms.ToolStrip tlsStatementStrip;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
-        private System.Windows.Forms.ToolStripButton toolStripButton7;
-        private System.Windows.Forms.ToolStripButton toolStripButton8;
-        private System.Windows.Forms.ToolStripButton toolStripButton9;
-        private System.Windows.Forms.ToolStripButton toolStripButton10;
+        private System.Windows.Forms.ToolStripButton AssignButton;
+        private System.Windows.Forms.ToolStripButton IfButton;
+        private System.Windows.Forms.ToolStripButton WhileButton;
+        private System.Windows.Forms.ToolStripButton OutputButton;
+        private System.Windows.Forms.ToolStripButton InputButton;
         private System.Windows.Forms.RichTextBox txtCodeBox;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonAccept;
@@ -253,6 +269,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Button DeleteButton;
 
     }
 }

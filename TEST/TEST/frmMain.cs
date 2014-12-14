@@ -375,19 +375,24 @@ namespace TEST
 
         private void txtCodeBox_MouseDown(object sender, MouseEventArgs e)
         {
-            if (txtCodeBox.Text != "") { IDEProgram.editStatement(txtCodeBox.GetLineFromCharIndex(txtCodeBox.GetCharIndexFromPosition(new Point(e.X, e.Y)))); }
+            if (txtCodeBox.Text != "")
+            {
+                IDEProgram.editStatement(txtCodeBox.GetLineFromCharIndex(txtCodeBox.GetCharIndexFromPosition(new Point(e.X, e.Y))));
+                refreshUI();
+            }
         }
 
         private void toolStripButton7_Click(object sender, EventArgs e)
         {
-            if (tvTreeDirectory.SelectedNode.ImageIndex == -1)
-            {
-                //Add folder at this document level
-            }
-            else
-            {
-                //Add folder under this folder 
-            }
+            //if (tvTreeDirectory.SelectedNode.ImageIndex == -1)
+            //{
+            //    //Add folder at this document level
+            //    IDEDir
+            //}
+            //else
+            //{
+            //    //Add folder under this folder 
+            //}
         }
 
         private void lblClear_Click(object sender, EventArgs e)
@@ -411,6 +416,11 @@ namespace TEST
                     e.Cancel = true;
                 }
             } 
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            IDEDir.moveHome();
         }
 
        

@@ -34,6 +34,7 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.buttonAccept = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.DeleteButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -93,11 +94,23 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // DeleteButton
+            // 
+            this.DeleteButton.Location = new System.Drawing.Point(15, 103);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(75, 23);
+            this.DeleteButton.TabIndex = 100;
+            this.DeleteButton.Text = "Delete";
+            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Visible = false;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
             // AssignmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(209, 138);
+            this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.buttonAccept);
             this.Controls.Add(this.comboBox2);
@@ -120,5 +133,6 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button buttonAccept;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button DeleteButton;
     }
 }
