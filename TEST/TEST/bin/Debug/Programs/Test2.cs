@@ -16,9 +16,8 @@
                                IDEQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(string) });
                                IDEQueue.Purge();
                                int X = 0;
-X = 5;
-IDEQueue.Send(X+"","Output");
-if (X == 5) {X = (X+X);}
+IDEQueue.Send("","InputRequestint");X = int.Parse(GetMessage().Body.ToString()); 
+X = (X*X);
 IDEQueue.Send(X+"","Output");
 
                                IDEQueue.Send("","EndProgram");

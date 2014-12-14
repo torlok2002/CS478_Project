@@ -59,8 +59,8 @@
             this.btnUp = new System.Windows.Forms.ToolStripButton();
             this.btnHome = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
-            this.txtOutputBox = new System.Windows.Forms.TextBox();
             this.lblClear = new System.Windows.Forms.Label();
+            this.txtOutputBox = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tlsStatementStrip.SuspendLayout();
@@ -379,6 +379,18 @@
             this.toolStripButton7.Text = "toolStripButton7";
             this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
             // 
+            // lblClear
+            // 
+            this.lblClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblClear.AutoSize = true;
+            this.lblClear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblClear.Location = new System.Drawing.Point(632, 5);
+            this.lblClear.Name = "lblClear";
+            this.lblClear.Size = new System.Drawing.Size(31, 13);
+            this.lblClear.TabIndex = 1;
+            this.lblClear.Text = "Clear";
+            this.lblClear.Click += new System.EventHandler(this.lblClear_Click);
+            // 
             // txtOutputBox
             // 
             this.txtOutputBox.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -391,17 +403,6 @@
             this.txtOutputBox.Size = new System.Drawing.Size(677, 153);
             this.txtOutputBox.TabIndex = 0;
             this.txtOutputBox.TextChanged += new System.EventHandler(this.txtOutputBox_TextChanged);
-            // 
-            // lblClear
-            // 
-            this.lblClear.AutoSize = true;
-            this.lblClear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblClear.Location = new System.Drawing.Point(632, 5);
-            this.lblClear.Name = "lblClear";
-            this.lblClear.Size = new System.Drawing.Size(31, 13);
-            this.lblClear.TabIndex = 1;
-            this.lblClear.Text = "Clear";
-            this.lblClear.Click += new System.EventHandler(this.lblClear_Click);
             // 
             // frmMain
             // 

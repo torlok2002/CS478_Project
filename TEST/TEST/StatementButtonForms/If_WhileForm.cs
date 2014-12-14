@@ -63,21 +63,15 @@ namespace TEST
             txtCodeBox.Text = codeString;
         }
 
-        /*private void toolStripButton5_Click(object sender, EventArgs e)
-        {
-
-            VarInitStatement stat1 = new VarInitStatement(varlist);
-            Variable var1 = stat1.GetVar();
-            statlist.Add(stat1);
-
-            refreshUI();
-             
-        }*/
+        
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
             AssignStatement stat1 = new AssignStatement(varlist);
-            statlist.Add(stat1);
+            if (stat1.Canceled == false) 
+            { 
+                statlist.Add(stat1); 
+            }
 
             refreshUI();
         }
@@ -85,7 +79,10 @@ namespace TEST
         private void toolStripButton7_Click(object sender, EventArgs e)
         {
             IfStatement stat1 = new IfStatement(varlist, oLanguage);
-            statlist.Add(stat1);
+            if (stat1.Canceled == false)
+            { 
+                statlist.Add(stat1); 
+            }
 
             refreshUI();
         }
@@ -93,7 +90,10 @@ namespace TEST
         private void toolStripButton8_Click(object sender, EventArgs e)
         {
             WhileStatement stat1 = new WhileStatement(varlist, oLanguage);
-            statlist.Add(stat1);
+            if (stat1.Canceled == false)
+            { 
+                statlist.Add(stat1); 
+            }
 
             refreshUI();
         }
@@ -101,7 +101,10 @@ namespace TEST
         private void toolStripButton9_Click(object sender, EventArgs e)
         {
             OutputStatement stat1 = new OutputStatement(varlist);
-            statlist.Add(stat1);
+            if (stat1.Canceled == false)
+            { 
+                statlist.Add(stat1); 
+            }
 
             refreshUI();
         }
@@ -109,7 +112,10 @@ namespace TEST
         private void toolStripButton10_Click(object sender, EventArgs e)
         {
             InputStatement stat1 = new InputStatement(varlist);
-            statlist.Add(stat1);
+            if (stat1.Canceled == false)
+            { 
+                statlist.Add(stat1); 
+            }
 
             refreshUI();
         }
@@ -145,7 +151,14 @@ namespace TEST
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
+            /*VarInitStatement stat1 = new VarInitStatement(varlist);
+            Variable var1 = stat1.GetVar();
+            if (stat1.Canceled==false) 
+            { 
+                statlist.Add(stat1); 
+            }
 
+            refreshUI(); */
         }
     }
 }
