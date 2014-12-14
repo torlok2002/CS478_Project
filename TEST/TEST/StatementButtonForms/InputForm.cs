@@ -18,20 +18,31 @@ namespace TEST
             get { return comboBoxVarName.Text; }
             set { }
         }
-
+        public string VarType
+        {
+            get { return comboBoxVarName.Text; }
+            set { }
+        }
         public string message 
         {
             get { return "\"" + textBox1.Text + "\""; }
             set { } 
         }
-
-        public InputForm(string[] ExistingVarList)
+        private bool boolCancel = true;
+        public bool Canceled
+        {
+            get
+            {
+                return boolCancel;
+            }
+        }
+        public InputForm(string[,] ExistingVarList)
         {
             
             InitializeComponent();
-            foreach (string VarName in ExistingVarList)
+            for (int i = 0; i < ExistingVarList.GetLength(0); i++)
             {
-                this.comboBoxVarName.Items.Add(VarName);
+                this.comboBoxVarName.Items.Add(ExistingVarList[i,0]);
             }
         }
 
@@ -46,6 +57,7 @@ namespace TEST
         {
             VarName = this.comboBoxVarName.Text;
             this.DialogResult = DialogResult.Yes;
+            this.boolCancel = false;
             this.Close();
         }
 

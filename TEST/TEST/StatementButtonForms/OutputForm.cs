@@ -12,6 +12,7 @@ namespace TEST
 {
     public partial class NewOutputForm : Form
     {
+        private bool boolCancel=true;
         //fields
         public string outtext
         {
@@ -25,12 +26,12 @@ namespace TEST
             set { }
         }
         
-        public NewOutputForm(string[] ExistingVarList)
+        public NewOutputForm(string[,] ExistingVarList)
         {
             InitializeComponent();
-            foreach (string s in ExistingVarList)
+            for (int i = 0; i < ExistingVarList.GetLength(0); i++)
             {
-                this.comboBox1.Items.Add(s);
+                this.comboBox1.Items.Add(ExistingVarList[i, 0]);
             }
             this.AcceptButton = buttonAccept;
 
@@ -52,6 +53,7 @@ namespace TEST
 
         private void buttonAccept_Click(object sender, EventArgs e)
         {
+            boolCancel = false;
             this.Close();
         }
 
@@ -67,6 +69,13 @@ namespace TEST
         {
             if (this.comboBox1.Text == "") this.buttonAccept.Enabled = false;
             else this.buttonAccept.Enabled = true;
+        }
+        public bool Canceled
+        {
+            get
+            {
+                return boolCancel;
+            }
         }
     }
 }

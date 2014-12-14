@@ -30,12 +30,13 @@ namespace TEST
     {
         //Fields
         private String outputString;
-
+        private bool boolCancel = true;
         //generic constructor
-        public OutputStatement(string[] ExistingVarList)
+        public OutputStatement(string[,] ExistingVarList)
         {
             NewOutputForm outform = new NewOutputForm(ExistingVarList);
             outform.ShowDialog();
+            boolCancel = outform.Canceled;
             outputString = outform.outtext;
         }
 
@@ -71,6 +72,13 @@ namespace TEST
         {
             throw new NotImplementedException();
         }
+        public bool Canceled
+        {
+            get
+            {
+                return boolCancel;
+            }
+        }
     }
 
     [Serializable]
@@ -80,18 +88,28 @@ namespace TEST
         private string messageString;
         private string varTo;
         private string varType="";
+        private bool boolCancel = true;
 
         //generic constructor
-        public InputStatement(string[] existvarlist)
+        public InputStatement(string[,] existvarlist)
         {
             InputForm inform = new InputForm(existvarlist);
             inform.ShowDialog();
             messageString = inform.message;
             varTo = inform.VarName;
+            for (int i = 0; i < existvarlist.GetLength(0); i++)
+            {
+                if (existvarlist[i, 0] == varTo)
+                {
+                    varType = existvarlist[i, 1];
+                    break;
+                }
+            }
+            boolCancel = inform.Canceled;
             
         }
         //Constructor - Overrides parent class
-        public InputStatement(string message, string varTo, string varType)
+        public InputStatement(string message, string varTo)
         {
             messageString = message;
             this.varTo = varTo;
@@ -100,7 +118,7 @@ namespace TEST
         public override String getCCode()
         {
             String Code;
-            Code = @"IDEQueue.Send("""",""InputRequest" + varType + @""");\n";
+            Code = @"IDEQueue.Send("""",""InputRequest" + varType + @""");";
             if (varType == "int") { Code += varTo + @" = int.Parse(GetMessage().Body.ToString()); "; }
             else if (varType == "string") { Code += varTo + @" = GetMessage().Body.ToString(); "; }
             else if (varType == "char") { Code += varTo + @" = GetMessage().Body.ToString().ToCharArray().ElementAt(0); "; }
@@ -121,6 +139,13 @@ namespace TEST
         {
             throw new NotImplementedException();
         }
+        public bool Canceled
+        {
+            get
+            {
+                return boolCancel;
+            }
+        }
     }
      
     [Serializable]
@@ -130,15 +155,17 @@ namespace TEST
         //private Expression express;
         private string express;
         private string assignTo;
+        private bool boolCancel = true;
 
         //generic Constructor
-        public AssignStatement(string[] ExistingVarList)
+        public AssignStatement(string[,] ExistingVarList)
         {
             AssignmentForm assignform = new AssignmentForm(ExistingVarList);
             assignform.ShowDialog();
             assignTo = assignform.to;
             //express = assignform.express;//used for passing object
             express = assignform.expressString;//used for passing string
+            boolCancel = assignform.Canceled;
         }
 
         //Constructor - Overrides parent class
@@ -175,7 +202,13 @@ namespace TEST
         {
             throw new NotImplementedException();
         }
-
+        public bool Canceled
+        {
+            get
+            {
+                return boolCancel;
+            }
+        }
 
     }
 
@@ -186,15 +219,16 @@ namespace TEST
         private string codeString;
         private Conditional conditional;
         private List<Statement> stmtlist;
- 
+        private bool boolCancel = true;
+
         //Generic constructor
-        public IfStatement(string[] ExistingVarList,Language oLanguage)
+        public IfStatement(string[,] ExistingVarList,Language oLanguage)
         {
             If_WhileForm ifform = new If_WhileForm(ExistingVarList, "If",oLanguage);
             ifform.ShowDialog();
             stmtlist = ifform.getStatlist();
             conditional = ifform.condition;
-
+            boolCancel = ifform.Canceled;
         }
 
         public override string getCCode()
@@ -231,6 +265,13 @@ namespace TEST
         {
             throw new NotImplementedException();
         }
+        public bool Canceled
+        {
+            get
+            {
+                return boolCancel;
+            }
+        }
     }
 
     [Serializable]
@@ -240,15 +281,16 @@ namespace TEST
         private string codeString;
         private Conditional conditional;
         private List<Statement> stmtlist;
+        private bool boolCancel = true;
 
         //Generic constructor
-        public WhileStatement(string[] ExistingVarList, Language oLanguage)
+        public WhileStatement(string[,] ExistingVarList, Language oLanguage)
         {
             If_WhileForm whileform = new If_WhileForm(ExistingVarList, "While", oLanguage);
             whileform.ShowDialog();
             stmtlist = whileform.getStatlist();
             conditional = whileform.condition;
-
+            boolCancel = whileform.Canceled;
         }
         
         public override string getCCode()
@@ -265,7 +307,14 @@ namespace TEST
 
         public override string getUserCode(Language oLanguage)
         {
-            return oLanguage.getLoopStatement(conditional.ToString());
+            try
+            {
+                return oLanguage.getLoopStatement(conditional.ToString());
+            }
+            catch
+            {
+                return "";
+            }
 
         }
         public override string getStatementType()
@@ -288,6 +337,13 @@ namespace TEST
         {
             throw new NotImplementedException();
         }
+        public bool Canceled
+        {
+            get
+            {
+                return boolCancel;
+            }
+        }
     }
     
     [Serializable]
@@ -295,10 +351,10 @@ namespace TEST
     {
         //fields 
         private Variable var;
-        
+        private bool boolCancel = true;
 
         //generic constructor
-        public VarInitStatement(string[] ExistingVarList)
+        public VarInitStatement(string[,] ExistingVarList)
         {
             VariableForm varform = new VariableForm(ExistingVarList);
             varform.ShowDialog();
@@ -306,7 +362,7 @@ namespace TEST
             //{
                 var = new Variable(varform.type, varform.name);
             //}
-            
+                boolCancel = varform.Canceled;
             
         }
 
@@ -330,7 +386,11 @@ namespace TEST
         {
             string vartype = var.getType();
             string varname = var.getName();
-            string code = vartype + " " + varname + ";";
+            string code = "";
+            if (vartype == "int") { code = vartype + " " + varname + " = 0;"; }
+            else if (vartype == "string") { code = vartype + " " + varname + " = \"\";"; }
+            else if (vartype == "char") { code = vartype + " " + varname + " = '';"; }
+            
             return code;
         }
 
@@ -341,6 +401,13 @@ namespace TEST
         public override string getStatementType()
         {
             return "variable";
+        }
+        public bool Canceled
+        {
+            get
+            {
+                return boolCancel;
+            }
         }
     }
     
@@ -407,7 +474,7 @@ namespace TEST
         string operation;
 
         //generic constructor
-        public Expression(string[] ExistingVarList)
+        public Expression(string[,] ExistingVarList)
         {
             ExpressionForm expform = new ExpressionForm(ExistingVarList);
             expform.ShowDialog();
@@ -493,7 +560,7 @@ namespace TEST
 
 
         //Constructor for one string
-        public Conditional(string[] ExistingVarList)
+        public Conditional(string[,] ExistingVarList)
         {
             ConditionalForm condform = new ConditionalForm(ExistingVarList);
             condform.ShowDialog();

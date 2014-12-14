@@ -43,6 +43,7 @@
             this.comboBoxVarName.Size = new System.Drawing.Size(123, 21);
             this.comboBoxVarName.TabIndex = 1;
             this.comboBoxVarName.SelectedIndexChanged += new System.EventHandler(this.comboBoxVarName_SelectedIndexChanged);
+            this.comboBoxVarName.TextChanged += new System.EventHandler(this.comboBoxVarName_SelectedIndexChanged);
             // 
             // buttonAccept
             // 

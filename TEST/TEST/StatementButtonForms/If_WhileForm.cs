@@ -14,13 +14,20 @@ namespace TEST
     {
         //fields
         private List<Statement> statlist;
-        private string[] varlist;
+        private string[,] varlist;
         private string codeString;
         public Conditional condition { get; set; }
         private Language oLanguage;
+        private bool boolCancel = true;
+        public bool Canceled
+        {
+            get
+            {
+                return boolCancel;
+            }
+        }
 
-
-        public If_WhileForm(string[] ExistVarList, string if_while, Language oLanguage)
+        public If_WhileForm(string[,] ExistVarList, string if_while, Language oLanguage)
         {
 
             InitializeComponent();
@@ -39,7 +46,7 @@ namespace TEST
 
         private void update_codeOutputBox() //iterate through linked list and get user statement code.
         {
-            codeString = "START\r\n";
+            
 
             //get temp sting array in order to grab each individual line
             //string[] stmtArray;
@@ -50,7 +57,7 @@ namespace TEST
                 codeString += "\r\n";
             }
 
-            codeString += "END";
+            
 
             txtCodeBox.Text = "";
             txtCodeBox.Text = codeString;
@@ -109,6 +116,7 @@ namespace TEST
 
         private void buttonAccept_Click(object sender, EventArgs e)
         {
+            this.boolCancel = false;
             this.Close();
         }
 
@@ -133,6 +141,11 @@ namespace TEST
             if (keyData == (Keys.Control | Keys.O)) { toolStripButton9_Click(null, null); }
             if (keyData == (Keys.Control | Keys.I)) { toolStripButton10_Click(null, null); }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

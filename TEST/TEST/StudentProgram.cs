@@ -83,14 +83,15 @@ namespace TEST
                 return oStatements;
             }
         }
-        public String[] Variables
+        public String[,] Variables
         {
             get
             {
-                String[] vars = new String[oVariables.Count];
+                String[,] vars = new String[oVariables.Count,2];
                 for (int i = 0; i < oVariables.Count; i++)
                 {
-                    vars[i] = oVariables.ElementAt(i).getName();
+                    vars[i,0] = oVariables.ElementAt(i).getName();
+                    vars[i,1] = oVariables.ElementAt(i).getType();
                 }
                 return vars;
             }

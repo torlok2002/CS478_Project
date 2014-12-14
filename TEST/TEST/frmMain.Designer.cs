@@ -38,20 +38,17 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chooseLanguageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadLanguageFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRunProg = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tlsStatementStrip = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.VariableButton = new System.Windows.Forms.ToolStripButton();
+            this.AssignButton = new System.Windows.Forms.ToolStripButton();
+            this.IfButton = new System.Windows.Forms.ToolStripButton();
+            this.WhileButton = new System.Windows.Forms.ToolStripButton();
+            this.OutputButton = new System.Windows.Forms.ToolStripButton();
+            this.InputButton = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.txtCodeBox = new System.Windows.Forms.RichTextBox();
@@ -63,6 +60,7 @@
             this.btnHome = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.txtOutputBox = new System.Windows.Forms.TextBox();
+            this.lblClear = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tlsStatementStrip.SuspendLayout();
@@ -80,8 +78,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fIleToolStripMenuItem,
-            this.languageToolStripMenuItem});
+            this.fIleToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(677, 24);
@@ -105,65 +102,45 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(100, 6);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(100, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // languageToolStripMenuItem
-            // 
-            this.languageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.chooseLanguageToolStripMenuItem,
-            this.loadLanguageFileToolStripMenuItem});
-            this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
-            this.languageToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.languageToolStripMenuItem.Text = "Language";
-            // 
-            // chooseLanguageToolStripMenuItem
-            // 
-            this.chooseLanguageToolStripMenuItem.Name = "chooseLanguageToolStripMenuItem";
-            this.chooseLanguageToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.chooseLanguageToolStripMenuItem.Text = "Choose Language";
-            // 
-            // loadLanguageFileToolStripMenuItem
-            // 
-            this.loadLanguageFileToolStripMenuItem.Name = "loadLanguageFileToolStripMenuItem";
-            this.loadLanguageFileToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.loadLanguageFileToolStripMenuItem.Text = "Load Language File";
             // 
             // btnRunProg
             // 
             this.btnRunProg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRunProg.Enabled = false;
             this.btnRunProg.Location = new System.Drawing.Point(635, 1);
             this.btnRunProg.Name = "btnRunProg";
             this.btnRunProg.Size = new System.Drawing.Size(42, 23);
@@ -201,77 +178,77 @@
             // 
             this.tlsStatementStrip.Enabled = false;
             this.tlsStatementStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2,
-            this.toolStripButton3,
-            this.toolStripButton4,
-            this.toolStripButton5,
-            this.toolStripButton6});
+            this.VariableButton,
+            this.AssignButton,
+            this.IfButton,
+            this.WhileButton,
+            this.OutputButton,
+            this.InputButton});
             this.tlsStatementStrip.Location = new System.Drawing.Point(0, 24);
             this.tlsStatementStrip.Name = "tlsStatementStrip";
             this.tlsStatementStrip.Size = new System.Drawing.Size(677, 25);
             this.tlsStatementStrip.TabIndex = 2;
             this.tlsStatementStrip.Text = "tlsStatementStrip";
             // 
-            // toolStripButton1
+            // VariableButton
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(53, 22);
-            this.toolStripButton1.Text = "Variable";
-            this.toolStripButton1.ToolTipText = "Initialize a Variable\r\n(Ctrl+V)";
-            this.toolStripButton1.Click += new System.EventHandler(this.VariableButton_Click);
+            this.VariableButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.VariableButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.VariableButton.Name = "VariableButton";
+            this.VariableButton.Size = new System.Drawing.Size(53, 22);
+            this.VariableButton.Text = "Variable";
+            this.VariableButton.ToolTipText = "Initialize a Variable\r\n(Ctrl+V)";
+            this.VariableButton.Click += new System.EventHandler(this.VariableButton_Click);
             // 
-            // toolStripButton2
+            // AssignButton
             // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(74, 22);
-            this.toolStripButton2.Text = "Assignment";
-            this.toolStripButton2.ToolTipText = "Assign a variable the result of an expression\r\n(Ctrl+A)";
-            this.toolStripButton2.Click += new System.EventHandler(this.AssignButton_Click);
+            this.AssignButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.AssignButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AssignButton.Name = "AssignButton";
+            this.AssignButton.Size = new System.Drawing.Size(74, 22);
+            this.AssignButton.Text = "Assignment";
+            this.AssignButton.ToolTipText = "Assign a variable the result of an expression\r\n(Ctrl+A)";
+            this.AssignButton.Click += new System.EventHandler(this.AssignButton_Click);
             // 
-            // toolStripButton3
+            // IfButton
             // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton3.Text = "If";
-            this.toolStripButton3.ToolTipText = "Execute statements if a conditional is met\r\n(Ctrl+F)";
-            this.toolStripButton3.Click += new System.EventHandler(this.IfButton_Click);
+            this.IfButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.IfButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.IfButton.Name = "IfButton";
+            this.IfButton.Size = new System.Drawing.Size(23, 22);
+            this.IfButton.Text = "If";
+            this.IfButton.ToolTipText = "Execute statements if a conditional is met\r\n(Ctrl+F)";
+            this.IfButton.Click += new System.EventHandler(this.IfButton_Click);
             // 
-            // toolStripButton4
+            // WhileButton
             // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(41, 22);
-            this.toolStripButton4.Text = "While";
-            this.toolStripButton4.ToolTipText = "Continue to execute statements until a conditional is met.\r\n(Ctrl+W)";
-            this.toolStripButton4.Click += new System.EventHandler(this.WhileButton_Click);
+            this.WhileButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.WhileButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.WhileButton.Name = "WhileButton";
+            this.WhileButton.Size = new System.Drawing.Size(41, 22);
+            this.WhileButton.Text = "While";
+            this.WhileButton.ToolTipText = "Continue to execute statements until a conditional is met.\r\n(Ctrl+W)";
+            this.WhileButton.Click += new System.EventHandler(this.WhileButton_Click);
             // 
-            // toolStripButton5
+            // OutputButton
             // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(49, 22);
-            this.toolStripButton5.Text = "Output";
-            this.toolStripButton5.ToolTipText = "Output to user\r\n(Ctrl+O)";
-            this.toolStripButton5.Click += new System.EventHandler(this.OutputButton_Click);
+            this.OutputButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.OutputButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.OutputButton.Name = "OutputButton";
+            this.OutputButton.Size = new System.Drawing.Size(49, 22);
+            this.OutputButton.Text = "Output";
+            this.OutputButton.ToolTipText = "Output to user\r\n(Ctrl+O)";
+            this.OutputButton.Click += new System.EventHandler(this.OutputButton_Click);
             // 
-            // toolStripButton6
+            // InputButton
             // 
-            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(39, 22);
-            this.toolStripButton6.Text = "Input";
-            this.toolStripButton6.ToolTipText = "Prompt user to input a value and assign it to a variable\r\n(Ctrl+I)";
-            this.toolStripButton6.Click += new System.EventHandler(this.InputButton_Click);
+            this.InputButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.InputButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.InputButton.Name = "InputButton";
+            this.InputButton.Size = new System.Drawing.Size(39, 22);
+            this.InputButton.Text = "Input";
+            this.InputButton.ToolTipText = "Prompt user to input a value and assign it to a variable\r\n(Ctrl+I)";
+            this.InputButton.Click += new System.EventHandler(this.InputButton_Click);
             // 
             // splitContainer1
             // 
@@ -286,6 +263,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.lblClear);
             this.splitContainer1.Panel2.Controls.Add(this.txtOutputBox);
             this.splitContainer1.Size = new System.Drawing.Size(677, 473);
             this.splitContainer1.SplitterDistance = 316;
@@ -311,6 +289,7 @@
             // 
             // txtCodeBox
             // 
+            this.txtCodeBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtCodeBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtCodeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.txtCodeBox.Location = new System.Drawing.Point(0, 0);
@@ -325,6 +304,7 @@
             // 
             // tvTreeDirectory
             // 
+            this.tvTreeDirectory.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tvTreeDirectory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvTreeDirectory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.tvTreeDirectory.ImageIndex = 0;
@@ -412,6 +392,17 @@
             this.txtOutputBox.TabIndex = 0;
             this.txtOutputBox.TextChanged += new System.EventHandler(this.txtOutputBox_TextChanged);
             // 
+            // lblClear
+            // 
+            this.lblClear.AutoSize = true;
+            this.lblClear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblClear.Location = new System.Drawing.Point(632, 5);
+            this.lblClear.Name = "lblClear";
+            this.lblClear.Size = new System.Drawing.Size(31, 13);
+            this.lblClear.TabIndex = 1;
+            this.lblClear.Text = "Clear";
+            this.lblClear.Click += new System.EventHandler(this.lblClear_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -430,6 +421,7 @@
             this.Name = "frmMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "CS487 IDE";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -462,9 +454,6 @@
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem languageToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem chooseLanguageToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadLanguageFileToolStripMenuItem;
         private System.Windows.Forms.Button btnRunProg;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.TextBox textBox1;
@@ -476,12 +465,12 @@
         private System.Windows.Forms.RichTextBox txtCodeBox;
         private System.Windows.Forms.TreeView tvTreeDirectory;
         private System.Windows.Forms.TextBox txtOutputBox;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
+        private System.Windows.Forms.ToolStripButton VariableButton;
+        private System.Windows.Forms.ToolStripButton AssignButton;
+        private System.Windows.Forms.ToolStripButton IfButton;
+        private System.Windows.Forms.ToolStripButton WhileButton;
+        private System.Windows.Forms.ToolStripButton OutputButton;
+        private System.Windows.Forms.ToolStripButton InputButton;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ImageList imageList1;
@@ -490,6 +479,7 @@
         private System.Windows.Forms.ToolStripButton btnUp;
         private System.Windows.Forms.ToolStripButton btnHome;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
+        private System.Windows.Forms.Label lblClear;
 
     }
 }

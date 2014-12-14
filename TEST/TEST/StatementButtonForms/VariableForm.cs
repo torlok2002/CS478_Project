@@ -23,17 +23,27 @@ namespace TEST
             get { return temptype; }
             set { }
         }
+        private bool boolCancel = true;
+        public bool Canceled
+        {
+            get
+            {
+                return boolCancel;
+            }
+        }
         private int temptype;
-        private string[] varlist;
+        private string[,] varlist;
         
+
         //constructor
-        public VariableForm(string[] ExistingVarList)
+        public VariableForm(string[,] ExistingVarList)
         {
             varlist = ExistingVarList;
             InitializeComponent();
             this.AcceptButton = button1;
             this.radioButton1.Checked = true;
             this.temptype = 1;
+
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -54,11 +64,16 @@ namespace TEST
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             button1.Enabled = false;
-            if(varlist.Contains(this.textBox1.Text))
+            string[] varnames = new string[varlist.GetLength(0)];
+            for (int i = 0; i < varlist.GetLength(0); i++)
+            {
+                varnames[i] = varlist[i, 0];
+            }
+            if (varnames.Contains(this.textBox1.Text))
             {
                 toolStripStatusLabel1.Text = "Name already defined";
             }
-            else if(!String.IsNullOrEmpty(textBox1.Text) && !Char.IsLetter(textBox1.Text[0]))
+            else if (!String.IsNullOrEmpty(textBox1.Text) && !Char.IsLetter(textBox1.Text[0]))
             {
                 toolStripStatusLabel1.Text = "Name must start with a letter";
             }
@@ -85,6 +100,7 @@ namespace TEST
             else 
             {
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                this.boolCancel = false;
                 this.Close();
             }
         }

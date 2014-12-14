@@ -39,13 +39,13 @@ namespace TEST
         }
 
         //constructor
-        public ConditionalForm(string[] ExistingVarList)
+        public ConditionalForm(string[,] ExistingVarList)
         {
             InitializeComponent();
-            foreach (string str in ExistingVarList)
+            for (int i = 0; i < ExistingVarList.GetLength(0); i++)
             {
-                this.comboBoxLeft.Items.Add(str);
-                this.comboBoxRight.Items.Add(str);
+                this.comboBoxLeft.Items.Add(ExistingVarList[i,0]);
+                this.comboBoxRight.Items.Add(ExistingVarList[i,0]);
             }
             this.AcceptButton = button1;
         }

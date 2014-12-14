@@ -13,7 +13,7 @@ namespace TEST
     public partial class ExpressionForm : Form
     {
         //fields
-        private string[] existvarlist;
+        private string[,] existvarlist;
 
         public string left
         {
@@ -43,14 +43,14 @@ namespace TEST
          }
 
         //constructor
-        public ExpressionForm(string[] ExistVarList)
+        public ExpressionForm(string[,] ExistVarList)
         {
             InitializeComponent();
             this.AcceptButton = btnAccept;
-            foreach (string VarName in ExistVarList)
+            for (int i = 0; i < ExistVarList.GetLength(0); i++)
             {
-                this.comboBoxLVar.Items.Add(VarName);
-                this.comboBoxRVar.Items.Add(VarName);
+                this.comboBoxLVar.Items.Add(ExistVarList[i,0]);
+                this.comboBoxRVar.Items.Add(ExistVarList[i,0]);
             }
             existvarlist = ExistVarList;
             

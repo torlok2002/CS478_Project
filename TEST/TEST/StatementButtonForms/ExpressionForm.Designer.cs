@@ -98,6 +98,7 @@
             this.comboBoxLVar.Size = new System.Drawing.Size(87, 21);
             this.comboBoxLVar.TabIndex = 0;
             this.comboBoxLVar.SelectedIndexChanged += new System.EventHandler(this.comboBoxLVar_SelectedIndexChanged);
+            this.comboBoxLVar.TextChanged += new System.EventHandler(this.comboBoxLVar_SelectedIndexChanged);
             // 
             // comboBoxRVar
             // 
@@ -129,7 +130,7 @@
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
-            // NewExpressionForm
+            // ExpressionForm
             // 
             this.AcceptButton = this.btnAccept;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -147,7 +148,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "NewExpressionForm";
+            this.Name = "ExpressionForm";
             this.ShowIcon = false;
             this.Text = "Expression Definition";
             this.ResumeLayout(false);

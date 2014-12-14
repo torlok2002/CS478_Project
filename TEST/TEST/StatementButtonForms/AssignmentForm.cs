@@ -29,21 +29,30 @@ namespace TEST
             }
             set { comboBox1.Text = expressString; }
         }
+        private bool boolCancel = true;
+        public bool Canceled
+        {
+            get
+            {
+                return boolCancel;
+            }
+        }
         public Expression express;
-        string[] existvarlist;
+        string[,] existvarlist;
         
         //constructor
-        public AssignmentForm(string[] ExistVarList)
+        public AssignmentForm(string[,] ExistVarList)
         {
             InitializeComponent();
-            foreach (string str in ExistVarList)
+            for (int i = 0; i < ExistVarList.GetLength(0); i++)
             {
-                this.comboBox1.Items.Add(str);
-                this.comboBox2.Items.Add(str);
+                this.comboBox1.Items.Add(ExistVarList[i, 0]);
+                this.comboBox2.Items.Add(ExistVarList[i, 0]);
             }
             this.AcceptButton = buttonAccept;
             this.existvarlist = ExistVarList;
             //express = new Expression("");
+            
         }
 
         private void buttonAccept_Click(object sender, EventArgs e)
@@ -58,6 +67,7 @@ namespace TEST
             {
                 expressString = express.ToString();
             }
+            this.boolCancel = false;
             this.Close();
         }
 

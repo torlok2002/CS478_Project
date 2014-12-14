@@ -57,6 +57,7 @@
             this.comboBoxRight.Size = new System.Drawing.Size(121, 21);
             this.comboBoxRight.TabIndex = 2;
             this.comboBoxRight.SelectedIndexChanged += new System.EventHandler(this.comboBoxRight_SelectedIndexChanged);
+            this.comboBoxRight.TextChanged += new System.EventHandler(this.comboBoxRight_SelectedIndexChanged);
             // 
             // comboBoxLeft
             // 
@@ -66,9 +67,13 @@
             this.comboBoxLeft.Size = new System.Drawing.Size(121, 21);
             this.comboBoxLeft.TabIndex = 0;
             this.comboBoxLeft.SelectedIndexChanged += new System.EventHandler(this.comboBoxLeft_SelectedIndexChanged);
+            this.comboBoxLeft.TextChanged += new System.EventHandler(this.comboBoxLeft_SelectedIndexChanged);
             // 
             // comboBoxEqual
             // 
+            this.comboBoxEqual.AllowDrop = true;
+            this.comboBoxEqual.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBoxEqual.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxEqual.FormattingEnabled = true;
             this.comboBoxEqual.Items.AddRange(new object[] {
             "==",
@@ -82,6 +87,7 @@
             this.comboBoxEqual.Size = new System.Drawing.Size(64, 21);
             this.comboBoxEqual.TabIndex = 1;
             this.comboBoxEqual.SelectedIndexChanged += new System.EventHandler(this.comboBoxEqual_SelectedIndexChanged);
+            this.comboBoxEqual.TextChanged += new System.EventHandler(this.comboBoxEqual_SelectedIndexChanged);
             // 
             // label1
             // 

@@ -92,15 +92,15 @@ namespace TEST
             tempString = tempString.Replace("<Typ>", sType);
             return tempString;
         }
-        public String[] getHotkeys()
+        public char[] getHotkeys()
         {
-            String[] aHotkeys = new String[5];
-            if (assignmentStatement != "") { aHotkeys[0] = assignmentStatement.Split(',').ElementAt(0); }
-            if (branchStatement     != "") { aHotkeys[1] = branchStatement.Split(',').ElementAt(0);     }
-            if (loopStatement       != "") { aHotkeys[2] = loopStatement.Split(',').ElementAt(0);       }
-            if (inputStatement      != "") { aHotkeys[3] = inputStatement.Split(',').ElementAt(0);      }
-            if (outputStatement     != "") { aHotkeys[4] = outputStatement.Split(',').ElementAt(0);     }
-            if (variableStatement   != "") { aHotkeys[5] = outputStatement.Split(',').ElementAt(0);     }
+            char[] aHotkeys = new char[6];
+            if (assignmentStatement != "") { aHotkeys[0] = assignmentStatement.Split(',').ElementAt(0).ToCharArray().ElementAt(0); } else aHotkeys[0] = '\u20E0';
+            if (branchStatement != "") { aHotkeys[1] = branchStatement.Split(',').ElementAt(0).ToCharArray().ElementAt(0); } else aHotkeys[1] = '\u20E0';
+            if (loopStatement != "") { aHotkeys[2] = loopStatement.Split(',').ElementAt(0).ToCharArray().ElementAt(0); } else aHotkeys[2] = '\u20E0';
+            if (inputStatement != "") { aHotkeys[3] = inputStatement.Split(',').ElementAt(0).ToCharArray().ElementAt(0); } else aHotkeys[3] = '\u20E0';
+            if (outputStatement != "") { aHotkeys[4] = outputStatement.Split(',').ElementAt(0).ToCharArray().ElementAt(0); } else aHotkeys[4] = '\u20E0';
+            if (variableStatement != "") { aHotkeys[5] = variableStatement.Split(',').ElementAt(0).ToCharArray().ElementAt(0); } else aHotkeys[5] = '\u20E0';
             return aHotkeys;
         }
     }

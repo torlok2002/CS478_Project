@@ -25,28 +25,44 @@ namespace TEST
         {
 
             IDECompiler comp = new IDECompiler();
-            comp.CompileExecutable(IDEProgram);
-            Thread myThread = new System.Threading.Thread(delegate()
+            if (comp.CompileExecutable(IDEProgram))
             {
-                comp.RunAssembly();
-            });
-            myThread.Start();
-            IDEQueue = GetQ(@".\Private$\IDEQueue");
-            IDEQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(string) });
-            
-            while (! IDEQueue.Peek().Label.Contains("EndProgram"))
-            {
-                if (IDEQueue.Peek().Label.Contains("InputRequest"))
+                Thread myThread = new System.Threading.Thread(delegate()
                 {
+                    comp.RunAssembly();
+                });
+                myThread.Start();
+                IDEQueue = GetQ(@".\Private$\IDEQueue");
+                IDEQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(string) });
 
-                    string type = IDEQueue.Receive().Label;
-                    
-                    IDEQueue.Send(Microsoft.VisualBasic.Interaction.InputBox("Input " + type.Substring(12), "Input"));
-                }
-                else if (IDEQueue.Peek().Label.Contains("Output"))
+                while (true)
                 {
-                    txtOutputBox.Text += "Output: " + GetMessage().Body.ToString() + Environment.NewLine;
+                    try
+                    {
+                        if (IDEQueue.Peek(new TimeSpan(5)).Label == "EndProgram")
+                        {
+                            IDEQueue.Purge();
+                            myThread.Abort();
+                            break;
+                        }
+                        else
+                        {
+                            if (IDEQueue.Peek().Label.Contains("InputRequest"))
+                            {
+
+                                string type = IDEQueue.Receive().Label;
+                                IDEQueue.Send(Microsoft.VisualBasic.Interaction.InputBox("Input " + type.Substring(12), "Input"), "Input");
+
+                            }
+                            else if (IDEQueue.Peek().Label.Contains("Output"))
+                            {
+                                txtOutputBox.Text += "Output: " + GetMessage().Body.ToString() + Environment.NewLine;
+                            }
+                        }
+                    }
+                    catch { }//if (myThread.IsAlive == false) { IDEQueue.Purge(); myThread.Abort(); break; } }
                 }
+                
             }
 
         }

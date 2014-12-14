@@ -20,7 +20,7 @@ namespace TEST
         ProgramDir IDEDir;
         StudentProgram IDEProgram;
         String codeString;
-        string[] varlist;
+        string[,] varlist;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -33,8 +33,11 @@ namespace TEST
             varlist = IDEProgram.Variables;
             VarInitStatement stat1 = new VarInitStatement(varlist);
             Variable var1 = stat1.GetVar();
-            IDEProgram.AddVariable(var1);
-            IDEProgram.AddStatement(stat1);
+            if (stat1.Canceled == false)
+            {
+                IDEProgram.AddVariable(var1);
+                IDEProgram.AddStatement(stat1);
+            }
 
             refreshUI();
         }
@@ -42,7 +45,7 @@ namespace TEST
         private void AssignButton_Click(object sender, EventArgs e)
         {
             varlist = IDEProgram.Variables;
-            if (varlist.Count() == 0)
+            if (varlist.GetLength(0) == 0)
             {
                 toolStripStatusLabel1.Text = "No Variables defined: Unable to create assignment statement";
                 statusStrip1.Refresh();
@@ -50,8 +53,10 @@ namespace TEST
             else
             {
                 AssignStatement stat1 = new AssignStatement(varlist);
-                IDEProgram.AddStatement(stat1);
-
+                if (stat1.Canceled == false)
+                {
+                    IDEProgram.AddStatement(stat1);
+                }
                 refreshUI();
             }
         }
@@ -60,7 +65,10 @@ namespace TEST
         {
             varlist = IDEProgram.Variables;
             IfStatement stat1 = new IfStatement(varlist,IDEProgram.ProgramLanguage);
-            IDEProgram.AddStatement(stat1);
+            if (stat1.Canceled == false)
+            {
+                IDEProgram.AddStatement(stat1);
+            }
             statusStrip1.Refresh();
             refreshUI();
         }
@@ -69,8 +77,10 @@ namespace TEST
         {
             varlist = IDEProgram.Variables;
             WhileStatement stat1 = new WhileStatement(varlist,IDEProgram.ProgramLanguage);
-            IDEProgram.AddStatement(stat1);
-
+            if (stat1.Canceled == false)
+            {
+                IDEProgram.AddStatement(stat1);
+            }
             refreshUI();
         }
 
@@ -78,7 +88,10 @@ namespace TEST
         {
             varlist = IDEProgram.Variables;
             OutputStatement stat1 = new OutputStatement(varlist); //New Output Statement
-            IDEProgram.AddStatement(stat1);
+            if (stat1.Canceled == false)
+            {
+                IDEProgram.AddStatement(stat1);
+            }
 
             refreshUI();
         }
@@ -86,7 +99,7 @@ namespace TEST
         private void InputButton_Click(object sender, EventArgs e)
         {
             varlist = IDEProgram.Variables;
-            if (varlist.Count() == 0)
+            if (varlist.GetLength(0) == 0)
             {
                 toolStripStatusLabel1.Text = "No Variables defined: Unable to create assignment statement";
                 statusStrip1.Refresh();
@@ -94,8 +107,10 @@ namespace TEST
             else
             {
                 InputStatement stat1 = new InputStatement(varlist);
-                IDEProgram.AddStatement(stat1);
-
+                if (stat1.Canceled == false)
+                {
+                    IDEProgram.AddStatement(stat1);
+                }
                 refreshUI();
             }
         }
@@ -115,19 +130,34 @@ namespace TEST
                     {
                         //Save the file
                         IDEDir.SaveFile(IDEProgram);
+
+                        //Create the file
+                        IDEProgram = new StudentProgram(frmNew.ChoosenLanguage, frmNew.ProgramName, frmNew.Path);
+                        tlsStatementStrip.Enabled = true;
+                        refreshUI();
                         bChanged = false;
                     }
+                    else if (Dr == DialogResult.No)
+                    {
+                        //Just create the file
+                        IDEProgram = new StudentProgram(frmNew.ChoosenLanguage, frmNew.ProgramName, frmNew.Path);
+                        tlsStatementStrip.Enabled = true;
+                        refreshUI();
+                        bChanged = false;
+                    }
+                    else { }
 
                 }
-                //Clear code box and exit program
-                //Either add empty program to program list or clear program object
-                //list1.Clear();
-                IDEProgram = new StudentProgram(frmNew.ChoosenLanguage, frmNew.ProgramName, frmNew.Path);
-                tlsStatementStrip.Enabled = true;
-                txtOutputBox.Text = "";
-                update_codeOutputBox();
-                update_txtOutputBox();
-
+                else
+                {
+                    //Clear code box and exit program
+                    //Either add empty program to program list or clear program object
+                    //list1.Clear();
+                    IDEProgram = new StudentProgram(frmNew.ChoosenLanguage, frmNew.ProgramName, frmNew.Path);
+                    tlsStatementStrip.Enabled = true;
+                    refreshUI();
+                    bChanged = false;
+                }
             }
 
         }
@@ -153,6 +183,7 @@ namespace TEST
                 IDEProgram.FilePath = fb.FileName;
                 tlsStatementStrip.Enabled = true;
                 refreshUI();
+                bChanged = false;
             }
             catch (Exception ex)
             {
@@ -174,19 +205,56 @@ namespace TEST
                     {
                         IDEDir.SaveFile(IDEProgram);
                         bChanged = false;
+                        //Load Object
+                        try
+                        {
+                            IDEProgram = IDEDir.LoadFile(IDEDir.ParentPath + "\\" + e.Node.FullPath);
+                            IDEProgram.FilePath = IDEDir.ParentPath + "\\" + e.Node.FullPath;
+                            tlsStatementStrip.Enabled = true;
+                            refreshUI();
+                            bChanged = false;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    else if (Dr == DialogResult.No)
+                    {
+                        //Load Object
+                        try
+                        {
+                            IDEProgram = IDEDir.LoadFile(IDEDir.ParentPath + "\\" + e.Node.FullPath);
+                            IDEProgram.FilePath = IDEDir.ParentPath + "\\" + e.Node.FullPath;
+                            tlsStatementStrip.Enabled = true;
+                            refreshUI();
+                            bChanged = false;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    else
+                    {
+
                     }
                 }
-                //Load Object
-                try
+                else
                 {
-                    IDEProgram = IDEDir.LoadFile(IDEDir.ParentPath + "\\" + e.Node.FullPath);
-                    IDEProgram.FilePath = IDEDir.ParentPath + "\\" + e.Node.FullPath;
-                    tlsStatementStrip.Enabled = true;
-                    refreshUI();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
+                    //Load Object
+                    try
+                    {
+                        IDEProgram = IDEDir.LoadFile(IDEDir.ParentPath + "\\" + e.Node.FullPath);
+                        IDEProgram.FilePath = IDEDir.ParentPath + "\\" + e.Node.FullPath;
+                        tlsStatementStrip.Enabled = true;
+                        refreshUI();
+                        bChanged = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
                 
             }
@@ -197,12 +265,15 @@ namespace TEST
 
             try
             {
+                btnRunProg.Enabled = false;
                 ProgramHandler RUNPROG = new ProgramHandler(IDEProgram, txtOutputBox);
                 RUNPROG.Run();
+                btnRunProg.Enabled = true;
+                RUNPROG = null;
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
 
         }
@@ -215,7 +286,7 @@ namespace TEST
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
 
         private void txtOutputBox_TextChanged(object sender, EventArgs e)
@@ -269,18 +340,36 @@ namespace TEST
             toolStripStatusLabel1.Text = "";
             statusStrip1.Refresh();
             update_codeOutputBox();
+            if (IDEProgram != null)
+            {
+                char[] temp = IDEProgram.ProgramLanguage.getHotkeys();
+                if (temp[0] == '\u20E0') { AssignButton.Enabled = false; } else AssignButton.Enabled = true;
+                if (temp[1] == '\u20E0') { IfButton.Enabled = false; } else IfButton.Enabled = true;
+                if (temp[2] == '\u20E0') { WhileButton.Enabled = false; } else WhileButton.Enabled = true;
+                if (temp[3] == '\u20E0') { InputButton.Enabled = false; } else InputButton.Enabled = true;
+                if (temp[4] == '\u20E0') { OutputButton.Enabled = false; } else OutputButton.Enabled = true;
+                if (temp[5] == '\u20E0') { VariableButton.Enabled = false; } else VariableButton.Enabled = true;
+                btnRunProg.Enabled = true;
+            }
+            else
+            {
+                btnRunProg.Enabled = false;
+            }
             //update_txtOutputBox();
         }
 
         //hotkey controls
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == (Keys.Control | Keys.V)){VariableButton_Click(null, null);}
-            if (keyData == (Keys.Control | Keys.A)){AssignButton_Click(null, null);}
-            if (keyData == (Keys.Control | Keys.F)) {IfButton_Click(null, null); }
-            if (keyData == (Keys.Control | Keys.W)) { WhileButton_Click(null, null); }
-            if (keyData == (Keys.Control | Keys.O)) {OutputButton_Click(null, null); }
-            if (keyData == (Keys.Control | Keys.I)) {InputButton_Click(null, null); }
+            if (tlsStatementStrip.Enabled)
+            {
+                if (keyData == (Keys.Control | (Keys)char.ToUpper(IDEProgram.ProgramLanguage.getHotkeys().ElementAt(0))) && IDEProgram.ProgramLanguage.getHotkeys().ElementAt(0) != '\u20E0' && AssignButton.Enabled) { AssignButton_Click(null, null); }
+                if (keyData == (Keys.Control | (Keys)char.ToUpper(IDEProgram.ProgramLanguage.getHotkeys().ElementAt(1))) && IDEProgram.ProgramLanguage.getHotkeys().ElementAt(1) != '\u20E0' && IfButton.Enabled) { IfButton_Click(null, null); }
+                if (keyData == (Keys.Control | (Keys)char.ToUpper(IDEProgram.ProgramLanguage.getHotkeys().ElementAt(2))) && IDEProgram.ProgramLanguage.getHotkeys().ElementAt(2) != '\u20E0' && WhileButton.Enabled) { WhileButton_Click(null, null); }
+                if (keyData == (Keys.Control | (Keys)char.ToUpper(IDEProgram.ProgramLanguage.getHotkeys().ElementAt(3))) && IDEProgram.ProgramLanguage.getHotkeys().ElementAt(3) != '\u20E0' && InputButton.Enabled) { InputButton_Click(null, null); }
+                if (keyData == (Keys.Control | (Keys)char.ToUpper(IDEProgram.ProgramLanguage.getHotkeys().ElementAt(4))) && IDEProgram.ProgramLanguage.getHotkeys().ElementAt(4) != '\u20E0' && OutputButton.Enabled) { OutputButton_Click(null, null); }
+                if (keyData == (Keys.Control | (Keys)char.ToUpper(IDEProgram.ProgramLanguage.getHotkeys().ElementAt(5))) && IDEProgram.ProgramLanguage.getHotkeys().ElementAt(5) != '\u20E0' && VariableButton.Enabled) { VariableButton_Click(null, null); }
+            }
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
@@ -291,7 +380,37 @@ namespace TEST
 
         private void toolStripButton7_Click(object sender, EventArgs e)
         {
+            if (tvTreeDirectory.SelectedNode.ImageIndex == -1)
+            {
+                //Add folder at this document level
+            }
+            else
+            {
+                //Add folder under this folder 
+            }
+        }
 
+        private void lblClear_Click(object sender, EventArgs e)
+        {
+            txtOutputBox.Text = "";
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (bChanged == true) 
+            {
+                DialogResult Dr = MessageBox.Show("Would you like to save the project?", "Save Project", MessageBoxButtons.YesNoCancel);
+
+                if (Dr == DialogResult.Yes)
+                {
+                    IDEDir.SaveFile(IDEProgram);
+                }
+                else if (Dr == DialogResult.No) { }
+                else
+                {
+                    e.Cancel = true;
+                }
+            } 
         }
 
        
