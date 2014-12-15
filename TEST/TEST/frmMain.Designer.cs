@@ -38,6 +38,10 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tlsLanguages = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRunProg = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -58,7 +62,6 @@
             this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.btnUp = new System.Windows.Forms.ToolStripButton();
             this.btnHome = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.lblClear = new System.Windows.Forms.Label();
             this.txtOutputBox = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
@@ -78,7 +81,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fIleToolStripMenuItem});
+            this.fIleToolStripMenuItem,
+            this.tlsLanguages});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(677, 24);
@@ -136,6 +140,37 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // tlsLanguages
+            // 
+            this.tlsLanguages.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem1,
+            this.editToolStripMenuItem,
+            this.deleteToolStripMenuItem});
+            this.tlsLanguages.Name = "tlsLanguages";
+            this.tlsLanguages.Size = new System.Drawing.Size(76, 20);
+            this.tlsLanguages.Text = "Languages";
+            // 
+            // newToolStripMenuItem1
+            // 
+            this.newToolStripMenuItem1.Name = "newToolStripMenuItem1";
+            this.newToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem1.Text = "New";
+            this.newToolStripMenuItem1.Click += new System.EventHandler(this.newToolStripMenuItem1_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // btnRunProg
             // 
@@ -314,6 +349,7 @@
             this.tvTreeDirectory.SelectedImageIndex = 0;
             this.tvTreeDirectory.Size = new System.Drawing.Size(154, 289);
             this.tvTreeDirectory.TabIndex = 0;
+            this.tvTreeDirectory.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvTreeDirectory_AfterSelect);
             this.tvTreeDirectory.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeDirectory_NodeMouseDoubleClick);
             // 
             // imageList1
@@ -328,8 +364,7 @@
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnRefresh,
             this.btnUp,
-            this.btnHome,
-            this.toolStripButton7});
+            this.btnHome});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(154, 27);
@@ -345,6 +380,7 @@
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(24, 24);
             this.btnRefresh.Text = "toolStripButton8";
+            this.btnRefresh.ToolTipText = "Refresh";
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // btnUp
@@ -356,6 +392,7 @@
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(24, 24);
             this.btnUp.Text = "toolStripButton7";
+            this.btnUp.ToolTipText = "Up";
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
             // btnHome
@@ -367,18 +404,8 @@
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(24, 24);
             this.btnHome.Text = "toolStripButton7";
+            this.btnHome.ToolTipText = "Home";
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
-            // 
-            // toolStripButton7
-            // 
-            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
-            this.toolStripButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton7.Text = "toolStripButton7";
-            this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
             // 
             // lblClear
             // 
@@ -422,7 +449,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = "CS487 IDE";
+            this.Text = "Programinator 4.5";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -480,8 +507,11 @@
         private System.Windows.Forms.ToolStripButton btnRefresh;
         private System.Windows.Forms.ToolStripButton btnUp;
         private System.Windows.Forms.ToolStripButton btnHome;
-        private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.Label lblClear;
+        private System.Windows.Forms.ToolStripMenuItem tlsLanguages;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
 
     }
 }

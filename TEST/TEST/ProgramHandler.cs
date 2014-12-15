@@ -26,12 +26,14 @@ namespace TEST
 
             IDECompiler comp = new IDECompiler();
             if (comp.CompileExecutable(IDEProgram))
-            {
+            {   
+                
                 Thread myThread = new System.Threading.Thread(delegate()
                 {
                     comp.RunAssembly();
                 });
                 myThread.Start();
+                txtOutputBox.Text = IDEProgram.getName() + " is running\r\n";
                 IDEQueue = GetQ(@".\Private$\IDEQueue");
                 IDEQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(string) });
 

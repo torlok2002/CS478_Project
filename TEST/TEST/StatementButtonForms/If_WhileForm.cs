@@ -97,14 +97,13 @@ namespace TEST
             codeString = "";
             foreach (Statement s in statlist)
             {
-                codeString = s.getUserCode(oLanguage);
-                codeString += "\r\n";
+                codeString += s.getUserCode(oLanguage) + "\r\n";
             }
 
             
 
             txtCodeBox.Text = "";
-            txtCodeBox.Text = codeString;
+            txtCodeBox.Text = codeString.Substring(0,codeString.Length-2);
         }
 
         

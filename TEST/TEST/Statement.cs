@@ -490,7 +490,7 @@ namespace TEST
             string code = "";
             if (vartype == "int") { code = vartype + " " + varname + " = 0;"; }
             else if (vartype == "string") { code = vartype + " " + varname + " = \"\";"; }
-            else if (vartype == "char") { code = vartype + " " + varname + " = '';"; }
+            else if (vartype == "char") { code = vartype + " " + varname + " = ' ';"; }
             
             return code;
         }

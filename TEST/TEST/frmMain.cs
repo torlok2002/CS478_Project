@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
+using System.IO;
 
 namespace TEST
 {
@@ -117,7 +118,7 @@ namespace TEST
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NewProgram frmNew = new NewProgram();
+            NewProgram frmNew = new NewProgram(false);
             frmNew.sInitialPath = IDEDir.Path;
             if (frmNew.ShowDialog(this) == DialogResult.OK)
             {
@@ -224,8 +225,9 @@ namespace TEST
                         //Load Object
                         try
                         {
-                            IDEProgram = IDEDir.LoadFile(IDEDir.ParentPath + "\\" + e.Node.FullPath);
-                            IDEProgram.FilePath = IDEDir.ParentPath + "\\" + e.Node.FullPath;
+                            string path = IDEDir.ParentPath + "\\" + e.Node.FullPath;
+                            IDEProgram = IDEDir.LoadFile(path);
+                            IDEProgram.FilePath = path;
                             tlsStatementStrip.Enabled = true;
                             refreshUI();
                             bChanged = false;
@@ -245,8 +247,9 @@ namespace TEST
                     //Load Object
                     try
                     {
-                        IDEProgram = IDEDir.LoadFile(IDEDir.ParentPath + "\\" + e.Node.FullPath);
-                        IDEProgram.FilePath = IDEDir.ParentPath + "\\" + e.Node.FullPath;
+                        string path = IDEDir.ParentPath + "\\" + e.Node.FullPath;
+                        IDEProgram = IDEDir.LoadFile(path);
+                        IDEProgram.FilePath = path;
                         tlsStatementStrip.Enabled = true;
                         refreshUI();
                         bChanged = false;
@@ -343,13 +346,15 @@ namespace TEST
             if (IDEProgram != null)
             {
                 char[] temp = IDEProgram.ProgramLanguage.getHotkeys();
-                if (temp[0] == '\u20E0') { AssignButton.Enabled = false; } else AssignButton.Enabled = true;
-                if (temp[1] == '\u20E0') { IfButton.Enabled = false; } else IfButton.Enabled = true;
-                if (temp[2] == '\u20E0') { WhileButton.Enabled = false; } else WhileButton.Enabled = true;
-                if (temp[3] == '\u20E0') { InputButton.Enabled = false; } else InputButton.Enabled = true;
-                if (temp[4] == '\u20E0') { OutputButton.Enabled = false; } else OutputButton.Enabled = true;
-                if (temp[5] == '\u20E0') { VariableButton.Enabled = false; } else VariableButton.Enabled = true;
+
+                if (temp[0] == '\u20E0') { AssignButton.Enabled = false; AssignButton.ToolTipText = ""; } else { AssignButton.Enabled = true; AssignButton.ToolTipText = "Initialize a Variable (Ctrl+" + temp[0] + ")"; }
+                if (temp[1] == '\u20E0') { IfButton.Enabled = false; IfButton.ToolTipText = ""; } else { IfButton.Enabled = true; IfButton.ToolTipText = "Assign a variable the result of an expression (Ctrl+" + temp[1] + ")"; }
+                if (temp[2] == '\u20E0') { WhileButton.Enabled = false; WhileButton.ToolTipText = ""; } else { WhileButton.Enabled = true; WhileButton.ToolTipText = "Execute statements if a condition is met (Ctrl+" + temp[2] + ")"; }
+                if (temp[3] == '\u20E0') { InputButton.Enabled = false; InputButton.ToolTipText = ""; } else { InputButton.Enabled = true; InputButton.ToolTipText = "Continue to execute statements until a condition is met (Ctrl+" + temp[3] + ")"; }
+                if (temp[4] == '\u20E0') { OutputButton.Enabled = false; OutputButton.ToolTipText = ""; } else { OutputButton.Enabled = true; OutputButton.ToolTipText = "Output to user (Ctrl+" + temp[4] + ")"; }
+                if (temp[5] == '\u20E0') { VariableButton.Enabled = false; VariableButton.ToolTipText = ""; } else { VariableButton.Enabled = true; VariableButton.ToolTipText = "Prompt user to input a value and assign to a variable (Ctrl+" + temp[5] + ")"; }
                 btnRunProg.Enabled = true;
+
             }
             else
             {
@@ -421,6 +426,66 @@ namespace TEST
         private void btnHome_Click(object sender, EventArgs e)
         {
             IDEDir.moveHome();
+        }
+
+        private void tvTreeDirectory_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+        }
+
+        private void newToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            string sName = Microsoft.VisualBasic.Interaction.InputBox("Enter Language Name: ", "Language Name");
+            if (sName != "")
+            {
+                Language temp = new Language(sName);
+                LanguageForm frmLanguage = new LanguageForm(temp);
+                frmLanguage.ShowDialog();
+                if (frmLanguage.DialogResult == System.Windows.Forms.DialogResult.OK)
+                {
+                    temp.SetDefinition(frmLanguage.Result);
+                    temp.Save();
+                }
+                else
+                {
+
+                }
+            }
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewProgram frmNew = new NewProgram(true);
+            frmNew.ShowDialog();
+            if (frmNew.DialogResult == System.Windows.Forms.DialogResult.OK)
+            {
+                Language temp = new Language(frmNew.ChoosenLanguage);
+                LanguageForm frmLanguage = new LanguageForm(temp);
+                frmLanguage.ShowDialog();
+                if (frmLanguage.DialogResult == System.Windows.Forms.DialogResult.OK)
+                {
+                    temp.SetDefinition(frmLanguage.Result);
+                    temp.Save();
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {
+
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewProgram frmNew = new NewProgram(true);
+            frmNew.ShowDialog();
+            if (frmNew.DialogResult == System.Windows.Forms.DialogResult.OK)
+            {
+                File.Delete(AppDomain.CurrentDomain.BaseDirectory + "\\Languages\\" + frmNew.ChoosenLanguage + ".Language");
+            }
         }
 
        

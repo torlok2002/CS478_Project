@@ -14,11 +14,17 @@ namespace TEST
     public partial class NewProgram : Form
     {
         public String sInitialPath;
-        public NewProgram()
+        public NewProgram(bool hideFileDialog)
         {
             InitializeComponent();
             this.AcceptButton = btnOk;
             this.CancelButton = btnCancel;
+            if (hideFileDialog)
+            {
+                label1.Visible = false;
+                txtFilePath.Visible = false;
+                btnFileDialog.Visible = false;
+            }
         }
 
         private void NewProgram_Load(object sender, EventArgs e)

@@ -116,7 +116,6 @@ namespace TEST
             foreach (Statement oTempObject in oStatements)
             {
                 aCSLines += oTempObject.getUserCode(oUserLanguage) + Environment.NewLine;
-
             }
 
             return aCSLines;
@@ -138,6 +137,10 @@ namespace TEST
                     {
                         oStatements[iIndex] = newstat;
                     }
+                    else
+                    {
+                        oStatements[iIndex] = Temp;
+                    }
                 }
                 else
                 {
@@ -157,6 +160,10 @@ namespace TEST
                         varIndex = i;
                         break;
                     }
+                    else
+                    {
+                        oStatements[iIndex] = Temp;
+                    }
                 }
                 //
                 VarInitStatement newstat = new VarInitStatement(this.Variables, Temp);
@@ -166,6 +173,10 @@ namespace TEST
                     {
                         oVariables[varIndex].getName = newstat.GetVar().getName;
                         oStatements[iIndex] = newstat;
+                    }
+                    else
+                    {
+                        oStatements[iIndex] = Temp;
                     }
                 }
                 else
@@ -184,6 +195,10 @@ namespace TEST
                     {
                         oStatements[iIndex] = newstat;
                     }
+                    else
+                    {
+                        oStatements[iIndex] = Temp;
+                    }
                 }
                 else
                 {
@@ -199,6 +214,10 @@ namespace TEST
                     if (newstat.Canceled == false)
                     {
                         oStatements[iIndex] = newstat;
+                    }
+                    else
+                    {
+                        oStatements[iIndex] = Temp;
                     }
                 }
                 else
@@ -216,6 +235,10 @@ namespace TEST
                     {
                         oStatements[iIndex] = newstat;
                     }
+                    else
+                    {
+                        oStatements[iIndex] = Temp;
+                    }
                 }
                 else
                 {
@@ -231,6 +254,10 @@ namespace TEST
                     if (newstat.Canceled == false)
                     {
                         oStatements[iIndex] = newstat;
+                    }
+                    else
+                    {
+                        oStatements[iIndex] = Temp;
                     }
                 }
                 else

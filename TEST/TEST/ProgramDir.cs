@@ -25,6 +25,9 @@ namespace TEST
 
         public StudentProgram LoadFile(String sFileName)
         {
+            String temp = sCurDirectory;
+            sCurDirectory = sFileName.Substring(0,sFileName.LastIndexOf('\\'));
+            LoadTree();
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(sFileName,
                                         FileMode.Open,
@@ -33,9 +36,6 @@ namespace TEST
             StudentProgram oFile = (StudentProgram)formatter.Deserialize(stream);
             stream.Close();
             return oFile;
-            
-            
-
             
         }
         public void SaveFile(StudentProgram oFile)
@@ -76,7 +76,7 @@ namespace TEST
             GetDirectories(directoryInfo, rootNode);
             tvTreeDirectory.Nodes.Add(rootNode);
             rootNode.ImageIndex = rootNode.SelectedImageIndex = 0;
-            
+            rootNode.Expand();
         }
         private void GetDirectories(DirectoryInfo rootDirectory, TreeNode nodeToAddTo)
         {
