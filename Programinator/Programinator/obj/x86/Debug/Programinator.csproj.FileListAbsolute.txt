@@ -46,3 +46,25 @@ C:\Users\Slowbro\Documents\GitHub\CS478_Project\Programinator\Programinator\obj\
 C:\Users\Slowbro\Documents\GitHub\CS478_Project\Programinator\Programinator\obj\x86\Debug\Programinator.csproj.GenerateResource.Cache
 C:\Users\Slowbro\Documents\GitHub\CS478_Project\Programinator\Programinator\obj\x86\Debug\TEST.exe.manifest
 C:\Users\Slowbro\Documents\GitHub\CS478_Project\Programinator\Programinator\obj\x86\Debug\TEST.application
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\bin\Debug\TEST.exe.config
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\obj\x86\Debug\TEST.exe
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\obj\x86\Debug\TEST.pdb
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\bin\Debug\TEST.exe.manifest
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\bin\Debug\TEST.application
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\bin\Debug\TEST.exe
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\bin\Debug\TEST.pdb
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\obj\x86\Debug\Programinator.csprojResolveAssemblyReference.cache
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\obj\x86\Debug\Programinator.LanguageForm.resources
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\obj\x86\Debug\Programinator.AssignmentForm.resources
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\obj\x86\Debug\Programinator.ConditionalForm.resources
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\obj\x86\Debug\Programinator.frmMain.resources
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\obj\x86\Debug\Programinator.ExpressionForm.resources
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\obj\x86\Debug\Programinator.NewOutputForm.resources
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\obj\x86\Debug\Programinator.NewProgram.resources
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\obj\x86\Debug\Programinator.If_WhileForm.resources
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\obj\x86\Debug\Programinator.VariableForm.resources
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\obj\x86\Debug\Programinator.Properties.Resources.resources
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\obj\x86\Debug\Programinator.InputForm.resources
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\obj\x86\Debug\Programinator.csproj.GenerateResource.Cache
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\obj\x86\Debug\TEST.exe.manifest
+C:\Users\jshade\Desktop\CS478 - Software Development\Group Project\CS478_Project\Programinator\Programinator\obj\x86\Debug\TEST.application
